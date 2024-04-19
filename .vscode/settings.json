@@ -82,6 +82,7 @@
         "variant": "cpp",
         "csignal": "cpp",
         "strstream": "cpp",
-        "codecvt": "cpp"
+        "codecvt": "cpp",
+        "ranges": "cpp"
     }
 }

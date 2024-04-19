@@ -6,51 +6,56 @@
 #include <ctime>
 #include <filesystem>
 
+// Line limit(for ram usage) 0 = unlimited(in theory)
+const int limit = 1000;
+
+using namespace std;
+
 class LinkUtils
 {
 public:
-    std::string timestamp;
-    std::string linkStart;
-    std::string linkEnd;
+    string timestamp;
+    string linkStart;
+    string linkEnd;
     double avgUtilization;
 
     // Default constructor
     LinkUtils() : timestamp(""), linkStart(""), linkEnd(""), avgUtilization(0.0) {}
 
     // Constructor with parameters
-    LinkUtils(const std::string &timestamp, const std::string &linkStart, const std::string &linkEnd, double avgUtilization)
+    LinkUtils(const string &timestamp, const string &linkStart, const string &linkEnd, double avgUtilization)
         : timestamp(timestamp), linkStart(linkStart), linkEnd(linkEnd), avgUtilization(avgUtilization) {}
 };
 
 class Traffic
 {
 public:
-    std::string timestamp;
-    std::string origin;
-    std::string destination;
+    string timestamp;
+    string origin;
+    string destination;
     double avgTraffic;
 
     // Default constructor
     Traffic() : timestamp(""), origin(""), destination(""), avgTraffic(0.0) {}
 
     // Constructor with parameters
-    Traffic(const std::string &timestamp, const std::string &origin, const std::string &destination, double avgTraffic)
+    Traffic(const string &timestamp, const string &origin, const string &destination, double avgTraffic)
         : timestamp(timestamp), origin(origin), destination(destination), avgTraffic(avgTraffic) {}
 };
 
 class Paths
 {
 public:
-    std::string timestamp;
-    std::string origin;
-    std::string destination;
-    std::vector<std::string> path; // Changed to a pointer
+    string timestamp;
+    string origin;
+    string destination;
+    vector<string> path; // Changed to a pointer
 
     // Default constructor
     Paths() : timestamp(""), origin(""), destination(""), path() {}
 
     // Constructor with parameters
-    Paths(const std::string &timestamp, const std::string &origin, const std::string &destination, std::vector<std::string> path)
+    Paths(const string &timestamp, const string &origin, const string &destination, vector<string> path)
         : timestamp(timestamp), origin(origin), destination(destination), path(path) {}
 
     // Destructor
@@ -63,129 +68,123 @@ public:
 class Router
 {
 public:
-    std::string id;
+    string id;
     double latitude;
     double longitude;
-    std::string type;
+    string type;
 
     // Default constructor
     Router() : id(""), latitude(0.0), longitude(0.0), type("") {}
 
     // Constructor with parameters
-    Router(const std::string &id, double latitude, double longitude, const std::string &type)
+    Router(const string &id, double latitude, double longitude, const string &type)
         : id(id), latitude(latitude), longitude(longitude), type(type) {}
 };
 
 class Link
 {
 public:
-    std::string linkStart;
-    std::string linkEnd;
+    string linkStart;
+    string linkEnd;
     double capacity;
 
     // Default constructor
     Link() : linkStart(""), linkEnd(""), capacity(0.0) {}
 
     // Constructor with parameters
-    Link(const std::string &linkStart, const std::string &linkEnd, double capacity)
+    Link(const string &linkStart, const string &linkEnd, double capacity)
         : linkStart(linkStart), linkEnd(linkEnd), capacity(capacity) {}
 };
 
 template <typename T>
-void readData(const std::string &fileName, std::vector<T> &data, void (*readFunction)(std::istringstream &, T &), bool debug)
+void readData(const string &fileName, vector<T> &data, void (*readFunction)(istringstream &, T &), bool debug)
 {
-    // std::cout << "Inside function 1 ";
+    // cout << "Inside function 1 ";
     if (debug)
-        std::cout << "Inside function 1 ";
-    std::ifstream file(fileName);
+        cout << "Inside function 1 ";
+    ifstream file(fileName);
     if (debug)
-        std::cout << "2 ";
+        cout << "2 ";
     if (!file)
     {
-        std::cout << "Error ";
-        std::cerr << "Error: Unable to open file " << fileName << std::endl;
+        cout << "Error ";
+        cerr << "Error: Unable to open file " << fileName << endl;
         return;
     }
     if (debug)
-        std::cout << "3 ";
+        cout << "3 ";
     const int bufferSize = 1024; // Adjust buffer size as needed
     if (debug)
-        std::cout << "4 ";
+        cout << "4 ";
     char buffer[bufferSize];
     if (debug)
-        std::cout << "5 ";
+        cout << "5 ";
     int count = 0;
     if (debug)
-        std::cout << "6 ";
-    while (file.getline(buffer, bufferSize))
+        cout << "6 ";
+    int i = 0;
+    while (file.getline(buffer, bufferSize) && i > 0 && i < limit)
     {
+        i++;
         if (debug)
         {
-            std::cout << std::to_string(count) + fileName + ": ";
+            cout << to_string(count) + fileName + ": ";
         }
-        std::istringstream iss(buffer);
-        if (debug)
-            std::cout << "1 ";
+        istringstream iss(buffer);
         T item;
-        if (debug)
-            std::cout << "2 ";
         readFunction(iss, item);
-        if (debug)
-            std::cout << "3 ";
         data.push_back(item);
-        if (debug)
-            std::cout << "4 ";
         count++;
     }
 }
 
-void readLinkUtils(std::istringstream &iss, LinkUtils &linkUtilsItem)
+void readLinkUtils(istringstream &iss, LinkUtils &linkUtilsItem)
 {
-    std::string timestamp, linkStart, linkEnd;
+    string timestamp, linkStart, linkEnd;
     double avgUtilization;
-    if (std::getline(iss, timestamp, ',') &&
-        std::getline(iss, linkStart, ',') &&
-        std::getline(iss, linkEnd, ',') &&
+    if (getline(iss, timestamp, ',') &&
+        getline(iss, linkStart, ',') &&
+        getline(iss, linkEnd, ',') &&
         iss >> avgUtilization)
     {
         linkUtilsItem = LinkUtils(timestamp, linkStart, linkEnd, avgUtilization);
     }
     else
     {
-        std::cerr << "Warning: Skipping line with insufficient data: " << iss.str() << std::endl;
+        cerr << "Warning: Skipping line with insufficient data: " << iss.str() << endl;
     }
 }
 
-void readTraffic(std::istringstream &iss, Traffic &trafficItem)
+void readTraffic(istringstream &iss, Traffic &trafficItem)
 {
-    std::string timestamp, origin, destination;
+    string timestamp, origin, destination;
     double avgTraffic;
-    if (std::getline(iss, timestamp, ',') &&
-        std::getline(iss, origin, ',') &&
-        std::getline(iss, destination, ',') &&
+    if (getline(iss, timestamp, ',') &&
+        getline(iss, origin, ',') &&
+        getline(iss, destination, ',') &&
         iss >> avgTraffic)
     {
         trafficItem = Traffic(timestamp, origin, destination, avgTraffic);
     }
     else
     {
-        std::cerr << "Warning: Skipping line with insufficient data: " << iss.str() << std::endl;
+        cerr << "Warning: Skipping line with insufficient data: " << iss.str() << endl;
     }
 }
 
-void readPaths(std::istringstream &iss, Paths &pathsItem)
+void readPaths(istringstream &iss, Paths &pathsItem)
 {
 
     // Read the timestamp, origin, and destination directly from the file stream
-    if (std::getline(iss, pathsItem.timestamp, ',') &&
-        std::getline(iss, pathsItem.origin, ',') &&
-        std::getline(iss, pathsItem.destination, ','))
+    if (getline(iss, pathsItem.timestamp, ',') &&
+        getline(iss, pathsItem.origin, ',') &&
+        getline(iss, pathsItem.destination, ','))
     {
         // Read the rest of the columns (nodes in the path)
-        std::string pathNode;
-        // pathsItem.path = new std::vector<std::string>(); // Manual memory allocation
+        string pathNode;
+        // pathsItem.path = new vector<string>(); // Manual memory allocation
 
-        while (std::getline(iss, pathNode, ','))
+        while (getline(iss, pathNode, ','))
         {
 
             // Skip '[' and ']' characters
@@ -195,15 +194,15 @@ void readPaths(std::istringstream &iss, Paths &pathsItem)
                 pathNode.pop_back();
 
             // Split the nodes separated by tabs
-            std::istringstream pathStream(pathNode);
-            std::string pathItem;
+            istringstream pathStream(pathNode);
+            string pathItem;
             int itemCount = 0;
-            std::vector<std::string> itemPaths;
-            while (std::getline(pathStream, pathItem, '\t'))
+            vector<string> itemPaths;
+            while (getline(pathStream, pathItem, '\t'))
             {
-                itemPaths.push_back(std::move(pathItem));
+                itemPaths.push_back(move(pathItem));
                 itemCount++;
-                // pathsItem.path.push_back(std::move(pathItem));
+                // pathsItem.path.push_back(move(pathItem));
             }
 
             pathsItem.path.resize(itemCount);
@@ -216,99 +215,101 @@ void readPaths(std::istringstream &iss, Paths &pathsItem)
     }
     else
     {
-        std::cerr << "Warning: Skipping line with insufficient data: " << iss.str() << std::endl;
+        cerr << "Warning: Skipping line with insufficient data: " << iss.str() << endl;
     }
 }
 
-void readRouters(std::istringstream &iss, Router &routerItem)
+void readRouters(istringstream &iss, Router &routerItem)
 {
-    std::string id, type;
+    string id, type;
     double latitude, longitude;
-    if (std::getline(iss, id, ',') &&
+    if (getline(iss, id, ',') &&
         iss >> latitude &&
         iss.ignore() && // Skip the comma
         iss >> longitude &&
         iss.ignore() && // Skip the comma
-        std::getline(iss, type))
+        getline(iss, type))
     {
         routerItem = Router(id, latitude, longitude, type);
     }
     else
     {
-        std::cerr << "Warning: Skipping line with insufficient data: " << iss.str() << std::endl;
+        cerr << "Warning: Skipping line with insufficient data: " << iss.str() << endl;
     }
 }
 
-void readLinks(std::istringstream &iss, Link &linkItem)
+void readLinks(istringstream &iss, Link &linkItem)
 {
-    std::string linkStart, linkEnd;
+    string linkStart, linkEnd;
     double capacity;
-    if (std::getline(iss, linkStart, ',') &&
-        std::getline(iss, linkEnd, ',') &&
+    if (getline(iss, linkStart, ',') &&
+        getline(iss, linkEnd, ',') &&
         iss >> capacity)
     {
         linkItem = Link(linkStart, linkEnd, capacity);
     }
     else
     {
-        std::cerr << "Warning: Skipping line with insufficient data: " << iss.str() << std::endl;
+        cerr << "Warning: Skipping line with insufficient data: " << iss.str() << endl;
     }
 }
 
-void processDataForDay(const std::string &directoryPath, int day)
+void processDataForDay(const string &directoryPath, int day)
 {
-    std::vector<LinkUtils> linkUtilsData;
-    std::vector<Traffic> trafficData;
-    std::vector<Paths> pathsData;
-    std::vector<Router> routersData;
-    std::vector<Link> linksData;
-    std::cout << "Processing" << std::endl;
+    vector<LinkUtils> linkUtilsData;
+    vector<Traffic> trafficData;
+    vector<Paths> pathsData;
+    vector<Router> routersData;
+    vector<Link> linksData;
+    cout << "Processing" << endl;
     // Read link utilities data
-    std::string linkUtilsFileName = directoryPath + "/link-util-day" + std::to_string(day) + ".csv";
+    string linkUtilsFileName = directoryPath + "/link-util-day" + to_string(day) + ".csv";
     readData(linkUtilsFileName, linkUtilsData, readLinkUtils, false);
-    std::cout << "Still Processing" << std::endl;
+    cout << "Still Processing" << endl;
     // Read flows data
-    std::string flowsFileName = directoryPath + "/flow-traffic-day" + std::to_string(day) + ".csv";
+    string flowsFileName = directoryPath + "/flow-traffic-day" + to_string(day) + ".csv";
     readData(flowsFileName, trafficData, readTraffic, false);
-    std::cout << "Still Still Processing" << std::endl;
+    cout << "Still Still Processing" << endl;
     // Read paths data
-    std::string pathsFileName = directoryPath + "/flow-paths-day" + std::to_string(day) + ".csv";
+    string pathsFileName = directoryPath + "/flow-paths-day" + to_string(day) + ".csv";
     readData(pathsFileName, pathsData, readPaths, false);
-    std::cout << "Still Still Still Processing" << std::endl;
+    cout << "Still Still Still Processing" << endl;
     // Read routers data
-    std::string routersFileName = directoryPath + "/routers.csv";
+    string routersFileName = directoryPath + "/routers.csv";
     readData(routersFileName, routersData, readRouters, false);
-    std::cout << "Still Still Still Still Processing" << std::endl;
+    cout << "Still Still Still Still Processing" << endl;
     // Read links data
-    std::string linksFileName = directoryPath + "/links.csv";
+    string linksFileName = directoryPath + "/links.csv";
     readData(linksFileName, linksData, readLinks, false);
-    std::cout << "Still Still Still Still Still Processing" << std::endl;
+    cout << "Still Still Still Still Still Processing" << endl;
+
+    cout << "Done" << endl;
 
     int userInput;
-    std::cin >> userInput;
+    cin >> userInput;
 }
 
 void printTimestamp()
 {
     // Get current time
-    std::time_t currentTime = std::time(nullptr);
+    time_t currentTime = time(nullptr);
 
     // Convert current time to local time
-    std::tm *localTime = std::localtime(&currentTime);
+    tm *localTime = localtime(&currentTime);
 
     // Format and print the local time
     char timeBuffer[80]; // Buffer to store formatted time
-    std::strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%d %H:%M:%S", localTime);
-    std::cout << "Current local time: " << timeBuffer << std::endl;
+    strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%d %H:%M:%S", localTime);
+    cout << "Current local time: " << timeBuffer << endl;
 }
 
-void printRouters(const std::vector<Router> &routersData, int numRoutersToPrint)
+void printRouters(const vector<Router> &routersData, int numRoutersToPrint)
 {
-    std::cout << "Printing " << numRoutersToPrint << " routers:" << std::endl;
+    cout << "Printing " << numRoutersToPrint << " routers:" << endl;
     int count = 0;
     for (const Router &router : routersData)
     {
-        std::cout << "Router ID: " << router.id << ", Latitude: " << router.latitude << ", Longitude: " << router.longitude << ", Type: " << router.type << std::endl;
+        cout << "Router ID: " << router.id << ", Latitude: " << router.latitude << ", Longitude: " << router.longitude << ", Type: " << router.type << endl;
         count++;
         if (count >= numRoutersToPrint)
         {
@@ -319,7 +320,8 @@ void printRouters(const std::vector<Router> &routersData, int numRoutersToPrint)
 
 int main()
 {
-    std::string directoryPath = std::filesystem::current_path();
+    string directoryPath = filesystem::current_path();
+    directoryPath += "/data/";
     int day = 1; // Change this variable to process different days
 
     processDataForDay(directoryPath, day);
