@@ -185,9 +185,6 @@ void MainWindow::simulateProcessingOne()
     if (currentValue < 100) {
         ui->progressBar->setValue(currentValue + 25);
     }
-    if (currentValue == 100){
-        ui->pushButton->setStyleSheet("background-color: green");
-    }
 }
 
 
@@ -207,6 +204,7 @@ void MainWindow::simulateProcessingTwo()
 }
 
 void MainWindow::runAlgorithms(){
+
     ui->progressBar_3->setValue(0);
     ui->pushButton_4->setEnabled(false);
     QList<QCheckBox*> checkboxes = findChildren<QCheckBox*>();
@@ -220,6 +218,13 @@ void MainWindow::runAlgorithms(){
         if (checkbox->isChecked()) {
             checkedCount++;
         }
+    }
+    if(checkedCount == 0){
+        ui->pushButton_4->setEnabled(true);
+        for (QCheckBox* checkbox : checkboxes) {
+            checkbox->setEnabled(true);
+        }
+        return;
     }
     if(checkedCount != 0){
             barValue =  100 / checkedCount;
