@@ -2,6 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QCheckBox>
+#include <QFileDialog>
+#include <QLabel>
+#include <QPixmap>
+#include <QFileInfo>
+#include <QRadioButton>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -9,6 +16,8 @@ class MainWindow;
 }
 QT_END_NAMESPACE
 
+class QLabel;
+class QProgressBar;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -17,7 +26,25 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void openFile();
+    void generateGraph();
+    void openImage();
+    void runAlgorithms();
+
+    void radioButtonClicked(bool checked);
+
 private:
     Ui::MainWindow *ui;
+    QLabel *imageLabel;
+    QProgressBar *progressBar;
+
+    QRadioButton* findNextAvailableRadioButton(QRadioButton* startRadioButton);
+
+    void simulateProcessingOne();
+    void simulateProcessingTwo();
+    void simulateProcessingThree(int barValue);
+
+    QRadioButton* lastCheckedRadioButton;
 };
 #endif // MAINWINDOW_H

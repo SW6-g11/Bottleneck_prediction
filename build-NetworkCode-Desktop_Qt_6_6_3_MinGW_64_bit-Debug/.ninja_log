@@ -1,0 +1,9 @@
+# ninja log v5
+2	656	7352177235393163	NetworkCode_autogen/timestamp	ca5aea069fea65dd
+2	656	7352177235393163	NetworkCode_autogen/mocs_compilation.cpp	ca5aea069fea65dd
+2	656	7352177235393163	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/build-NetworkCode-Desktop_Qt_6_6_3_MinGW_64_bit-Debug/NetworkCode_autogen/timestamp	ca5aea069fea65dd
+2	656	7352177235393163	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/build-NetworkCode-Desktop_Qt_6_6_3_MinGW_64_bit-Debug/NetworkCode_autogen/mocs_compilation.cpp	ca5aea069fea65dd
+660	1913	7352177248573160	CMakeFiles/NetworkCode.dir/main.cpp.obj	856158e06ffeae9d
+657	1978	7352177249223162	CMakeFiles/NetworkCode.dir/NetworkCode_autogen/mocs_compilation.cpp.obj	72f723d188f8edca
+668	2135	7352177250793156	CMakeFiles/NetworkCode.dir/mainwindow.cpp.obj	2ab23a58f9bb365c
+2135	2333	7352177252753185	NetworkCode.exe	586fee277d1d3d15
