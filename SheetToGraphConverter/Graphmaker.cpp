@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -15,13 +14,19 @@
 #include "Link.h"
 
 using namespace std;
-template <typename T>
+
 class Graphmaker
 {
-    public: Graphmaker(const std::string &directoryPath);
+    // string directoryPath;
 
-    public: void processDataForDay(const std::string &directoryPath, int day)
+    public:  // Default constructor
+        Graphmaker() {
+           
+            }
+        
+    public: void processDataForDay(const std::string &directoryPath, int day, int Limit)
     {
+        SheetReader Readmaster = SheetReader(Limit);
         vector<Linkutils> linkUtilsData;
         vector<Traffic> trafficData;
         vector<Paths> pathsData;
@@ -30,7 +35,7 @@ class Graphmaker
         cout << "Processing linkutils" << endl;
         // Read link utilities data
         string linkUtilsFileName = directoryPath + "/link-util-day" + to_string(day) + ".csv";
-        readData(linkUtilsFileName, linkUtilsData, readLinkUtils, false);
+        SheetReader.readData(linkUtilsFileName, linkUtilsData, readLinkUtils, false);
         cout << "Processing flowfile" << endl;
         // Read flows data
         string flowsFileName = directoryPath + "/flow-traffic-day" + to_string(day) + ".csv";
@@ -53,6 +58,33 @@ class Graphmaker
         int userInput;
         cin >> userInput;
     }
+    void printTimestamp()
+    {
+        // Get current time
+        time_t currentTime = time(nullptr);
 
+        // Convert current time to local time
+        tm *localTime = localtime(&currentTime);
+
+        // Format and print the local time
+        char timeBuffer[80]; // Buffer to store formatted time
+        strftime(timeBuffer, sizeof(timeBuffer), "%Y-%m-%d %H:%M:%S", localTime);
+        cout << "Current local time: " << timeBuffer << endl;
+    }
+
+    void printRouters(const vector<Router> &routersData, int numRoutersToPrint)
+    {
+        cout << "Printing " << numRoutersToPrint << " routers:" << endl;
+        int count = 0;
+        for (const Router &router : routersData)
+        {
+            cout << "Router ID: " << router.id << ", Latitude: " << router.latitude << ", Longitude: " << router.longitude << ", Type: " << router.type << endl;
+            count++;
+            if (count >= numRoutersToPrint)
+            {
+                break; // Exit loop after printing desired number of routers
+            }
+        }
+    }
 };
 

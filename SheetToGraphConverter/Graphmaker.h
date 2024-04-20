@@ -9,13 +9,13 @@
 #include "Router.h"
 #include "Link.h"
 
-template <typename T>
+
 #include <string>
 
 class Graphmaker {
 public:
     // Constructor
-    Graphmaker(const std::string &directoryPath);
+    Graphmaker() {}
 
     void processDataForDay(const std::string &filename, int day);
 private:
