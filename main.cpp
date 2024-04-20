@@ -37,7 +37,8 @@ public:
     Traffic(const std::string &timestamp, const std::string &origin, const std::string &destination, double avgTraffic)
         : timestamp(timestamp), origin(origin), destination(destination), avgTraffic(avgTraffic) {}
 };
-
+//this is a change
+int change = 2;
 class Paths
 {
 public:
