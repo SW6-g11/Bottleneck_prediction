@@ -26,7 +26,7 @@ class Graphmaker
         
     public: void processDataForDay(const std::string &directoryPath, int day, int Limit)
     {
-        SheetReader Readmaster = SheetReader(Limit);
+        SheetReader Readmaster
         vector<Linkutils> linkUtilsData;
         vector<Traffic> trafficData;
         vector<Paths> pathsData;
