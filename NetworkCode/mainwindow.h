@@ -9,6 +9,7 @@
 #include <QFileInfo>
 #include <QRadioButton>
 #include <QMessageBox>
+#include <QInputDialog>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -25,9 +26,11 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void simulateProcessingOne();
+    void simulateProcessingTwo();
 
 private slots:
-    void openFile();
+    void openDirectory();
     void generateGraph();
     void openImage();
     void runAlgorithms();
@@ -41,8 +44,6 @@ private:
 
     QRadioButton* findNextAvailableRadioButton(QRadioButton* startRadioButton);
 
-    void simulateProcessingOne();
-    void simulateProcessingTwo();
     void simulateProcessingThree(int barValue);
 
     QRadioButton* lastCheckedRadioButton;

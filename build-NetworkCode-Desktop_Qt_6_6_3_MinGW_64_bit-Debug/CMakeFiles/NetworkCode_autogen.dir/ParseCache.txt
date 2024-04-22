@@ -139,6 +139,7 @@ C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/mainwindow.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qkeysequence.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qpaintdevice.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qpalette.h
+ mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qpen.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qpicture.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qpixelformat.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qpixmap.h
@@ -146,7 +147,10 @@ C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/mainwindow.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qregion.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qrgb.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qrgba64.h
+ mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qtextcursor.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qtextdocument.h
+ mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qtextformat.h
+ mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qtextoption.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qtgui-config.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qtguiexports.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qtguiglobal.h
@@ -155,6 +159,7 @@ C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/mainwindow.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtGui/qwindowdefs_win.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtWidgets/QCheckBox
  mdp:C:/Qt/6.6.3/mingw_64/include/QtWidgets/QFileDialog
+ mdp:C:/Qt/6.6.3/mingw_64/include/QtWidgets/QInputDialog
  mdp:C:/Qt/6.6.3/mingw_64/include/QtWidgets/QLabel
  mdp:C:/Qt/6.6.3/mingw_64/include/QtWidgets/QMainWindow
  mdp:C:/Qt/6.6.3/mingw_64/include/QtWidgets/QMessageBox
@@ -165,7 +170,9 @@ C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/mainwindow.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtWidgets/qfiledialog.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtWidgets/qframe.h
+ mdp:C:/Qt/6.6.3/mingw_64/include/QtWidgets/qinputdialog.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtWidgets/qlabel.h
+ mdp:C:/Qt/6.6.3/mingw_64/include/QtWidgets/qlineedit.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtWidgets/qmainwindow.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtWidgets/qmessagebox.h
  mdp:C:/Qt/6.6.3/mingw_64/include/QtWidgets/qradiobutton.h
@@ -406,6 +413,8 @@ C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/mainwindow.h
  mdp:C:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wctype.h
  mdp:C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/mainwindow.h
  mdp:C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/build-NetworkCode-Desktop_Qt_6_6_3_MinGW_64_bit-Debug/NetworkCode_autogen/moc_predefs.h
-C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/main.cpp
+C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/graphLoader.h
 C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/mainwindow.cpp
  uic:./ui_mainwindow.h
+C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/graphLoader.cpp
+C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/main.cpp

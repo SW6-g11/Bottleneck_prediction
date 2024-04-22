@@ -1,7 +1,6 @@
+#include "graphLoader.h"
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-
-
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -9,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::openFile);
+    connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::openDirectory);
     connect(ui->pushButton_2, &QPushButton::clicked, this, &MainWindow::generateGraph);
     connect(ui->pushButton_3, &QPushButton::clicked, this, &MainWindow::openImage);
     connect(ui->pushButton_4, &QPushButton::clicked, this, &MainWindow::runAlgorithms);
@@ -20,7 +19,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->radioButton_3, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
     connect(ui->radioButton_4, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
     connect(ui->radioButton_5, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
-
 
     // Initialize the QLabel with width and height set to 0
     ui->label->setFixedSize(0, 0);
@@ -40,15 +38,20 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::openFile()
+void MainWindow::openDirectory()
 {
-    // Open a file dialog to select a file
-    QString filePath = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("All Files (*.*)"));
+    // Open a directory dialog to select a directory
+    QString directoryPath = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
-    // Check if a file was selected
-    if (!filePath.isEmpty()) {
-        // Process the selected file, e.g., load it
-        qDebug() << "Selected File: " << filePath;
+    // Check if a directory was selected
+    if (!directoryPath.isEmpty()) {
+        bool ok;
+        int day = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter a number from 1 to 7:"), 1, 1, 7, 1, &ok);
+        // Check if the user clicked OK and entered a valid number
+        if (ok) {
+            // Call the processDataForDay function on the instance
+            graphLoader::processDataForDay(directoryPath, day);
+        }
     }
 }
 
@@ -183,10 +186,9 @@ void MainWindow::simulateProcessingOne()
 {
     int currentValue = ui->progressBar->value();
     if (currentValue < 100) {
-        ui->progressBar->setValue(currentValue + 25);
+        ui->progressBar->setValue(currentValue + 20);
     }
 }
-
 
 void MainWindow::generateGraph()
 {

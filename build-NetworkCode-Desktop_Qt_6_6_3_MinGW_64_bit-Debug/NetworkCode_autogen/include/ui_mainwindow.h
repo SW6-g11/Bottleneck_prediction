@@ -87,6 +87,7 @@ public:
         progressBar_3 = new QProgressBar(widget);
         progressBar_3->setObjectName("progressBar_3");
         progressBar_3->setGeometry(QRect(10, 190, 118, 23));
+        progressBar_3->setStyleSheet(QString::fromUtf8("background-color:rgb(0, 165, 224)"));
         progressBar_3->setValue(0);
         label = new QLabel(centralwidget);
         label->setObjectName("label");

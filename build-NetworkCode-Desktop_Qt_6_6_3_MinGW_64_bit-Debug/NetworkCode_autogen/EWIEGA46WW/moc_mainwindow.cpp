@@ -40,7 +40,7 @@ namespace {
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {};
 constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers::stringData(
     "MainWindow",
-    "openFile",
+    "openDirectory",
     "",
     "generateGraph",
     "openImage",
@@ -52,7 +52,7 @@ constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers::string
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
     uint offsetsAndSizes[16];
     char stringdata0[11];
-    char stringdata1[9];
+    char stringdata1[14];
     char stringdata2[1];
     char stringdata3[14];
     char stringdata4[10];
@@ -65,16 +65,16 @@ struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
 Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_stringdata_CLASSMainWindowENDCLASS = {
     {
         QT_MOC_LITERAL(0, 10),  // "MainWindow"
-        QT_MOC_LITERAL(11, 8),  // "openFile"
-        QT_MOC_LITERAL(20, 0),  // ""
-        QT_MOC_LITERAL(21, 13),  // "generateGraph"
-        QT_MOC_LITERAL(35, 9),  // "openImage"
-        QT_MOC_LITERAL(45, 13),  // "runAlgorithms"
-        QT_MOC_LITERAL(59, 18),  // "radioButtonClicked"
-        QT_MOC_LITERAL(78, 7)   // "checked"
+        QT_MOC_LITERAL(11, 13),  // "openDirectory"
+        QT_MOC_LITERAL(25, 0),  // ""
+        QT_MOC_LITERAL(26, 13),  // "generateGraph"
+        QT_MOC_LITERAL(40, 9),  // "openImage"
+        QT_MOC_LITERAL(50, 13),  // "runAlgorithms"
+        QT_MOC_LITERAL(64, 18),  // "radioButtonClicked"
+        QT_MOC_LITERAL(83, 7)   // "checked"
     },
     "MainWindow",
-    "openFile",
+    "openDirectory",
     "",
     "generateGraph",
     "openImage",
@@ -125,7 +125,7 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSMainWindowENDCLASS_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<MainWindow, std::true_type>,
-        // method 'openFile'
+        // method 'openDirectory'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'generateGraph'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
@@ -146,7 +146,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<MainWindow *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->openFile(); break;
+        case 0: _t->openDirectory(); break;
         case 1: _t->generateGraph(); break;
         case 2: _t->openImage(); break;
         case 3: _t->runAlgorithms(); break;
