@@ -8,17 +8,13 @@
 #include "Path.h"
 #include "Router.h"
 #include "Link.h"
-
-
 #include <string>
+using namespace std;
 
 class Graphmaker {
 public:
     // Constructor
     Graphmaker() {}
-
-    void processDataForDay(const std::string &filename, int day);
-private:
-
+    void processDataForDay(string &directoryPath, int day, int Limit);
 };
 #endif

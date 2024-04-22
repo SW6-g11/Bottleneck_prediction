@@ -13,22 +13,37 @@
 #include "Router.h"
 #include "Inputverifyer.h"
 #include "linkutils.h"
-#include "Inputverifyer.h"
+#include "Traffic.h"
+// class Linkutils;
+// class Traffic;
+// class Paths;
+// class Router;
+// class Link;
 
-class Linkutils;
-class Traffic;
-class Paths;
-class Router;
-class Link;
+#define DEFAULTLIMIT 100
 
-template <typename T>
+using namespace std;
+
 class SheetReader {
 public:
     // Constructor(s), destructor, and any other public members
+    // overloading constructor (have one use the other) gives us an optional input "limit"
+    SheetReader(int Limit) : limit(Limit) {
+       // Line limit(for ram usage) 0 = unlimited(in theory)
+    }
+        
+    
+    SheetReader() {
+       // Line limit(for ram usage) 0 = unlimited(in theory)
+       // Default value defined above
+    }
 
-    void readData(const std::string &fileName, std::vector<T> &data, void (*readFunction)(std::istringstream &, T &), bool debug);
+    template <typename T> // generic read function, calls the correct specific read function based on vectors type
+    void readData(const std::string &fileName, std::vector<T> &data, bool debug);
+    //void readData(const std::string &fileName, std::vector<T> &data, void (*readFunction)(std::istringstream &, T &), bool debug);
 
 private:
+    const int limit = DEFAULTLIMIT;
     // Private member functions for reading specific types of data
     void readLinkUtils(std::istringstream &iss, Linkutils &linkUtilsItem);
     void readTraffic(std::istringstream &iss, Traffic &trafficItem);
