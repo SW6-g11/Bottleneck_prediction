@@ -321,9 +321,66 @@
 	"HEADERS" : 
 	[
 		[
+<<<<<<< Updated upstream
+=======
+			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/graphLoader.h",
+			"MU",
+			"EWIEGA46WW/moc_graphLoader.cpp",
+			null
+		],
+		[
+			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/graphmaker.h",
+			"MU",
+			"EWIEGA46WW/moc_graphmaker.cpp",
+			null
+		],
+		[
+			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/inputverifyer.h",
+			"MU",
+			"EWIEGA46WW/moc_inputverifyer.cpp",
+			null
+		],
+		[
+			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/link.h",
+			"MU",
+			"EWIEGA46WW/moc_link.cpp",
+			null
+		],
+		[
+			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/linkutils.h",
+			"MU",
+			"EWIEGA46WW/moc_linkutils.cpp",
+			null
+		],
+		[
+>>>>>>> Stashed changes
 			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/mainwindow.h",
 			"MU",
 			"EWIEGA46WW/moc_mainwindow.cpp",
+			null
+		],
+		[
+			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/path.h",
+			"MU",
+			"EWIEGA46WW/moc_path.cpp",
+			null
+		],
+		[
+			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/router.h",
+			"MU",
+			"EWIEGA46WW/moc_router.cpp",
+			null
+		],
+		[
+			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/sheetreader.h",
+			"MU",
+			"EWIEGA46WW/moc_sheetreader.cpp",
+			null
+		],
+		[
+			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/traffic.h",
+			"MU",
+			"EWIEGA46WW/moc_traffic.cpp",
 			null
 		]
 	],
@@ -398,12 +455,55 @@
 	"SOURCES" : 
 	[
 		[
+<<<<<<< Updated upstream
+=======
+			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/graphLoader.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/graphmaker.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/link.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/linkutils.cpp",
+			"MU",
+			null
+		],
+		[
+>>>>>>> Stashed changes
 			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/main.cpp",
 			"MU",
 			null
 		],
 		[
 			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/mainwindow.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/path.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/router.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/sheetreader.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/traffic.cpp",
 			"MU",
 			null
 		]

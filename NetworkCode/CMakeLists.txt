@@ -17,6 +17,28 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+<<<<<<< Updated upstream
+=======
+        graphLoader.cpp
+        graphLoader.h
+        graphmaker.cpp
+        graphmaker.h
+        inputverifyer.h
+        link.cpp
+        link.h
+        linkutils.cpp
+        linkutils.h
+        path.cpp
+        path.h
+        router.cpp
+        router.h
+        sheetreader.cpp
+        sheetreader.h
+        traffic.cpp
+        traffic.h
+
+
+>>>>>>> Stashed changes
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
