@@ -79,6 +79,62 @@ build CMakeFiles/NetworkCode.dir/mainwindow.cpp.obj: CXX_COMPILER__NetworkCode_u
   TARGET_COMPILE_PDB = CMakeFiles\NetworkCode.dir\
   TARGET_PDB = NetworkCode.pdb
 
+build CMakeFiles/NetworkCode.dir/graphmaker.cpp.obj: CXX_COMPILER__NetworkCode_unscanned_Debug C$:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/graphmaker.cpp || cmake_object_order_depends_target_NetworkCode
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\NetworkCode.dir\graphmaker.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/build-NetworkCode-Desktop_Qt_6_6_3_MinGW_64_bit-Debug/NetworkCode_autogen/include -isystem C:/Qt/6.6.3/mingw_64/include/QtCore -isystem C:/Qt/6.6.3/mingw_64/include -isystem C:/Qt/6.6.3/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.6.3/mingw_64/include/QtWidgets -isystem C:/Qt/6.6.3/mingw_64/include/QtGui
+  OBJECT_DIR = CMakeFiles\NetworkCode.dir
+  OBJECT_FILE_DIR = CMakeFiles\NetworkCode.dir
+
+build CMakeFiles/NetworkCode.dir/link.cpp.obj: CXX_COMPILER__NetworkCode_unscanned_Debug C$:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/link.cpp || cmake_object_order_depends_target_NetworkCode
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\NetworkCode.dir\link.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/build-NetworkCode-Desktop_Qt_6_6_3_MinGW_64_bit-Debug/NetworkCode_autogen/include -isystem C:/Qt/6.6.3/mingw_64/include/QtCore -isystem C:/Qt/6.6.3/mingw_64/include -isystem C:/Qt/6.6.3/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.6.3/mingw_64/include/QtWidgets -isystem C:/Qt/6.6.3/mingw_64/include/QtGui
+  OBJECT_DIR = CMakeFiles\NetworkCode.dir
+  OBJECT_FILE_DIR = CMakeFiles\NetworkCode.dir
+
+build CMakeFiles/NetworkCode.dir/linkutils.cpp.obj: CXX_COMPILER__NetworkCode_unscanned_Debug C$:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/linkutils.cpp || cmake_object_order_depends_target_NetworkCode
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\NetworkCode.dir\linkutils.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/build-NetworkCode-Desktop_Qt_6_6_3_MinGW_64_bit-Debug/NetworkCode_autogen/include -isystem C:/Qt/6.6.3/mingw_64/include/QtCore -isystem C:/Qt/6.6.3/mingw_64/include -isystem C:/Qt/6.6.3/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.6.3/mingw_64/include/QtWidgets -isystem C:/Qt/6.6.3/mingw_64/include/QtGui
+  OBJECT_DIR = CMakeFiles\NetworkCode.dir
+  OBJECT_FILE_DIR = CMakeFiles\NetworkCode.dir
+
+build CMakeFiles/NetworkCode.dir/path.cpp.obj: CXX_COMPILER__NetworkCode_unscanned_Debug C$:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/path.cpp || cmake_object_order_depends_target_NetworkCode
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\NetworkCode.dir\path.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/build-NetworkCode-Desktop_Qt_6_6_3_MinGW_64_bit-Debug/NetworkCode_autogen/include -isystem C:/Qt/6.6.3/mingw_64/include/QtCore -isystem C:/Qt/6.6.3/mingw_64/include -isystem C:/Qt/6.6.3/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.6.3/mingw_64/include/QtWidgets -isystem C:/Qt/6.6.3/mingw_64/include/QtGui
+  OBJECT_DIR = CMakeFiles\NetworkCode.dir
+  OBJECT_FILE_DIR = CMakeFiles\NetworkCode.dir
+
+build CMakeFiles/NetworkCode.dir/router.cpp.obj: CXX_COMPILER__NetworkCode_unscanned_Debug C$:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/router.cpp || cmake_object_order_depends_target_NetworkCode
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\NetworkCode.dir\router.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/build-NetworkCode-Desktop_Qt_6_6_3_MinGW_64_bit-Debug/NetworkCode_autogen/include -isystem C:/Qt/6.6.3/mingw_64/include/QtCore -isystem C:/Qt/6.6.3/mingw_64/include -isystem C:/Qt/6.6.3/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.6.3/mingw_64/include/QtWidgets -isystem C:/Qt/6.6.3/mingw_64/include/QtGui
+  OBJECT_DIR = CMakeFiles\NetworkCode.dir
+  OBJECT_FILE_DIR = CMakeFiles\NetworkCode.dir
+
+build CMakeFiles/NetworkCode.dir/sheetreader.cpp.obj: CXX_COMPILER__NetworkCode_unscanned_Debug C$:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/sheetreader.cpp || cmake_object_order_depends_target_NetworkCode
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\NetworkCode.dir\sheetreader.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/build-NetworkCode-Desktop_Qt_6_6_3_MinGW_64_bit-Debug/NetworkCode_autogen/include -isystem C:/Qt/6.6.3/mingw_64/include/QtCore -isystem C:/Qt/6.6.3/mingw_64/include -isystem C:/Qt/6.6.3/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.6.3/mingw_64/include/QtWidgets -isystem C:/Qt/6.6.3/mingw_64/include/QtGui
+  OBJECT_DIR = CMakeFiles\NetworkCode.dir
+  OBJECT_FILE_DIR = CMakeFiles\NetworkCode.dir
+
+build CMakeFiles/NetworkCode.dir/traffic.cpp.obj: CXX_COMPILER__NetworkCode_unscanned_Debug C$:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/traffic.cpp || cmake_object_order_depends_target_NetworkCode
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\NetworkCode.dir\traffic.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/build-NetworkCode-Desktop_Qt_6_6_3_MinGW_64_bit-Debug/NetworkCode_autogen/include -isystem C:/Qt/6.6.3/mingw_64/include/QtCore -isystem C:/Qt/6.6.3/mingw_64/include -isystem C:/Qt/6.6.3/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.6.3/mingw_64/include/QtWidgets -isystem C:/Qt/6.6.3/mingw_64/include/QtGui
+  OBJECT_DIR = CMakeFiles\NetworkCode.dir
+  OBJECT_FILE_DIR = CMakeFiles\NetworkCode.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target NetworkCode
@@ -87,7 +143,11 @@ build CMakeFiles/NetworkCode.dir/mainwindow.cpp.obj: CXX_COMPILER__NetworkCode_u
 #############################################
 # Link the executable NetworkCode.exe
 
+<<<<<<< Updated upstream
 build NetworkCode.exe: CXX_EXECUTABLE_LINKER__NetworkCode_Debug CMakeFiles/NetworkCode.dir/NetworkCode_autogen/mocs_compilation.cpp.obj CMakeFiles/NetworkCode.dir/main.cpp.obj CMakeFiles/NetworkCode.dir/mainwindow.cpp.obj | C$:/Qt/6.6.3/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.6.3/mingw_64/lib/libQt6Gui.a C$:/Qt/6.6.3/mingw_64/lib/libQt6Core.a C$:/Qt/6.6.3/mingw_64/lib/libQt6EntryPoint.a || NetworkCode_autogen NetworkCode_autogen_timestamp_deps
+=======
+build NetworkCode.exe: CXX_EXECUTABLE_LINKER__NetworkCode_Debug CMakeFiles/NetworkCode.dir/NetworkCode_autogen/mocs_compilation.cpp.obj CMakeFiles/NetworkCode.dir/main.cpp.obj CMakeFiles/NetworkCode.dir/mainwindow.cpp.obj CMakeFiles/NetworkCode.dir/graphLoader.cpp.obj CMakeFiles/NetworkCode.dir/graphmaker.cpp.obj CMakeFiles/NetworkCode.dir/link.cpp.obj CMakeFiles/NetworkCode.dir/linkutils.cpp.obj CMakeFiles/NetworkCode.dir/path.cpp.obj CMakeFiles/NetworkCode.dir/router.cpp.obj CMakeFiles/NetworkCode.dir/sheetreader.cpp.obj CMakeFiles/NetworkCode.dir/traffic.cpp.obj | C$:/Qt/6.6.3/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.6.3/mingw_64/lib/libQt6Gui.a C$:/Qt/6.6.3/mingw_64/lib/libQt6Core.a C$:/Qt/6.6.3/mingw_64/lib/libQt6EntryPoint.a || NetworkCode_autogen NetworkCode_autogen_timestamp_deps
+>>>>>>> Stashed changes
   FLAGS = -DQT_QML_DEBUG -g
   LINK_FLAGS = -mwindows
   LINK_LIBRARIES = C:/Qt/6.6.3/mingw_64/lib/libQt6Widgets.a  C:/Qt/6.6.3/mingw_64/lib/libQt6Gui.a  C:/Qt/6.6.3/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -lmingw32  C:/Qt/6.6.3/mingw_64/lib/libQt6EntryPoint.a  -lshell32  -ld3d11  -ldxgi  -ldxguid  -ld3d12  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -191,7 +251,11 @@ build NetworkCode_autogen/timestamp NetworkCode_autogen/mocs_compilation.cpp | $
 #############################################
 # Phony custom command for CMakeFiles\NetworkCode_autogen_timestamp_deps
 
+<<<<<<< Updated upstream
 build CMakeFiles/NetworkCode_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/NetworkCode_autogen_timestamp_deps: phony C$:/Qt/6.6.3/mingw_64/lib/libQt6Core.a C$:/Qt/6.6.3/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.6.3/mingw_64/./bin/uic.exe C$:/Qt/6.6.3/mingw_64/./bin/moc.exe
+=======
+build CMakeFiles/NetworkCode_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/NetworkCode_autogen_timestamp_deps: phony C$:/Qt/6.6.3/mingw_64/./bin/uic.exe C$:/Qt/6.6.3/mingw_64/./bin/moc.exe C$:/Qt/6.6.3/mingw_64/lib/libQt6Core.a C$:/Qt/6.6.3/mingw_64/lib/libQt6Widgets.a
+>>>>>>> Stashed changes
 
 
 #############################################

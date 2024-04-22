@@ -630,9 +630,29 @@ NetworkCode_autogen/timestamp: \
 	C:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wchar.h \
 	C:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wctype.h \
 	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/CMakeLists.txt \
+<<<<<<< Updated upstream
+=======
+	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/graphLoader.cpp \
+	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/graphLoader.h \
+	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/graphmaker.cpp \
+	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/graphmaker.h \
+	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/inputverifyer.h \
+	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/link.cpp \
+	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/link.h \
+	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/linkutils.cpp \
+	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/linkutils.h \
+>>>>>>> Stashed changes
 	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/main.cpp \
 	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/mainwindow.cpp \
 	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/mainwindow.h \
+	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/path.cpp \
+	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/path.h \
+	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/router.cpp \
+	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/router.h \
+	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/sheetreader.cpp \
+	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/sheetreader.h \
+	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/traffic.cpp \
+	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/NetworkCode/traffic.h \
 	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/build-NetworkCode-Desktop_Qt_6_6_3_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake \
 	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/build-NetworkCode-Desktop_Qt_6_6_3_MinGW_64_bit-Debug/CMakeFiles/3.27.7/CMakeCXXCompiler.cmake \
 	C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/build-NetworkCode-Desktop_Qt_6_6_3_MinGW_64_bit-Debug/CMakeFiles/3.27.7/CMakeRCCompiler.cmake \
