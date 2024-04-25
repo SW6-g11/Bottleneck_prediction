@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(NetworkCode VERSION 0.1 LANGUAGES CXX)
+project(Network_Simulator VERSION 0.1)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -13,32 +13,29 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
-<<<<<<< Updated upstream
-=======
-        graphLoader.cpp
-        graphLoader.h
-        graphmaker.cpp
-        graphmaker.h
-        inputverifyer.h
-        link.cpp
-        link.h
-        linkutils.cpp
-        linkutils.h
-        path.cpp
-        path.h
-        router.cpp
-        router.h
-        sheetreader.cpp
-        sheetreader.h
-        traffic.cpp
-        traffic.h
+        NetworkCode/main.cpp
+        NetworkCode/mainwindow.cpp
+        NetworkCode/mainwindow.h
+        NetworkCode/mainwindow.ui
+
+        # graphLoader.cpp
+        # graphLoader.h
+        NetworkCode/SheetToGraphConverter/graphmaker.cpp
+        NetworkCode/SheetToGraphConverter/graphmaker.h
+        NetworkCode/SheetToGraphConverter/inputverifyer.h
+
+        NetworkCode/SheetToGraphConverter/link.h
+
+        NetworkCode/SheetToGraphConverter/linkutils.h
+
+        NetworkCode/SheetToGraphConverter/path.h
+
+        NetworkCode/SheetToGraphConverter/router.h
+        NetworkCode/SheetToGraphConverter/sheetreader.cpp
+
+        NetworkCode/SheetToGraphConverter/traffic.h
 
 
->>>>>>> Stashed changes
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

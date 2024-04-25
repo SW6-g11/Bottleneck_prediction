@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="M:\M_Doc\M_CodeProjects\Bottleneck_prediction\CMakeFiles\a4f5bb768c0c58ccec17f7c8a5d96b76\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{18B00FB0-C60A-30BF-8622-B0E49343DC42}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

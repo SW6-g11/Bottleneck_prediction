@@ -1,2 +1,0 @@
-how to compile all files:
-g++ -std=c++17 -o main main.cpp SheetToGraphConverter/*.cpp -lstdc++fs
