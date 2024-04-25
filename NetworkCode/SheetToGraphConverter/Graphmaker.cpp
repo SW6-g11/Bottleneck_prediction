@@ -1,4 +1,3 @@
-#include "Graphmaker.h"
 
 #include <iostream>
 #include <fstream>
@@ -8,6 +7,7 @@
 #include <ctime>
 #include <filesystem>
 #include "SheetReader.h"
+#include "Graphmaker.h"
 using namespace std;
 
 void Graphmaker::processDataForDay(string &directoryPath, int day, int Limit)

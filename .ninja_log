@@ -1,0 +1,4 @@
+# ninja log v6
+3	637	7357655340711385	CMakeFiles/NetworkCode.dir/NetworkCode/main.cpp.obj	30f805421fa7c720
+19	730	7357655340894832	CMakeFiles/NetworkCode.dir/NetworkCode/SheetToGraphConverter/SheetReader.cpp.obj	2476a8a2f7237e26
+10	765	7357655340810304	CMakeFiles/NetworkCode.dir/NetworkCode/SheetToGraphConverter/Graphmaker.cpp.obj	2192e2ab592d845e

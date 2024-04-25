@@ -5,4 +5,4 @@ using namespace std;
 class Inputverifyer;
 
 
-#endif // Inpputverifyer_H
+#endif // Inputverifyer_H

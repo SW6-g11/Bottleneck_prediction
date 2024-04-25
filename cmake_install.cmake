@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Project")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Network_Simulator")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Release")
+    set(CMAKE_INSTALL_CONFIG_NAME "")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -30,6 +30,29 @@ endif()
 # Is this installation the result of a crosscompile?
 if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
+endif()
+
+# Set default install directory permissions.
+if(NOT DEFINED CMAKE_OBJDUMP)
+  set(CMAKE_OBJDUMP "M:/M_Programs/MSYS compiler/ucrt64/bin/objdump.exe")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
+   "M:/M_Doc/M_CodeProjects/Bottleneck_prediction/build/NetworkCode.exe")
+  if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  endif()
+  if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  endif()
+file(INSTALL DESTINATION "M:/M_Doc/M_CodeProjects/Bottleneck_prediction/build" TYPE EXECUTABLE FILES "M:/M_Doc/M_CodeProjects/Bottleneck_prediction/NetworkCode.exe")
+  if(EXISTS "$ENV{DESTDIR}/M:/M_Doc/M_CodeProjects/Bottleneck_prediction/build/NetworkCode.exe" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/M:/M_Doc/M_CodeProjects/Bottleneck_prediction/build/NetworkCode.exe")
+    if(CMAKE_INSTALL_DO_STRIP)
+      execute_process(COMMAND "M:/M_Programs/MSYS compiler/ucrt64/bin/strip.exe" "$ENV{DESTDIR}/M:/M_Doc/M_CodeProjects/Bottleneck_prediction/build/NetworkCode.exe")
+    endif()
+  endif()
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
