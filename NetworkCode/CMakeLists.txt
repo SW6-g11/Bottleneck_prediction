@@ -43,7 +43,8 @@ else()
         )
     endif()
 endif()
-
+target_compile_options(NetworkCode PRIVATE /Zc:__cplusplus)
+target_compile_options(NetworkCode PRIVATE /permissive-)
 target_link_libraries(NetworkCode PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
