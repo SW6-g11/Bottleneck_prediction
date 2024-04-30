@@ -1,0 +1,9 @@
+﻿  Automatic MOC and UIC for target Network_Simulator
+  1>
+  Building Custom Rule C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/CMakeLists.txt
+  mocs_compilation_Release.cpp
+  graphLoader.cpp
+  main.cpp
+  mainwindow.cpp
+  Generating Code...
+  Network_Simulator.vcxproj -> C:\Users\Mattias\Documents\GitHub\Bottleneck_prediction\build\Release\Network_Simulator.exe
