@@ -1,6 +1,7 @@
 #ifndef PATH_H
 #define PATH_H
 #include <string>
+#include <vector>
 using namespace std;
 
 class Paths

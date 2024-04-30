@@ -1,6 +1,7 @@
 #ifndef TRAFFIC_H
 #define TRAFFIC_H
 using namespace std;
+#include <string>
 class Traffic
 {
 public:

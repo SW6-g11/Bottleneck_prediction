@@ -1,7 +1,6 @@
 #ifndef LINK_H
 #define LINK_H
 #include <string>
-
 using namespace std;
 
 class Link
@@ -17,10 +16,5 @@ public:
     // Constructor with parameters
     Link(string &linkStart, string &linkEnd, double capacity)
         : linkStart(linkStart), linkEnd(linkEnd), capacity(capacity) {}
-
-//           // Constructor with parameters
-//     Link(const string &linkStart, const string &linkEnd, double capacity)
-//         : linkStart(linkStart), linkEnd(linkEnd), capacity(capacity) {}
-// 
 };
 #endif // LINK_H
