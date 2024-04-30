@@ -1,9 +1,3 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <string>
-#include <filesystem>
 #include "graphmaker.h"
 using namespace std;
 

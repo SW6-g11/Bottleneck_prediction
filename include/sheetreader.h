@@ -1,12 +1,12 @@
 #ifndef SHEETREADER_H
 #define SHEETREADER_H
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <vector>
 #include <string>
 #include <filesystem>
+#include <typeinfo>
 #include "path.h"
 #include "link.h"
 #include "router.h"
@@ -32,10 +32,10 @@ public:
     }
         
     
-    /*SheetReader() {
+    SheetReader() {
        // Line limit(for ram usage) 0 = unlimited(in theory)
        // Default value defined above
-    }*/
+    }
 
     template <typename T> // generic read function, calls the correct specific read function based on vectors type
     void readData(const std::string &fileName, std::vector<T> &data, bool debug);
