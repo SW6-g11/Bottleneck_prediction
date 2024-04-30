@@ -1,0 +1,22 @@
+^C:\USERS\MATTIAS\DOCUMENTS\GITHUB\BOTTLENECK_PREDICTION\BUILD\CMAKEFILES\5133172ACF74DED1CDAD04D17A6CD433\AUTOUIC_(CONFIG).STAMP.RULE
+setlocal
+cd C:\Users\Mattias\Documents\GitHub\Bottleneck_prediction\build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\MATTIAS\DOCUMENTS\GITHUB\BOTTLENECK_PREDICTION\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Mattias/Documents/GitHub/Bottleneck_prediction -BC:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/build --check-stamp-file C:/Users/Mattias/Documents/GitHub/Bottleneck_prediction/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
