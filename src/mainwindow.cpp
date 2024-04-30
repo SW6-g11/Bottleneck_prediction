@@ -1,4 +1,4 @@
-#include "graphLoader.h"
+#include "graphmaker.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -49,11 +49,19 @@ void MainWindow::openDirectory()
         int day = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter a number from 1 to 7:"), 1, 1, 7, 1, &ok);
         // Check if the user clicked OK and entered a valid number
         if (ok) {
-            // Call the processDataForDay function on the instance
-            graphLoader::processDataForDay(directoryPath, day);
+            bool limitOk;
+            int limit = QInputDialog::getInt(this, tr("Input Limit"), tr("Please enter a limit:"), 0, 0, INT_MAX, 1, &limitOk);
+            // Check if the user clicked OK and entered a valid limit
+            if (limitOk) {
+                // Convert QString to std::string
+                std::string directoryPathStdString = directoryPath.toStdString();
+                // Call the processDataForDay function with the additional limit parameter
+                graphmaker::processDataForDay(directoryPathStdString, day, limit);
+            }
         }
     }
 }
+
 
 void MainWindow::openImage()
 {
