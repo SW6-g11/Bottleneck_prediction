@@ -1,4 +1,5 @@
 #include "graphmaker.h"
+#include "sheetreader.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -55,8 +56,12 @@ void MainWindow::openDirectory()
             if (limitOk) {
                 // Convert QString to std::string
                 std::string directoryPathStdString = directoryPath.toStdString();
-                // Call the processDataForDay function with the additional limit parameter
-                Graphmaker::processDataForDay(directoryPathStdString, day, limit);
+                
+                // Create an instance of the Graphmaker class
+                Graphmaker graphOne;
+            
+                // Call processDataForDay with the directory path, day, and limit
+                graphOne.processDataForDay(directoryPathStdString, day, limit);
             }
         }
     }
