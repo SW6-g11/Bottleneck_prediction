@@ -56,12 +56,11 @@ void MainWindow::openDirectory()
                 // Convert QString to std::string
                 std::string directoryPathStdString = directoryPath.toStdString();
                 // Call the processDataForDay function with the additional limit parameter
-                graphmaker::processDataForDay(directoryPathStdString, day, limit);
+                Graphmaker::processDataForDay(directoryPathStdString, day, limit);
             }
         }
     }
 }
-
 
 void MainWindow::openImage()
 {
