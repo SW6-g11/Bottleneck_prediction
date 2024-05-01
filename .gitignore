@@ -33,9 +33,9 @@
 
 data/*.csv
 CMakeFiles/
-build/
 .qt/
 Makefile
 Network_Simulator
 cmake_install.cmake
 CMakeCache.txt
+build
