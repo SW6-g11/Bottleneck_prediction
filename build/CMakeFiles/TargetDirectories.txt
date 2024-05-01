@@ -1,5 +1,0 @@
-/home/wired/Nextcloud/P6/Bottleneck_prediction/build/CMakeFiles/Network_Simulator.dir
-/home/wired/Nextcloud/P6/Bottleneck_prediction/build/CMakeFiles/edit_cache.dir
-/home/wired/Nextcloud/P6/Bottleneck_prediction/build/CMakeFiles/rebuild_cache.dir
-/home/wired/Nextcloud/P6/Bottleneck_prediction/build/CMakeFiles/Network_Simulator_autogen_timestamp_deps.dir
-/home/wired/Nextcloud/P6/Bottleneck_prediction/build/CMakeFiles/Network_Simulator_autogen.dir
