@@ -23,32 +23,75 @@
 
 using namespace std;
 
-class SheetReader {
+class SheetReader
+{
 public:
     // Constructor(s), destructor, and any other public members
     // overloading constructor (have one use the other) gives us an optional input "limit"
-    SheetReader(int Limit) : limit(Limit) {
-       // Line limit(for ram usage) 0 = unlimited(in theory)
-    }
-        
-    
-    SheetReader() {
-       // Line limit(for ram usage) 0 = unlimited(in theory)
-       // Default value defined above
+    SheetReader(int Limit) : limit(Limit)
+    {
+        // Line limit(for ram usage) 0 = unlimited(in theory)
     }
 
-    template <typename T> // generic read function, calls the correct specific read function based on vectors type
-    void readData(const std::string &fileName, std::vector<T> &data, bool debug);
-    //void readData(const std::string &fileName, std::vector<T> &data, void (*readFunction)(std::istringstream &, T &), bool debug);
+    SheetReader()
+    {
+        // Line limit(for ram usage) 0 = unlimited(in theory)
+        // Default value defined above
+    }
+
+    template <typename T>
+    void readData(const string &fileName, vector<T> &data, bool debug)
+    {
+        // cout << "Inside function 1 ";
+        if (debug)
+            cout << "Inside function 1 ";
+        ifstream file(fileName);
+        if (debug)
+            cout << "2 ";
+        if (!file)
+        {
+            cout << "Error ";
+            cerr << "Error: Unable to open file " << fileName << endl;
+            return;
+        }
+        if (debug)
+            cout << "3 ";
+        const int bufferSize = 1024; // Adjust buffer size as needed
+        if (debug)
+            cout << "4 ";
+        char buffer[bufferSize];
+        if (debug)
+            cout << "5 ";
+        int count = 0;
+        if (debug)
+            cout << "6 ";
+        int i = 0;
+        while (file.getline(buffer, bufferSize) && i > 0 && i < limit)
+        {
+            i++;
+            if (debug)
+            {
+                cout << to_string(count) + fileName + ": ";
+            }
+            istringstream iss(buffer);
+            T item;
+            readType(iss, item);
+            data.push_back(item);
+            count++;
+        }
+    }
+    // void readData(const std::string &fileName, std::vector<T> &data, void (*readFunction)(std::istringstream &, T &), bool debug);
 
 private:
     const int limit = DEFAULTLIMIT;
     // Private member functions for reading specific types of data
-    void readLinkUtils(std::istringstream &iss, Linkutils &linkUtilsItem);
-    void readTraffic(std::istringstream &iss, Traffic &trafficItem);
-    void readPaths(std::istringstream &iss, Paths &pathsItem);
-    void readRouters(std::istringstream &iss, Router &routerItem);
-    void readLinks(std::istringstream &iss, Link &linkItem);
+    // void readLinkUtils(istringstream &iss, Linkutils &linkUtilsItem);
+    // void readTraffic(istringstream &iss, Traffic &trafficItem);
+    // void readPaths(istringstream &iss, Paths &pathsItem);
+    // void readRouters(istringstream &iss, Router &routerItem);
+    // void readLinks(istringstream &iss, Link &linkItem);
+    template <typename T>
+    void readType(istringstream &iss, T &typeItem);
 };
 
 #endif // SHEETREADER_H
