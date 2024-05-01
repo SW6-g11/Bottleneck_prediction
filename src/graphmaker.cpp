@@ -1,4 +1,5 @@
 #include "graphmaker.h"
+#include "sheetreader.h"
 using namespace std;
 
 void Graphmaker::processDataForDay(string &directoryPath, int day, int Limit)

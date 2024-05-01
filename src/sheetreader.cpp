@@ -98,7 +98,6 @@ void SheetReader::readLinkUtils(istringstream &iss, Linkutils &linkUtilsItem) {
     }
 }
 
-
 void SheetReader::readTraffic(istringstream &iss, Traffic &trafficItem) {
     string timestamp, origin, destination;
     double avgTraffic;
@@ -117,7 +116,6 @@ void SheetReader::readTraffic(istringstream &iss, Traffic &trafficItem) {
 
 void SheetReader::readPaths(istringstream &iss, Paths &pathsItem)
 {
-
     // Read the timestamp, origin, and destination directly from the file stream
     if (getline(iss, pathsItem.timestamp, ',') &&
         getline(iss, pathsItem.origin, ',') &&
@@ -129,7 +127,6 @@ void SheetReader::readPaths(istringstream &iss, Paths &pathsItem)
 
         while (getline(iss, pathNode, ','))
         {
-
             // Skip '[' and ']' characters
             if (pathNode.front() == '[')
                 pathNode.erase(0, 1);
@@ -161,7 +158,6 @@ void SheetReader::readPaths(istringstream &iss, Paths &pathsItem)
         cerr << "Warning: Skipping line with insufficient data: " << iss.str() << endl;
     }
 }
-
 
 void SheetReader::readRouters(istringstream &iss, Router &routerItem)
 {
