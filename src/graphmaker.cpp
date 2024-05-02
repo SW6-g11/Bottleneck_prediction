@@ -2,7 +2,7 @@
 #include "sheetreader.h"
 #include "linkutils.h"
 #include "traffic.h"
-#include "paths.h"
+#include "path.h"
 #include "router.h"
 #include "link.h"
 // #include "sheetreader.cpp"
