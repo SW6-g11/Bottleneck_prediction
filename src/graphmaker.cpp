@@ -2,15 +2,25 @@
 #include "sheetreader.h"
 #include "linkutils.h"
 #include "traffic.h"
-#include "path.h"
+#include "paths.h"
 #include "router.h"
 #include "link.h"
+
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <vector>
+
 // #include "sheetreader.cpp"
 using namespace std;
 
 void Graphmaker::processDataForDay(string &directoryPath, int day, int Limit)
 {
     SheetReader Readmaster(Limit);
+    vector<Linkutils> linkUtilsData;
+    vector<Traffic> trafficData;
+    vector<Paths> pathsData;
+    vector<Router> routersData;
+    vector<Link> linksData;
 
     // vector<int> intData;
     // Readmaster.readData("hello", intData, false);
@@ -41,3 +51,7 @@ void Graphmaker::processDataForDay(string &directoryPath, int day, int Limit)
     int userInput;
     cin >> userInput;
 };
+
+
+
+graph 
