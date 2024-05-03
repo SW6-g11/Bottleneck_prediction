@@ -11,11 +11,6 @@ using namespace std;
 void Graphmaker::processDataForDay(string &directoryPath, int day, int Limit)
 {
     SheetReader Readmaster(Limit);
-    vector<Linkutils> linkUtilsData;
-    vector<Traffic> trafficData;
-    vector<Paths> pathsData;
-    vector<Router> routersData;
-    vector<Link> linksData;
 
     // vector<int> intData;
     // Readmaster.readData("hello", intData, false);

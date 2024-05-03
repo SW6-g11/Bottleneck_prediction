@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include <string>
+#include <vector>
 #include <QMainWindow>
 #include <QCheckBox>
 #include <QFileDialog>

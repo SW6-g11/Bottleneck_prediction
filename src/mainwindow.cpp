@@ -2,6 +2,7 @@
 #include "sheetreader.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "graphviz.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -32,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
     for (QRadioButton *radioButton : radioButtons) {
         radioButton->setEnabled(false);
     }
+    ui->pushButton_2->setEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -62,6 +64,7 @@ void MainWindow::openDirectory()
             
                 // Call processDataForDay with the directory path, day, and limit
                 graphOne.processDataForDay(directoryPathStdString, day, limit);
+                ui->pushButton_2->setEnabled(true);
             }
         }
     }
@@ -204,6 +207,16 @@ void MainWindow::simulateProcessingOne()
 
 void MainWindow::generateGraph()
 {
+
+    Graphmaker graphTwo;
+    const vector<Linkutils>& linkUtilsData = graphTwo.getLinkUtilsData();
+    const vector<Traffic>& trafficData = graphTwo.getTrafficData();
+    const vector<Paths>& pathsData = graphTwo.getPathsData();
+    const vector<Router>& routersData = graphTwo.getRoutersData();
+    const vector<Link>& linksData = graphTwo.getLinksData();
+    cout << "Calling GraphViz" << endl;
+    Graphviz::GenerateGraphViz(linkUtilsData, trafficData, pathsData, routersData, linksData, "NetworkGraph.dot");
+    cout << "GraphViz Done" << endl;
     // Call the function to generate the graph (not implemented yet)
     // replace `functionToGenerateGraph()` with your actual function call
     // functionToGenerateGraph();
