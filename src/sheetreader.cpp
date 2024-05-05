@@ -11,7 +11,7 @@ using namespace std;
 template <>
 void SheetReader::readType(istringstream &iss, Linkutils &linkUtilsItem)
 {
-     cout << "Reading everything: hopefully " << endl;
+    cout << "type linkutils"<< endl;
     string timestamp, linkStart, linkEnd;
     double avgUtilization;
     if (getline(iss, timestamp, ',') &&
@@ -30,6 +30,7 @@ void SheetReader::readType(istringstream &iss, Linkutils &linkUtilsItem)
 template <>
 void SheetReader::readType<Traffic>(istringstream &iss, Traffic &trafficItem)
 {
+    cout << "type traffic"<< endl;
     string timestamp, origin, destination;
     double avgTraffic;
     if (getline(iss, timestamp, ',') &&
@@ -47,6 +48,7 @@ void SheetReader::readType<Traffic>(istringstream &iss, Traffic &trafficItem)
 template <>
 void SheetReader::readType<Paths>(istringstream &iss, Paths &pathsItem)
 {
+    cout << "type paths"<< endl;
     // Read the timestamp, origin, and destination directly from the file stream
     if (getline(iss, pathsItem.timestamp, ',') &&
         getline(iss, pathsItem.origin, ',') &&
@@ -92,6 +94,7 @@ void SheetReader::readType<Paths>(istringstream &iss, Paths &pathsItem)
 template <>
 void SheetReader::readType<Router>(istringstream &iss, Router &routerItem)
 {
+    cout << "type Router" << endl;
     string id, type;
     double latitude, longitude;
     if (getline(iss, id, ',') &&
@@ -110,7 +113,8 @@ void SheetReader::readType<Router>(istringstream &iss, Router &routerItem)
 }
 template <>
 void SheetReader::readType<Link>(istringstream &iss, Link &linkItem)
-{   cout << "Reading link: hopefully " << endl;
+{
+    cout << "type link"<< endl;
     string linkStart, linkEnd;
     double capacity;
     if (getline(iss, linkStart, ',') &&
@@ -118,10 +122,10 @@ void SheetReader::readType<Link>(istringstream &iss, Link &linkItem)
         iss >> capacity)
     {
         linkItem = Link(linkStart, linkEnd, capacity);
-        cout << "Read link: " << linkStart << " -> " << linkEnd << " with capacity: " << capacity << endl;
     }
     else
     {
         cerr << "Warning: Skipping line with insufficient data: " << iss.str() << endl;
     }
 }
+

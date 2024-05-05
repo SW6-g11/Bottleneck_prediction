@@ -40,7 +40,7 @@ public:
     }
 
     template <typename T>
-    void readType(const string &fileName, vector<T> &data, bool debug)
+    void readData(const string &fileName, vector<T> &data, bool debug)
     {
         // cout << "Inside function 1 ";
         if (debug)
@@ -66,13 +66,15 @@ public:
         if (debug)
             cout << "6 ";
         int i = 0;
+        cout << "the filename is : " + fileName + " : ";<< endl;
         while (file.getline(buffer, bufferSize) && i > 0 && i < limit)
         {
             i++;
             if (debug)
             {
-                cout << to_string(count) + fileName + ": ";
+                cout <<"reading line "+ to_string(count) + fileName + ": ";
             }
+            cout <<"reading line "+ to_string(count) + fileName + ": ";
             istringstream iss(buffer);
             T item;
             readType(iss, item);
@@ -80,7 +82,7 @@ public:
             count++;
         }
     }
-    // void readType(const std::string &fileName, std::vector<T> &data, void (*readFunction)(std::istringstream &, T &), bool debug);
+    // void readData(const std::string &fileName, std::vector<T> &data, void (*readFunction)(std::istringstream &, T &), bool debug);
 
 private:
     const int limit = DEFAULTLIMIT;
