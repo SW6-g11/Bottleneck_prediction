@@ -40,7 +40,7 @@ public:
     }
 
     template <typename T>
-    void readData(const string &fileName, vector<T> &data, bool debug)
+    void readType(const string &fileName, vector<T> &data, bool debug)
     {
         // cout << "Inside function 1 ";
         if (debug)
@@ -80,7 +80,7 @@ public:
             count++;
         }
     }
-    // void readData(const std::string &fileName, std::vector<T> &data, void (*readFunction)(std::istringstream &, T &), bool debug);
+    // void readType(const std::string &fileName, std::vector<T> &data, void (*readFunction)(std::istringstream &, T &), bool debug);
 
 private:
     const int limit = DEFAULTLIMIT;

@@ -11,6 +11,7 @@ using namespace std;
 template <>
 void SheetReader::readType(istringstream &iss, Linkutils &linkUtilsItem)
 {
+     cout << "Reading everything: hopefully " << endl;
     string timestamp, linkStart, linkEnd;
     double avgUtilization;
     if (getline(iss, timestamp, ',') &&
@@ -109,7 +110,7 @@ void SheetReader::readType<Router>(istringstream &iss, Router &routerItem)
 }
 template <>
 void SheetReader::readType<Link>(istringstream &iss, Link &linkItem)
-{
+{   cout << "Reading link: hopefully " << endl;
     string linkStart, linkEnd;
     double capacity;
     if (getline(iss, linkStart, ',') &&
@@ -117,6 +118,7 @@ void SheetReader::readType<Link>(istringstream &iss, Link &linkItem)
         iss >> capacity)
     {
         linkItem = Link(linkStart, linkEnd, capacity);
+        cout << "Read link: " << linkStart << " -> " << linkEnd << " with capacity: " << capacity << endl;
     }
     else
     {

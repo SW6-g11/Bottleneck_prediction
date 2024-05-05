@@ -47,11 +47,11 @@ void MainWindow::openDirectory()
     // Check if a directory was selected
     if (!directoryPath.isEmpty()) {
         bool ok;
-        int day = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter a number from 1 to 7:"), 1, 1, 7, 1, &ok);
+        int day = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter a number indicating which day to be processed:"), 1, 1, 7, 1, &ok);
         // Check if the user clicked OK and entered a valid number
         if (ok) {
             bool limitOk;
-            int limit = QInputDialog::getInt(this, tr("Input Limit"), tr("Please enter a limit:"), 0, 0, INT_MAX, 1, &limitOk);
+            int limit = QInputDialog::getInt(this, tr("Input Limit"), tr("Please enter a limit of lines from data to be processed:"), 0, 0, INT_MAX, 1, &limitOk);
             // Check if the user clicked OK and entered a valid limit
             if (limitOk) {
                 // Convert QString to std::string

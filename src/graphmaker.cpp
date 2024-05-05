@@ -18,28 +18,28 @@ void Graphmaker::processDataForDay(string &directoryPath, int day, int Limit)
     vector<Link> linksData;
 
     // vector<int> intData;
-    // Readmaster.readData("hello", intData, false);
+    // Readmaster.readType("hello", intData, false);
 
     cout << "Processing linkutils" << endl;
     // Read link utilities data
     string linkUtilsFileName = directoryPath + "/link-util-day" + to_string(day) + ".csv";
-    Readmaster.readData(linkUtilsFileName, linkUtilsData, false);
+    Readmaster.readType(linkUtilsFileName, linkUtilsData, false);
     cout << "Processing flowfile" << endl;
     // Read flows data
     string flowsFileName = directoryPath + "/flow-traffic-day" + to_string(day) + ".csv";
-    Readmaster.readData(flowsFileName, trafficData, false);
+    Readmaster.readType(flowsFileName, trafficData, false);
     cout << "Processing pathfile" << endl;
     // Read paths data
     string pathsFileName = directoryPath + "/flow-paths-day" + to_string(day) + ".csv";
-    Readmaster.readData(pathsFileName, pathsData, false);
+    Readmaster.readType(pathsFileName, pathsData, false);
     cout << "Processing routerdata" << endl;
     // Read routers data
     string routersFileName = directoryPath + "/routers.csv";
-    Readmaster.readData(routersFileName, routersData, false);
+    Readmaster.readType(routersFileName, routersData, false);
     cout << "Processing links" << endl;
     // Read links data
     string linksFileName = directoryPath + "/links.csv";
-    Readmaster.readData(linksFileName, linksData, false);
+    Readmaster.readType(linksFileName, linksData, false);
 
     cout << "Done" << endl;
 
