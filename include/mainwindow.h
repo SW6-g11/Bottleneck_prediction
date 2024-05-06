@@ -13,8 +13,9 @@
 #include "graphDataStruct.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
+namespace Ui
+{
+    class MainWindow;
 }
 QT_END_NAMESPACE
 
@@ -45,11 +46,10 @@ private:
     QLabel *imageLabel;
     QProgressBar *progressBar;
 
-    QRadioButton* findNextAvailableRadioButton(QRadioButton* startRadioButton);
+    QRadioButton *findNextAvailableRadioButton(QRadioButton *startRadioButton);
 
-    QRadioButton* lastCheckedRadioButton;
+    QRadioButton *lastCheckedRadioButton;
 
-    graphData a;
-
+    graphDataStruct graphdata;
 };
 #endif // MAINWINDOW_H

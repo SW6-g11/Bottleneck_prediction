@@ -9,7 +9,7 @@
 
 using namespace std;
 
-void Graphmaker::processDataForDay(string &directoryPath, int day, int Limit, graphData graphdata)
+void Graphmaker::processDataForDay(string &directoryPath, int day, int Limit, graphDataStruct &graphdata)
 {
     SheetReader Readmaster(Limit);
     // vector<Linkutils> linkUtilsData;
@@ -42,6 +42,6 @@ void Graphmaker::processDataForDay(string &directoryPath, int day, int Limit, gr
     string linksFileName = directoryPath + "/links.csv";
     Readmaster.readData(linksFileName, graphdata.linksData, true);
 
-    cout << "Done" << endl;;
-
+    cout << "Done" << endl;
+    ;
 };

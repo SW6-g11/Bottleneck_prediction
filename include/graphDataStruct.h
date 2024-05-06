@@ -1,5 +1,5 @@
-#ifndef graphData
-#define graphData
+#ifndef GRAPHDATASTRUCT
+#define GRAPHDATASTRUCT
 #include <vector>
 #include "link.h"
 #include "linkutils.h"
@@ -7,12 +7,19 @@
 #include "router.h"
 #include "traffic.h"
 
-struct graphData {
+struct graphDataStruct
+{
     std::vector<Linkutils> linkUtilsData;
     std::vector<Traffic> trafficData;
     std::vector<Paths> pathsData;
     std::vector<Router> routersData;
     std::vector<Link> linksData;
-} graphdata;
+    graphDataStruct()
+        : linkUtilsData(),
+          trafficData(),
+          pathsData(),
+          routersData(),
+          linksData() {}
+};
 
 #endif

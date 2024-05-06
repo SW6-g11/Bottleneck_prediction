@@ -10,11 +10,11 @@
 #include <graphDataStruct.h>
 using namespace std;
 
-
-class Graphmaker {
+class Graphmaker
+{
 public:
     // Constructor
     Graphmaker() {}
-    void processDataForDay(string &directoryPath, int day, int Limit);
+    void processDataForDay(string &directoryPath, int day, int Limit, graphDataStruct &graphData);
 };
 #endif // GRAPHMAKER_H
