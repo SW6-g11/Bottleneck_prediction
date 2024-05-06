@@ -10,6 +10,7 @@
 #include <QRadioButton>
 #include <QMessageBox>
 #include <QInputDialog>
+#include "graphDataStruct.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -28,6 +29,8 @@ public:
     ~MainWindow();
     void simulateProcessingOne();
     void simulateProcessingTwo();
+    void simulateProcessingThree();
+    void simulateProcessingFour();
 
 private slots:
     void openDirectory();
@@ -44,8 +47,9 @@ private:
 
     QRadioButton* findNextAvailableRadioButton(QRadioButton* startRadioButton);
 
-    void simulateProcessingThree(int barValue);
-
     QRadioButton* lastCheckedRadioButton;
+
+    graphData a;
+
 };
 #endif // MAINWINDOW_H

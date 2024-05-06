@@ -7,7 +7,9 @@
 #include <vector>
 #include <string>
 #include <filesystem>
+#include <graphDataStruct.h>
 using namespace std;
+
 
 class Graphmaker {
 public:

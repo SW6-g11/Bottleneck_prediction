@@ -2,12 +2,16 @@
 #include "sheetreader.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <string.h>
+
+#include "DinicAlgorithm.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    showMaximized();
 
     connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::openDirectory);
     connect(ui->pushButton_2, &QPushButton::clicked, this, &MainWindow::generateGraph);
@@ -42,8 +46,11 @@ MainWindow::~MainWindow()
 void MainWindow::openDirectory()
 {
     // Open a directory dialog to select a directory
-    QString directoryPath = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-
+    std::string initialDir = "../data";
+    if(!std::filesystem::exists(initialDir)) std::filesystem::create_directory(initialDir);
+    
+    QString QinitialDir = QString::fromStdString(initialDir);
+    QString directoryPath = QFileDialog::getExistingDirectory(this, tr("Open Directory"), QinitialDir, QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
     // Check if a directory was selected
     if (!directoryPath.isEmpty()) {
         bool ok;
@@ -61,10 +68,11 @@ void MainWindow::openDirectory()
                 Graphmaker graphOne;
             
                 // Call processDataForDay with the directory path, day, and limit
-                graphOne.processDataForDay(directoryPathStdString, day, limit);
+                graphOne.processDataForDay(directoryPathStdString, day, limit, MainWindow.graphdata);
             }
         }
     }
+    // return;
 }
 
 void MainWindow::openImage()
@@ -196,10 +204,27 @@ void MainWindow::radioButtonClicked(bool checked)
 
 void MainWindow::simulateProcessingOne()
 {
-    int currentValue = ui->progressBar->value();
-    if (currentValue < 100) {
-        ui->progressBar->setValue(currentValue + 20);
-    }
+    std::cout << "ProcessingOne" << std::endl;
+    DinicAlgorithm Dinics = new DinicAlgorithm(MainWindow.graphdata.linksData);
+
+    // int currentValue = ui->progressBar->value();
+    // if (currentValue < 100) {
+    //     ui->progressBar->setValue(currentValue + 20);
+    // }
+}
+
+void MainWindow::simulateProcessingTwo() 
+{
+    std::cout << "ProcessingTwo" << std::endl;
+}
+
+void MainWindow::simulateProcessingThree() 
+{
+    std::cout << "ProcessingThree" << std::endl;
+}
+void MainWindow::simulateProcessingFour() 
+{
+    std::cout << "ProcessingFour" << std::endl;
 }
 
 void MainWindow::generateGraph()
@@ -209,13 +234,6 @@ void MainWindow::generateGraph()
     // functionToGenerateGraph();
 }
 
-void MainWindow::simulateProcessingTwo()
-{
-    int currentValue = ui->progressBar_2->value();
-    if (currentValue < 100) {
-        ui->progressBar_2->setValue(currentValue + 25);
-    }
-}
 
 void MainWindow::runAlgorithms(){
 
@@ -245,19 +263,19 @@ void MainWindow::runAlgorithms(){
     }
 
     if(ui->checkBox->isChecked()){
-    simulateProcessingThree(barValue);
+        simulateProcessingOne();
     }
 
     if(ui->checkBox_2->isChecked()){
-    simulateProcessingThree(barValue);
+        simulateProcessingTwo();
     }
 
     if(ui->checkBox_3->isChecked()){
-    simulateProcessingThree(barValue);
+        simulateProcessingThree();
     }
 
     if(ui->checkBox_4->isChecked()){
-    simulateProcessingThree(barValue);
+        simulateProcessingFour();
     }
 
     if(ui->progressBar_3->value() != 100){

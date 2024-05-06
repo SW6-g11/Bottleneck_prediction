@@ -68,7 +68,7 @@ class SheetReader {
       if (debug) {
         cout << "reading line " + to_string(count) + fileName + ": ";
       }
-      cout << "reading line " + to_string(count) + fileName + ": ";
+    //   cout << "reading line " + to_string(count) + fileName + ": ";
       istringstream iss(buffer);
       T item;
       readType(iss, item);
@@ -91,4 +91,4 @@ class SheetReader {
   void readType(istringstream& iss, T& typeItem);
 };
 
-#endif  // SHEETREADER_H
+#endif  // SHEEHTREADER_

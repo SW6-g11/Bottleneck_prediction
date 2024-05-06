@@ -12,7 +12,7 @@ class DinicAlgorithm {
 private:
     std::unordered_map<std::string, std::vector<Link>> AdjecentMap;
     std::unordered_map<std::string, int> level;
-    std::unordered_map<std::string, int> NextEdgePointer;
+    std::unordered_map<std::string, int> NextEdgePointer; // Next edge (link) to be visited
 
     bool bfs(const std::string& source, const std::string& sink);
     double dfs(const std::string& u, const std::string& sink, double minCapacity);
