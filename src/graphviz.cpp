@@ -7,9 +7,7 @@
 #include "sheetreader.h"
 #include "traffic.h"
 #include <iostream>
-//#include "../Graphviz/include/graphviz/cgraph.h"
-//#include "../Graphviz/include/graphviz/gvc.h"
-//#include "../Graphviz/include/graphviz/xdot.h"
+
 
 using namespace std;
 

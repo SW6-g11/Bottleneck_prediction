@@ -6,7 +6,15 @@
 #include <string.h>
 #include "SimulatorController.h"
 #include "graphviz.h"
+MainWindow* MainWindow::instance = nullptr;
 
+// Implement the getInstance() static member function
+MainWindow& MainWindow::getInstance() {
+    if (!instance) {
+        instance = new MainWindow(); // Create a new instance if it doesn't exist
+    }
+    return *instance;
+}
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -77,6 +85,7 @@ void MainWindow::openDirectory()
                 // Call processDataForDay with the directory path, day, and limit
                 graphOne.processDataForDay(directoryPathStdString, day, limit, SimulatorController::getGraphDataPointer());
                 // SimulatorController::addData(SimulatorController::getGraphDataPointer());
+                ui->pushButton_2->setEnabled(true);
 
             }
         }
@@ -236,28 +245,24 @@ void MainWindow::radioButtonClicked(bool checked)
 
 void MainWindow::simulateProcessingOne()
 {
-    std::cout << "ProcessingOne" << std::endl;
-
-    SimulatorController::runDinics("R1", "R10");
-
-    // int currentValue = ui->progressBar->value();
-    // if (currentValue < 100) {
-    //     ui->progressBar->setValue(currentValue + 20);
-    // }
+    int currentValue = ui->progressBar->value();
+    if (currentValue < 100) {
+        ui->progressBar->setValue(currentValue + 20);
+    }
 }
 
 void MainWindow::simulateProcessingTwo()
 {
-    std::cout << "ProcessingTwo" << std::endl;
+    int currentValue = ui->progressBar_2->value();
+    if (currentValue < 100) {
+        ui->progressBar_2->setValue(currentValue + 25);
+    }
 }
-
-void MainWindow::simulateProcessingThree()
-{
-    std::cout << "ProcessingThree" << std::endl;
-}
-void MainWindow::simulateProcessingFour()
-{
-    std::cout << "ProcessingFour" << std::endl;
+void MainWindow::simulateProcessingThree(int barValue){
+    int currentValue = ui->progressBar_3->value();
+    if (currentValue < 100) {
+        ui->progressBar_3->setValue(currentValue + barValue);
+    }
 }
 
 void MainWindow::generateGraph()
@@ -269,68 +274,56 @@ void MainWindow::generateGraph()
     // Call the function to draw the graph 
 }
 
-void MainWindow::runAlgorithms()
-{
+void MainWindow::runAlgorithms(){
 
     ui->progressBar_3->setValue(0);
     ui->pushButton_4->setEnabled(false);
-    QList<QCheckBox *> checkboxes = findChildren<QCheckBox *>();
-    for (QCheckBox *checkbox : checkboxes)
-    {
+    QList<QCheckBox*> checkboxes = findChildren<QCheckBox*>();
+    for (QCheckBox* checkbox : checkboxes) {
         checkbox->setEnabled(false);
     }
 
     int checkedCount = 0;
     int barValue = 100;
-    for (QCheckBox *checkbox : checkboxes)
-    {
-        if (checkbox->isChecked())
-        {
+    for (QCheckBox* checkbox : checkboxes) {
+        if (checkbox->isChecked()) {
             checkedCount++;
         }
     }
-    if (checkedCount == 0)
-    {
+    if(checkedCount == 0){
         ui->pushButton_4->setEnabled(true);
-        for (QCheckBox *checkbox : checkboxes)
-        {
+        for (QCheckBox* checkbox : checkboxes) {
             checkbox->setEnabled(true);
         }
         return;
     }
-    if (checkedCount != 0)
-    {
-        barValue = 100 / checkedCount;
+    if(checkedCount != 0){
+            barValue =  100 / checkedCount;
     }
 
-    if (ui->checkBox->isChecked())
-    {
-        simulateProcessingOne();
+    if(ui->checkBox->isChecked()){
+    simulateProcessingThree(barValue);
     }
 
-    if (ui->checkBox_2->isChecked())
-    {
-        simulateProcessingTwo();
+    if(ui->checkBox_2->isChecked()){
+    simulateProcessingThree(barValue);
     }
 
-    if (ui->checkBox_3->isChecked())
-    {
-        simulateProcessingThree();
+    if(ui->checkBox_3->isChecked()){
+    simulateProcessingThree(barValue);
     }
 
-    if (ui->checkBox_4->isChecked())
-    {
-        simulateProcessingFour();
+    if(ui->checkBox_4->isChecked()){
+    simulateProcessingThree(barValue);
     }
 
-    if (ui->progressBar_3->value() != 100)
-    {
+    if(ui->progressBar_3->value() != 100){
         ui->progressBar_3->setValue(100);
     }
 
     ui->pushButton_4->setEnabled(true);
-    for (QCheckBox *checkbox : checkboxes)
-    {
+    for (QCheckBox* checkbox : checkboxes) {
         checkbox->setEnabled(true);
     }
+
 }
