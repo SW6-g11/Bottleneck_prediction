@@ -7,13 +7,21 @@
 #include <vector>
 #include <string>
 #include <filesystem>
+
+#include <graphDataStruct.h>
+
 #include <mainwindow.h>
+
 using namespace std;
 
-class Graphmaker {
+class Graphmaker
+{
 public:
     // Constructor
     Graphmaker() {}
+
+    void processDataForDay(string &directoryPath, int day, int Limit, graphDataStruct &graphData);
+
     void processDataForDay(string &directoryPath, int day, int Limit);
     const vector<Linkutils>& getLinkUtilsData() const{return linkUtilsData;}
     const vector<Traffic>& getTrafficData() const {return trafficData;}
@@ -27,6 +35,7 @@ private:
     vector<Paths> pathsData;
     vector<Router> routersData;
     vector<Link> linksData;
+
 };
 
 

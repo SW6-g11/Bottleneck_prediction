@@ -11,10 +11,12 @@
 #include <QRadioButton>
 #include <QMessageBox>
 #include <QInputDialog>
+#include "graphDataStruct.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
+namespace Ui
+{
+    class MainWindow;
 }
 QT_END_NAMESPACE
 
@@ -29,6 +31,8 @@ public:
     ~MainWindow();
     static void simulateProcessingOne();
     void simulateProcessingTwo();
+    void simulateProcessingThree();
+    void simulateProcessingFour();
 
 private slots:
     void openDirectory();
@@ -43,10 +47,10 @@ private:
     QLabel *imageLabel;
     QProgressBar *progressBar;
 
-    QRadioButton* findNextAvailableRadioButton(QRadioButton* startRadioButton);
+    QRadioButton *findNextAvailableRadioButton(QRadioButton *startRadioButton);
 
-    void simulateProcessingThree(int barValue);
+    QRadioButton *lastCheckedRadioButton;
 
-    QRadioButton* lastCheckedRadioButton;
+    graphDataStruct graphdata;
 };
 #endif // MAINWINDOW_H
