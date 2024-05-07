@@ -46,7 +46,7 @@ MainWindow::~MainWindow()
 void MainWindow::openDirectory()
 {
     // Open a directory dialog to select a directory
-    std::string initialDir = "../data";
+    std::string initialDir = "../data/sampleSet";
     if (!std::filesystem::exists(initialDir))
         std::filesystem::create_directory(initialDir);
 
@@ -245,6 +245,7 @@ void MainWindow::simulateProcessingOne()
 void MainWindow::simulateProcessingTwo()
 {
     std::cout << "ProcessingTwo" << std::endl;
+    SimulatorController::findPeakUtilValues(1);
 }
 
 void MainWindow::simulateProcessingThree()

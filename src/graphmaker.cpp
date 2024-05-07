@@ -36,11 +36,11 @@ void Graphmaker::processDataForDay(string &directoryPath, int day, int Limit, gr
     // Read routers data
     cout << "Processing routerdata" << endl;
     string routersFileName = directoryPath + "/routers.csv";
-    Readmaster.readData(routersFileName, graphdata.routersData, true);
+    Readmaster.readData(routersFileName, graphdata.routersData, false);
     // Read links data
     cout << "Processing links" << endl;
     string linksFileName = directoryPath + "/links.csv";
-    Readmaster.readData(linksFileName, graphdata.linksData, true);
+    Readmaster.readData(linksFileName, graphdata.linksData, false);
 
     cout << "Done" << endl;
     ;

@@ -55,16 +55,15 @@ public:
     int count = 0;
     int i = 0;
     cout << "the filename is : " + fileName + " : " << endl;
-
-    while (file.getline(buffer, bufferSize) && ((std::is_same<T, Router>::value || std::is_same<T, Link>::value) || i < limit))
+    cout << "Data: " + (to_string(i)) + " " + to_string(limit) + ": " << endl;
+    while (file.getline(buffer, bufferSize) && ((std::is_same<T, Router>::value || std::is_same<T, Link>::value) || (i < limit || limit == 0)))
     {
       // std::cout << i << std::endl;
       i++;
       if (debug)
       {
-        cout << "reading line " + to_string(count) + fileName + ": ";
+        cout << "reading line " + (to_string(count)) + fileName + ": " << endl;
       }
-      //   cout << "reading line " + to_string(count) + fileName + ": ";
       istringstream iss(buffer);
       T item;
       readType(iss, item);
