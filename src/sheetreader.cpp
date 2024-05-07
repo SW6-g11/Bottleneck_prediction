@@ -30,7 +30,7 @@ void SheetReader::readType(istringstream &iss, Linkutils &linkUtilsItem)
 template <>
 void SheetReader::readType<Traffic>(istringstream &iss, Traffic &trafficItem)
 {
-    cout << "type traffic"<< endl;
+
     string timestamp, origin, destination;
     double avgTraffic;
     if (getline(iss, timestamp, ',') &&
@@ -48,7 +48,7 @@ void SheetReader::readType<Traffic>(istringstream &iss, Traffic &trafficItem)
 template <>
 void SheetReader::readType<Paths>(istringstream &iss, Paths &pathsItem)
 {
-    cout << "type paths"<< endl;
+
     // Read the timestamp, origin, and destination directly from the file stream
     if (getline(iss, pathsItem.timestamp, ',') &&
         getline(iss, pathsItem.origin, ',') &&
@@ -94,7 +94,7 @@ void SheetReader::readType<Paths>(istringstream &iss, Paths &pathsItem)
 template <>
 void SheetReader::readType<Router>(istringstream &iss, Router &routerItem)
 {
-    cout << "type Router" << endl;
+
     string id, type;
     double latitude, longitude;
     if (getline(iss, id, ',') &&
@@ -105,6 +105,13 @@ void SheetReader::readType<Router>(istringstream &iss, Router &routerItem)
         getline(iss, type))
     {
         routerItem = Router(id, latitude, longitude, type);
+
+        // Print router data
+        cout << "Router Data:\n";
+        cout << "ID: " << routerItem.id << "\n";
+        cout << "Latitude: " << routerItem.latitude << "\n";
+        cout << "Longitude: " << routerItem.longitude << "\n";
+        cout << "Type: " << routerItem.type << "\n\n";
     }
     else
     {

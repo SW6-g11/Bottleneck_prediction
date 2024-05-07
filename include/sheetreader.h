@@ -65,6 +65,7 @@ public:
         cout << "reading line " + to_string(count) + fileName + ": ";
       }
       //   cout << "reading line " + to_string(count) + fileName + ": ";
+
       istringstream iss(buffer);
       T item;
       readType(iss, item);
@@ -72,8 +73,7 @@ public:
       count++;
     }
   }
-  // void readData(const std::string &fileName, std::vector<T> &data, void
-  // (*readFunction)(std::istringstream &, T &), bool debug);
+
 
 private:
   const int limit = DEFAULTLIMIT;

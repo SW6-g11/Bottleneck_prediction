@@ -2,9 +2,11 @@
 #include "sheetreader.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <string.h>
 
+#include <string.h>
 #include "SimulatorController.h"
+#include "graphviz.h"
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -36,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     {
         radioButton->setEnabled(false);
     }
+    ui->pushButton_2->setEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -74,6 +77,7 @@ void MainWindow::openDirectory()
                 // Call processDataForDay with the directory path, day, and limit
                 graphOne.processDataForDay(directoryPathStdString, day, limit, SimulatorController::getGraphDataPointer());
                 // SimulatorController::addData(SimulatorController::getGraphDataPointer());
+
             }
         }
     }
@@ -258,9 +262,11 @@ void MainWindow::simulateProcessingFour()
 
 void MainWindow::generateGraph()
 {
-    // Call the function to generate the graph (not implemented yet)
-    // replace `functionToGenerateGraph()` with your actual function call
-    // functionToGenerateGraph();
+
+    cout << "Calling GraphViz" << endl;
+    Graphviz::GenerateGraphViz("NetworkGraph.dot");
+    cout << "GraphViz Done" << endl;
+    // Call the function to draw the graph 
 }
 
 void MainWindow::runAlgorithms()
