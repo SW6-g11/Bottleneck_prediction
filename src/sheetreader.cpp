@@ -104,6 +104,13 @@ void SheetReader::readType<Router>(istringstream &iss, Router &routerItem)
         getline(iss, type))
     {
         routerItem = Router(id, latitude, longitude, type);
+
+        // Print router data
+        cout << "Router Data:\n";
+        cout << "ID: " << routerItem.id << "\n";
+        cout << "Latitude: " << routerItem.latitude << "\n";
+        cout << "Longitude: " << routerItem.longitude << "\n";
+        cout << "Type: " << routerItem.type << "\n\n";
     }
     else
     {
