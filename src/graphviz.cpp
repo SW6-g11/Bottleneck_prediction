@@ -6,10 +6,21 @@
 #include "router.h"
 #include "sheetreader.h"
 #include "traffic.h"
+#include <iostream>
+//#include "../Graphviz/include/graphviz/cgraph.h"
+//#include "../Graphviz/include/graphviz/gvc.h"
+//#include "../Graphviz/include/graphviz/xdot.h"
 
 using namespace std;
 
-void Graphviz::GenerateGraphViz(const vector<Linkutils>& linkUtilsData, const vector<Traffic>& trafficData, const vector<Paths>& pathsData, const vector<Router>& routersData, const vector<Link>& linksData, const string& filename) {
+void Graphviz::GenerateGraphViz(const string& filename) {
+  Graphmaker graphTwo;
+  const vector<Linkutils>& linkUtilsData = graphTwo.getLinkUtilsData();
+  const vector<Traffic>& trafficData = graphTwo.getTrafficData();
+  const vector<Paths>& pathsData = graphTwo.getPathsData();
+  const vector<Router>& routersData = graphTwo.getRoutersData();
+  const vector<Link>& linksData = graphTwo.getLinksData();
+
   std::ofstream dotFile(filename);
 
   // Check if the stream is open and ready for writing

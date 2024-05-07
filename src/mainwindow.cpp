@@ -208,19 +208,10 @@ void MainWindow::simulateProcessingOne()
 void MainWindow::generateGraph()
 {
 
-    // Process the data needed for the graph
-    Graphmaker graphTwo;
-    const vector<Linkutils>& linkUtilsData = graphTwo.getLinkUtilsData();
-    const vector<Traffic>& trafficData = graphTwo.getTrafficData();
-    const vector<Paths>& pathsData = graphTwo.getPathsData();
-    const vector<Router>& routersData = graphTwo.getRoutersData();
-    const vector<Link>& linksData = graphTwo.getLinksData();
     cout << "Calling GraphViz" << endl;
-    Graphviz::GenerateGraphViz(linkUtilsData, trafficData, pathsData, routersData, linksData, "NetworkGraph.dot");
+    Graphviz::GenerateGraphViz("NetworkGraph.dot");
     cout << "GraphViz Done" << endl;
     // Call the function to draw the graph 
-    GraphDrawer graph2.drawGraph();
-
 }
 
 void MainWindow::simulateProcessingTwo()

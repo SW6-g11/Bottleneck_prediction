@@ -27,7 +27,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void simulateProcessingOne();
+    static void simulateProcessingOne();
     void simulateProcessingTwo();
 
 private slots:

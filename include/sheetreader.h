@@ -39,47 +39,45 @@ public:
         // Default value defined above
     }
 
-    template <typename T>
-    void readData(const string &fileName, vector<T> &data, bool debug)
-    {
-        // cout << "Inside function 1 ";
-        if (debug)
-            cout << "Inside function 1 ";
-        ifstream file(fileName);
-        if (debug)
-            cout << "2 ";
-        if (!file)
-        {
-            cout << "Error ";
-            cerr << "Error: Unable to open file " << fileName << endl;
-            return;
-        }
-        if (debug)
-            cout << "3 ";
-        const int bufferSize = 1024; // Adjust buffer size as needed
-        if (debug)
-            cout << "4 ";
-        char buffer[bufferSize];
-        if (debug)
-            cout << "5 ";
-        int count = 0;
-        if (debug)
-            cout << "6 ";
-        int i = 0;
-        while (file.getline(buffer, bufferSize) && i > 0 && i < limit)
-        {
-            i++;
-            if (debug)
-            {
-                cout << to_string(count) + fileName + ": ";
-            }
-            istringstream iss(buffer);
-            T item;
-            readType(iss, item);
-            data.push_back(item);
-            count++;
-        }
+  template <typename T>
+  void readData(const string& fileName, vector<T>& data, bool debug) {
+    // cout << "Inside function 1 ";
+    if (debug)
+      cout << "Inside function 1 ";
+    ifstream file(fileName);
+    if (debug)
+      cout << "2 ";
+    if (!file) {
+      cout << "Error ";
+      cerr << "Error: Unable to open file " << fileName << endl;
+      return;
     }
+    if (debug)
+      cout << "3 ";
+    const int bufferSize = 1024;  // Adjust buffer size as needed
+    if (debug)
+      cout << "4 ";
+    char buffer[bufferSize];
+    if (debug)
+      cout << "5 ";
+    int count = 0;
+    if (debug)
+      cout << "6 ";
+    int i = 0;
+    cout << "the filename is : " + fileName + " : " << endl;
+    while (file.getline(buffer, bufferSize) && i < limit) {
+      i++;
+      if (debug) {
+        cout << "reading line " + to_string(count) + fileName + ": ";
+      }
+      cout << "reading line " + to_string(count) + fileName + ": ";
+      istringstream iss(buffer);
+      T item;
+      readType(iss, item);
+      data.push_back(item);
+      count++;
+    }
+  }
     // void readData(const std::string &fileName, std::vector<T> &data, void (*readFunction)(std::istringstream &, T &), bool debug);
 
 private:
