@@ -255,7 +255,7 @@ void MainWindow::simulateProcessingTwo()
 {
     int currentValue = ui->progressBar_2->value();
     if (currentValue < 100) {
-        ui->progressBar_2->setValue(currentValue + 25);
+        ui->progressBar_2->setValue(currentValue + 20);
     }
 }
 void MainWindow::simulateProcessingThree(int barValue){
@@ -267,11 +267,13 @@ void MainWindow::simulateProcessingThree(int barValue){
 
 void MainWindow::generateGraph()
 {
-
-    cout << "Calling GraphViz" << endl;
-    Graphviz::GenerateGraphViz("NetworkGraph.dot");
-    cout << "GraphViz Done" << endl;
-    // Call the function to draw the graph 
+    bool ok;
+    QString filename  = QInputDialog::getText(nullptr, "Input", "Enter the filename for the Graphviz output:", QLineEdit::Normal, "", &ok);
+    if (ok && !filename.isEmpty()) {
+        // User entered something and pressed OK
+        Graphviz graphviz;
+        graphviz.GenerateGraphViz((filename + ".dot").toStdString());
+    }
 }
 
 void MainWindow::runAlgorithms(){
