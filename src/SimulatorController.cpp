@@ -1,12 +1,6 @@
 #include "SimulatorController.h"
 #include "graphDataStruct.h"
 #include "DinicAlgorithm.h"
-#include <algorithm>
-#include <map>
-#include <regex>
-#include <vector>
-#include "paths.h"
-#include <Networkmanipulator.h>
 
 graphDataStruct SimulatorController::graphData;
 DinicAlgorithm SimulatorController::dinicsInstance;
@@ -21,19 +15,14 @@ graphDataStruct &SimulatorController::getGraphDataPointer()
 {
     return graphData;
 }
-
-void SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(int amountPUV, int amountPaths)
+/*
+DinicAlgorithm &SimulatorController::getDinicsInstance(const std::vector<Link> &linksData)
 {
-    std::vector<std::pair<std::string, Linkutils>> peakset;
-    Networkmanipulator::findPeakUtilValues(amountPUV, peakset, getGraphDataPointer());
-    Networkmanipulator::reduceVector(peakset, amountPUV);
-    vector<Paths> problempaths = Networkmanipulator::findLinksInPaths(peakset, amountPUV, getGraphDataPointer());
-    Networkmanipulator::reduceVector(problempaths, amountPaths);
-    for (const auto &path : problempaths)
+    // Construct dinicsInstance if not already constructed
+    if (!dinicsInstance.isValid())
     {
-        runDinics(path.origin, path.destination);
+        dinicsInstance = DinicAlgorithm(linksData);
     }
-
-    // for(i<problempaths.size: i++)
-    //     runDinics(problempaths[i].2, problempaths[i].3)
+    return dinicsInstance;
 }
+*/

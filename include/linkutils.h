@@ -16,8 +16,6 @@ public:
     // Constructor with parameters
     Linkutils(const string &timestamp, const string &linkStart, const string &linkEnd, double avgUtilization)
         : timestamp(timestamp), linkStart(linkStart), linkEnd(linkEnd), avgUtilization(avgUtilization) {}
-
-    double PeakUtilValue;
 };
 
 #endif // LINKUTILS_H

@@ -36,6 +36,5 @@ void Graphmaker::processDataForDay(string &directoryPath, int day, int Limit, gr
     string linksFileName = directoryPath + "/links.csv";
     Readmaster.readData(linksFileName, graphdata.linksData, true);
     mainWindow.simulateProcessingOne();
-
 };
 
