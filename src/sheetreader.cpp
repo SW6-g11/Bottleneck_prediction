@@ -5,13 +5,14 @@
 #include "inputverifyer.h"
 #include "linkutils.h"
 #include "traffic.h"
+#include <regex>
 
 using namespace std;
 
 template <>
 void SheetReader::readType(istringstream &iss, Linkutils &linkUtilsItem)
 {
-    cout << "type linkutils"<< endl;
+    // cout << "type linkutils" << endl;
     string timestamp, linkStart, linkEnd;
     double avgUtilization;
     if (getline(iss, timestamp, ',') &&
@@ -30,7 +31,6 @@ void SheetReader::readType(istringstream &iss, Linkutils &linkUtilsItem)
 template <>
 void SheetReader::readType<Traffic>(istringstream &iss, Traffic &trafficItem)
 {
-
     string timestamp, origin, destination;
     double avgTraffic;
     if (getline(iss, timestamp, ',') &&
@@ -45,56 +45,83 @@ void SheetReader::readType<Traffic>(istringstream &iss, Traffic &trafficItem)
         cerr << "Warning: Skipping line with insufficient data: " << iss.str() << endl;
     }
 }
+// template <>
+// void SheetReader::readType<Paths>(istringstream &iss, Paths &pathsItem)
+// {
+//     cout << "type paths" << endl;
+//     // Read the timestamp, origin, and destination directly from the file stream
+//     if (getline(iss, pathsItem.timestamp, ',') &&
+//         getline(iss, pathsItem.origin, ',') &&
+//         getline(iss, pathsItem.destination, ','))
+//     {
+//         // Read the rest of the columns (nodes in the path)
+//         string pathNode;
+
+//         while (getline(iss, pathNode, ','))
+//         {
+//             // Skip '[' and ']' characters
+//             if (pathNode.front() == '[')
+//                 pathNode.erase(0, 1);
+//             if (pathNode.back() == ']')
+//                 pathNode.pop_back();
+
+//             // Split the nodes separated by tabs
+//             istringstream pathStream(pathNode);
+//             string pathItem;
+//             int itemCount = 0;
+//             while (getline(pathStream, pathItem, '\t'))
+//             {
+//                 if (pathItem == "")
+//                     continue;
+//                 pathsItem.path.push_back(move(pathItem));
+//                 itemCount++;
+//                 cout << "item counter: " + to_string(itemCount) << endl;
+//                 cout << "item: " + pathItem << endl;
+//                 // pathsItem.path.push_back(move(pathItem));
+//             }
+//         }
+//     }
+//     else
+//     {
+//         cerr << "Warning: Skipping line with insufficient data: " << iss.str() << endl;
+//     }
+// }
 template <>
 void SheetReader::readType<Paths>(istringstream &iss, Paths &pathsItem)
 {
+    const regex matcher = regex("^([^,]+),([^,]+),([^,]+)(?:,((?:(?:(?:[^,]+),)*)(?:[^,]+)))?");
+    string buffer;
+    std::smatch matches;
 
-    // Read the timestamp, origin, and destination directly from the file stream
-    if (getline(iss, pathsItem.timestamp, ',') &&
-        getline(iss, pathsItem.origin, ',') &&
-        getline(iss, pathsItem.destination, ','))
+
+    // std::cout << "BeforeLoop" << std::endl;
+
+    // Loop over each token separated by the tab character ('\t') in the input string stream (iss)
+    while (getline(iss, buffer, '\t'))
     {
-        // Read the rest of the columns (nodes in the path)
-        string pathNode;
-        // pathsItem.path = new vector<string>(); // Manual memory allocation
-
-        while (getline(iss, pathNode, ','))
+        std::cout << "New path: " << std::endl;
+        regex_search(buffer, matches, matcher);
+        // Extract and assign the timestamp, origin, and destination from the matched groups
+        pathsItem.timestamp = matches[1];
+        pathsItem.origin = matches[2];
+        pathsItem.destination = matches[3];
+        std::cout << "0: " << matches[0] << " 1: " << matches[1] << " 2: " << matches[2] << " 3: " << matches[3] << " 4: " << matches[4] << std::endl;
+        if (matches[4] == "")
+            continue;
+        std::stringstream ss(matches[4]);
+        string pathBuffer;
+        while (getline(ss, pathBuffer, ','))
         {
-            // Skip '[' and ']' characters
-            if (pathNode.front() == '[')
-                pathNode.erase(0, 1);
-            if (pathNode.back() == ']')
-                pathNode.pop_back();
-
-            // Split the nodes separated by tabs
-            istringstream pathStream(pathNode);
-            string pathItem;
-            int itemCount = 0;
-            vector<string> itemPaths;
-            while (getline(pathStream, pathItem, '\t'))
-            {
-                itemPaths.push_back(move(pathItem));
-                itemCount++;
-                // pathsItem.path.push_back(move(pathItem));
-            }
-
-            pathsItem.path.resize(itemCount);
-            for (int i = 0; i < itemCount; i++)
-            {
-                pathsItem.path.push_back(itemPaths[i]);
-            }
-            itemPaths.clear();
+            pathsItem.path.push_back(move(pathBuffer));
         }
-    }
-    else
-    {
-        cerr << "Warning: Skipping line with insufficient data: " << iss.str() << endl;
+        pathsItem.applyChanges();
+        std::cout << pathsItem.to_string() << std::endl;
     }
 }
+
 template <>
 void SheetReader::readType<Router>(istringstream &iss, Router &routerItem)
 {
-
     string id, type;
     double latitude, longitude;
     if (getline(iss, id, ',') &&
@@ -114,7 +141,7 @@ void SheetReader::readType<Router>(istringstream &iss, Router &routerItem)
 template <>
 void SheetReader::readType<Link>(istringstream &iss, Link &linkItem)
 {
-    cout << "type link"<< endl;
+    // cout << "type link" << endl;
     string linkStart, linkEnd;
     double capacity;
     if (getline(iss, linkStart, ',') &&
@@ -128,4 +155,3 @@ void SheetReader::readType<Link>(istringstream &iss, Link &linkItem)
         cerr << "Warning: Skipping line with insufficient data: " << iss.str() << endl;
     }
 }
-
