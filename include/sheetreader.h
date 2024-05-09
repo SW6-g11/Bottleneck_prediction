@@ -55,7 +55,7 @@ public:
     int count = 0;
     int i = 0;
     cout << "the filename is : " + fileName + " : " << endl;
-    cout << "Data: " + (to_string(i)) + " " + to_string(limit) + ": " << endl;
+    cout << "Data line: " + (to_string(i)) + " out of " + to_string(limit) + ": " << endl;
     while (file.getline(buffer, bufferSize) && ((std::is_same<T, Router>::value || std::is_same<T, Link>::value) || (i < limit || limit == 0)))
     {
       // std::cout << i << std::endl;

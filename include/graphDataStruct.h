@@ -9,17 +9,19 @@
 
 struct graphDataStruct
 {
-    std::vector<Linkutils> linkUtilsData;
-    std::vector<Traffic> trafficData;
-    std::vector<Paths> pathsData;
-    std::vector<Router> routersData;
-    std::vector<Link> linksData;
-    graphDataStruct()
-        : linkUtilsData(),
-          trafficData(),
-          pathsData(),
-          routersData(),
-          linksData() {}
+  std::vector<Linkutils> linkUtilsData;
+  std::vector<Traffic> trafficData;
+  std::vector<Paths> pathsData;
+  std::vector<Router> routersData;
+  std::vector<Link> linksData;
+  std::vector<Link> Augmentedlinks;
+  graphDataStruct()
+      : linkUtilsData(),
+        trafficData(),
+        pathsData(),
+        routersData(),
+        linksData(),
+        Augmentedlinks() {}
 };
 
 #endif

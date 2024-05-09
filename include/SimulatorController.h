@@ -2,7 +2,7 @@
 #define SIMULATORCONTROLLER
 
 #include <string.h>
-
+#include "path.h"
 #include "graphDataStruct.h"
 #include "DinicAlgorithm.h"
 
@@ -15,17 +15,9 @@ public:
 
     static graphDataStruct &getGraphDataPointer();
 
-    static std::unordered_map<std::string, Linkutils> findPeaks();
-
-    static void findPeakUtilValues(int amountofPUVs);
-
-    // vector<T &> replaceByFingerPrint(std::string (SimulatorController::*makeFingerPrintFunction)(T), T linkObj, vector<T> *arr);
-    static std::string makeFingerPrint(Linkutils LinkUtils);
-    static std::string makeFingerPrint(Link link);
-
     template <typename T>
-    vector<T> replaceByFingerPrint(std::string (*makeFingerPrintFunction)(T), T linkObj, vector<T> arr)
-    // vector<T> replaceByFingerPrint(std::string (*makeFingerPrintFunction)(T))
+    static vector<T> replaceByFingerPrint(std::string(makeFingerPrintFunction)(T), T linkObj, vector<T> arr)
+    // vector<T> replaceByFingerPrint(std::string (makeFingerPrintFunction)(T))
     {
         std::string target = makeFingerPrintFunction(linkObj);
         vector<T> result;
@@ -39,6 +31,8 @@ public:
         }
         return result;
     }
+
+    static void DinicsOnBottlenecksNoAugmentedNetork(int amountPUV, int amountPaths);
 
 private:
     static graphDataStruct graphData;

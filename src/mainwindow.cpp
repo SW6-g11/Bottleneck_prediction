@@ -6,6 +6,8 @@
 
 #include "SimulatorController.h"
 
+const bool skipQuery = true;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -55,13 +57,17 @@ void MainWindow::openDirectory()
     // Check if a directory was selected
     if (!directoryPath.isEmpty())
     {
-        bool ok;
-        int day = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter a number indicating which day to be processed:"), 1, 1, 7, 1, &ok);
+        bool ok = skipQuery;
+        int day = 1;
+        if (!skipQuery)
+            day = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter a number indicating which day to be processed:"), 1, 1, 7, 1, &ok);
         // Check if the user clicked OK and entered a valid number
         if (ok)
         {
-            bool limitOk;
-            int limit = QInputDialog::getInt(this, tr("Input Limit"), tr("Please enter a limit of lines from data to be processed:"), 0, 0, INT_MAX, 1, &limitOk);
+            bool limitOk = skipQuery;
+            int limit = 0;
+            if (!skipQuery)
+                limit = QInputDialog::getInt(this, tr("Input Limit"), tr("Please enter a limit of lines from data to be processed:"), 0, 0, INT_MAX, 1, &limitOk);
             // Check if the user clicked OK and entered a valid limit
             if (limitOk)
             {
@@ -77,7 +83,6 @@ void MainWindow::openDirectory()
             }
         }
     }
-    // return;
 }
 
 void MainWindow::openImage()
@@ -245,7 +250,13 @@ void MainWindow::simulateProcessingOne()
 void MainWindow::simulateProcessingTwo()
 {
     std::cout << "ProcessingTwo" << std::endl;
-    SimulatorController::findPeakUtilValues(1);
+    bool amountOK = !skipQuery;
+    int amountPUV = 5;
+    int amountPaths = 2;
+    if (!skipQuery)
+        amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, 7, 1, &amountOK);
+
+    SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths);
 }
 
 void MainWindow::simulateProcessingThree()
