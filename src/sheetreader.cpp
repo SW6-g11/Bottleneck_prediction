@@ -31,7 +31,6 @@ void SheetReader::readType(istringstream &iss, Linkutils &linkUtilsItem)
 template <>
 void SheetReader::readType<Traffic>(istringstream &iss, Traffic &trafficItem)
 {
-    // cout << "type traffic" << endl;
     string timestamp, origin, destination;
     double avgTraffic;
     if (getline(iss, timestamp, ',') &&
@@ -94,6 +93,7 @@ void SheetReader::readType<Paths>(istringstream &iss, Paths &pathsItem)
     string buffer;
     std::smatch matches;
 
+
     // std::cout << "BeforeLoop" << std::endl;
 
     // Loop over each token separated by the tab character ('\t') in the input string stream (iss)
@@ -122,7 +122,6 @@ void SheetReader::readType<Paths>(istringstream &iss, Paths &pathsItem)
 template <>
 void SheetReader::readType<Router>(istringstream &iss, Router &routerItem)
 {
-    // cout << "type Router" << endl;
     string id, type;
     double latitude, longitude;
     if (getline(iss, id, ',') &&
