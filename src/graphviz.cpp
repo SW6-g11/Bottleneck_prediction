@@ -29,36 +29,37 @@ void Graphviz::GenerateGraphViz(const string& filename) {
         return;
     }
     
-    dotFile << "digraph G {" << endl;
-
+    dotFile << "digraph G { \n" << endl;
+    
     // Write routers as nodes
-    for (const auto& router : routersData) {
-        dotFile << "\t\"" << router.id << "\" [label=\"" << router.id << "\", shape=circle];" << endl;
+    for (const auto& Router : routersData) {
+        dotFile << "\t\"" << Router.id << "\" [label=\"" << Router.id << "\", shape=circle];" << endl;
     }
+    
     mainWindow.simulateProcessingTwo();
     // Write traffic data as edges with labels
-    for (const auto& traffic : trafficData) {
-        dotFile << "\t\"" << traffic.origin << "\" -> \"" << traffic.destination << "\" [label=\"" << traffic.avgTraffic << "\", color=red];" << endl;
+    for (const auto& Traffic : trafficData) {
+        dotFile << "\t\"" << Traffic.origin << "\" -> \"" << Traffic.destination << "\" [label=\"" << Traffic.avgTraffic << "\", color=red];" << endl;
     }
     mainWindow.simulateProcessingTwo();
     // Write paths data as edges
-    for (const auto& path : pathsData) {
-        for (size_t i = 0; i < path.path.size() - 1; ++i) {
-            dotFile << "\t\"" << path.path[i] << "\" -> \"" << path.path[i + 1] << "\" [style=dashed];" << endl;
+    for (const auto& Path : pathsData) {
+        for (size_t i = 0; i < Path.path.size() - 1; ++i) {
+            dotFile << "\t\"" << Path.path[i] << "\" -> \"" << Path.path[i + 1] << "\" [style=dashed];" << endl;
         }
     }
     mainWindow.simulateProcessingTwo();
     // Write link utils data as edges with labels
-    for (const auto& linkUtils : linkUtilsData) {
-        dotFile << "\t\"" << linkUtils.linkStart << "\" -> \"" << linkUtils.linkEnd << "\" [label=\"" << linkUtils.avgUtilization << "\", color=blue];" << endl;
+    for (const auto& LinkUtils : linkUtilsData) {
+        dotFile << "\t\"" << LinkUtils.linkStart << "\" -> \"" << LinkUtils.linkEnd << "\" [label=\"" << LinkUtils.avgUtilization << "\", color=blue];" << endl;
     }
     mainWindow.simulateProcessingTwo();
     // Write links data as edges with labels
-    for (const auto& link : linksData) {
-        dotFile << "\t\"" << link.linkStart << "\" -> \"" << link.linkEnd << "\" [label=\"" << link.capacity << "\", color=green];" << endl;
+    for (const auto& Link : linksData) {
+        dotFile << "\t\"" << Link.linkStart << "\" -> \"" << Link.linkEnd << "\" [label=\"" << Link.capacity << "\", color=green];" << endl;
     } 
-
-    dotFile << "}" << endl;
+    
+    dotFile << "}\n" << endl;
     dotFile.close();
     mainWindow.simulateProcessingTwo();
     if (dotFile.fail()) {

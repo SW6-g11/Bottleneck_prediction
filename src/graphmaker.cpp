@@ -15,7 +15,7 @@ using namespace std;
 void Graphmaker::processDataForDay(string &directoryPath, int day, int Limit, graphDataStruct &graphdata)
 {
     SheetReader Readmaster(Limit);
-    MainWindow& mainWindow = MainWindow::getInstance();
+    MainWindow& mainWindow = MainWindow::getInstance(); 
 
     string linkUtilsFileName = directoryPath + "/link-util-day" + to_string(day) + ".csv";
     Readmaster.readData(linkUtilsFileName, graphdata.linkUtilsData, false);
