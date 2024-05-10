@@ -14,12 +14,13 @@ using namespace std;
 
 void Graphviz::GenerateGraphViz(const string& filename) {
     Graphmaker graph;
+    MainWindow& mainWindow = MainWindow::getInstance(); 
     const vector<Router>& routersData = graph.getRoutersData();
     const vector<Traffic>& trafficData = graph.getTrafficData();
     const vector<Paths>& pathsData = graph.getPathsData();
     const vector<Linkutils>& linkUtilsData = graph.getLinkUtilsData();
     const vector<Link>& linksData = graph.getLinksData();
-    MainWindow& mainWindow = MainWindow::getInstance();
+    
     
     string filePath = "../images/" + filename + ".dot";
     ofstream dotFile(filePath);
@@ -65,7 +66,7 @@ void Graphviz::GenerateGraphViz(const string& filename) {
     dotFile << "}\n" << endl;
     dotFile.close();
     mainWindow.simulateProcessingTwo();
-    
+
     if (dotFile.fail()) {
         cerr << "Error: Failed to write to file " << filename << endl;
         return;
