@@ -309,14 +309,23 @@ void MainWindow::runAlgorithms(){
 
     if(ui->checkBox->isChecked()){
     simulateProcessingThree(barValue);
+    SimulatorController::runDinics("R1", "R10");
     }
 
     if(ui->checkBox_2->isChecked()){
+    bool amountOK = !skipQuery;
+    int amountPUV = 5;
+    int amountPaths = 2;
+    if (!skipQuery)
+        amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, 7, 1, &amountOK);
+
+    SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths);
     simulateProcessingThree(barValue);
     }
 
     if(ui->checkBox_3->isChecked()){
     simulateProcessingThree(barValue);
+
     }
 
     if(ui->checkBox_4->isChecked()){
@@ -331,5 +340,4 @@ void MainWindow::runAlgorithms(){
     for (QCheckBox* checkbox : checkboxes) {
         checkbox->setEnabled(true);
     }
-
 }
