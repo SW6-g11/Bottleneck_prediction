@@ -7,6 +7,7 @@
 #include <vector>
 #include "paths.h"
 #include <Networkmanipulator.h>
+#include "mainwindow.h"
 
 graphDataStruct SimulatorController::graphData;
 DinicAlgorithm SimulatorController::dinicsInstance;
@@ -31,7 +32,7 @@ void SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(int amountPUV, in
     Networkmanipulator::reduceVector(problempaths, amountPaths);
     for (const auto &path : problempaths)
     {
-        runDinics(path.origin, path.destination);
+       // runDinics(path.origin, path.destination);
     }
 
     // for(i<problempaths.size: i++)

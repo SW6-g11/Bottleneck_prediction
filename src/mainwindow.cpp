@@ -315,6 +315,9 @@ void MainWindow::runAlgorithms(){
 
     if(ui->checkBox->isChecked()){
     simulateProcessingThree(barValue);
+    std::string sourceInput = QInputDialog::getText(nullptr, "Source", "Enter source node").toStdString();
+    std::string sinkInput = QInputDialog::getText(nullptr, "Sink", "Enter sink node").toStdString();
+    SimulatorController::runDinics(sourceInput, sinkInput);
     }
 
     if(ui->checkBox_2->isChecked()){

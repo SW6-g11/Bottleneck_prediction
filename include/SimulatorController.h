@@ -11,7 +11,7 @@ class SimulatorController
 public:
     SimulatorController() = delete;
 
-    static void runDinics(const std::string startLink, const std::string endLink);
+    static void runDinics(const std::string, const std::string);
 
     static graphDataStruct &getGraphDataPointer();
 

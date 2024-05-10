@@ -29,6 +29,7 @@ class MainWindow : public QMainWindow
 public:
     void simulateProcessingOne();
     void simulateProcessingTwo();
+    void simulateProcessingThree();
     void simulateProcessingThree(int barValue);
 
     static MainWindow& getInstance();
