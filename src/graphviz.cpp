@@ -41,6 +41,7 @@ void Graphviz::GenerateGraphViz(const string& filename) {
     for (const auto& Traffic : trafficData) {
         dotFile << "\t\"" << Traffic.origin << "\" -> \"" << Traffic.destination << "\" [label=\"" << Traffic.avgTraffic << "\", color=red];" << endl;
     }
+
     mainWindow.simulateProcessingTwo();
     // Write paths data as edges
     for (const auto& Path : pathsData) {
@@ -48,11 +49,13 @@ void Graphviz::GenerateGraphViz(const string& filename) {
             dotFile << "\t\"" << Path.path[i] << "\" -> \"" << Path.path[i + 1] << "\" [style=dashed];" << endl;
         }
     }
+
     mainWindow.simulateProcessingTwo();
     // Write link utils data as edges with labels
     for (const auto& LinkUtils : linkUtilsData) {
         dotFile << "\t\"" << LinkUtils.linkStart << "\" -> \"" << LinkUtils.linkEnd << "\" [label=\"" << LinkUtils.avgUtilization << "\", color=blue];" << endl;
     }
+
     mainWindow.simulateProcessingTwo();
     // Write links data as edges with labels
     for (const auto& Link : linksData) {
@@ -62,6 +65,7 @@ void Graphviz::GenerateGraphViz(const string& filename) {
     dotFile << "}\n" << endl;
     dotFile.close();
     mainWindow.simulateProcessingTwo();
+    
     if (dotFile.fail()) {
         cerr << "Error: Failed to write to file " << filename << endl;
         return;
