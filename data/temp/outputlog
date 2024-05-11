@@ -1,0 +1,848 @@
+ProcessingTwo
+Size 70
+Did not find: "R1,R2"
+Did not find: "R2,R1"
+Did not find: "R1,R4"
+Did not find: "R4,R1"
+Did not find: "R2,R3"
+Did not find: "R3,R2"
+Did not find: "R2,R4"
+Did not find: "R4,R2"
+Did not find: "R2,R9"
+Did not find: "R3,R4"
+Did not find: "R4,R3"
+Did not find: "R3,R7"
+Did not find: "R7,R3"
+Did not find: "R4,R6"
+Did not find: "R6,R4"
+Did not find: "R6,R7"
+Did not find: "R7,R6"
+Did not find: "R6,R8"
+Did not find: "R8,R6"
+Did not find: "R9,R7"
+Did not find: "R8,R10"
+Did not find: "R10,R8"
+Did not find: "R7,R9"
+Found in peakSet, comparing: R2,R9"
+Found in peakSet, comparing: R1,R2"
+Found in peakSet, comparing: R2,R1"
+Found in peakSet, comparing: R1,R4"
+Found in peakSet, comparing: R4,R1"
+Found in peakSet, comparing: R2,R3"
+Found in peakSet, comparing: R3,R2"
+Found in peakSet, comparing: R2,R4"
+Found in peakSet, comparing: R4,R2"
+Found in peakSet, comparing: R2,R9"
+Did not find: "R9,R2"
+Found in peakSet, comparing: R3,R4"
+Found in peakSet, comparing: R4,R3"
+Found in peakSet, comparing: R3,R7"
+Found in peakSet, comparing: R7,R3"
+Found in peakSet, comparing: R4,R6"
+Found in peakSet, comparing: R6,R4"
+Found in peakSet, comparing: R6,R7"
+Found in peakSet, comparing: R7,R6"
+Found in peakSet, comparing: R6,R8"
+Found in peakSet, comparing: R7,R9"
+Found in peakSet, comparing: R9,R7"
+Found in peakSet, comparing: R8,R10"
+Found in peakSet, comparing: R10,R8"
+Found in peakSet, comparing: R1,R2"
+Found in peakSet, comparing: R2,R1"
+Found in peakSet, comparing: R1,R4"
+Found in peakSet, comparing: R4,R1"
+Found in peakSet, comparing: R2,R3"
+Found in peakSet, comparing: R3,R2"
+Found in peakSet, comparing: R2,R4"
+Found in peakSet, comparing: R4,R2"
+Found in peakSet, comparing: R2,R9"
+Found in peakSet, comparing: R9,R2"
+Found in peakSet, comparing: R3,R4"
+Found in peakSet, comparing: R4,R3"
+Found in peakSet, comparing: R3,R7"
+Found in peakSet, comparing: R7,R3"
+Found in peakSet, comparing: R4,R6"
+Found in peakSet, comparing: R6,R4"
+Found in peakSet, comparing: R6,R7"
+Found in peakSet, comparing: R7,R6"
+Found in peakSet, comparing: R6,R8"
+Found in peakSet, comparing: R7,R9"
+Found in peakSet, comparing: R9,R7"
+Found in peakSet, comparing: R8,R10"
+Found in peakSet, comparing: R10,R8"
+24
+R9,R7
+WHOOOOO
+R8,R6
+WHOOOOO
+R7,R6
+WHOOOOO
+R6,R7
+WHOOOOO
+R6,R4
+WHOOOOO
+R10,R8
+WHOOOOO
+R7,R3
+WHOOOOO
+R4,R6
+WHOOOOO
+R1,R2
+WHOOOOO
+R2,R1
+WHOOOOO
+R6,R8
+WHOOOOO
+R4,R3
+WHOOOOO
+R7,R9
+WHOOOOO
+R1,R4
+WHOOOOO
+R4,R1
+WHOOOOO
+R2,R3
+WHOOOOO
+R2,R4
+WHOOOOO
+R3,R2
+WHOOOOO
+R4,R2
+WHOOOOO
+R8,R10
+WHOOOOO
+R2,R9
+WHOOOOO
+R3,R7
+WHOOOOO
+R9,R2
+WHOOOOO
+R3,R4
+WHOOOOO
+***Sorted BottleLinks:****
+R2,R4 - PeakUtilValue: 140.5
+R3,R2 - PeakUtilValue: 106.8
+R7,R3 - PeakUtilValue: 82
+R8,R6 - PeakUtilValue: 36.3333
+R2,R9 - PeakUtilValue: 25
+***Left over BottleLinks:****
+R4,R2 - PeakUtilValue: 23
+R3,R7 - PeakUtilValue: 19.3333
+R2,R3 - PeakUtilValue: 18.6
+R2,R1 - PeakUtilValue: 10.7857
+R6,R8 - PeakUtilValue: 10.5
+R9,R2 - PeakUtilValue: 10.1667
+R7,R6 - PeakUtilValue: 7.75
+R4,R3 - PeakUtilValue: 7
+R6,R7 - PeakUtilValue: 6.875
+R3,R4 - PeakUtilValue: 6.66667
+R4,R6 - PeakUtilValue: 5.63636
+R6,R4 - PeakUtilValue: 5.63636
+R8,R10 - PeakUtilValue: 4.83333
+R10,R8 - PeakUtilValue: 4.58333
+R1,R2 - PeakUtilValue: 4.21429
+R4,R1 - PeakUtilValue: 3.58824
+R9,R7 - PeakUtilValue: 3.05263
+R1,R4 - PeakUtilValue: 2.76471
+R7,R9 - PeakUtilValue: 2.57895
+" searching for: "R2,R4"
+" searching for: "R3,R2"
+" searching for: "R7,R3"
+" searching for: "R8,R6"
+" searching for: "R2,R9"
+ increased pathsize of path: R1,R2,R4,R3,R7,R6,R8
+ increased pathsize of path: R8,R6,R7,R3,R2,R4
+ increased pathsize of path: R9,R7,R3,R2,R4
+ increased pathsize of path: R1,R2,R4,R6,R7
+ increased pathsize of path: R2,R4
+ increased pathsize of path: R8,R6,R7,R3,R2,R4
+ increased pathsize of path: R9,R7,R3,R2,R4
+ increased pathsize of path: R8,R6,R7,R3,R2,R4
+ increased pathsize of path: R9,R7,R3,R2,R4
+ increased pathsize of path: R8,R6,R7,R3,R2,R4
+6|7
+6|7
+5|7
+5|6
+5|7
+5|5
+5|7
+5|5
+***All problematic paths (No duplicates), ordered by pathlength: ***
+R1,R2,R4,R3,R7,R6,R8 pathsize: 7
+R8,R6,R7,R3,R2,R4 pathsize: 6
+R9,R7,R3,R2,R4 pathsize: 5
+R1,R2,R4,R6,R7 pathsize: 5
+R2,R4 pathsize: 5
+ProblemPaths length: 5
+running dinics for the 0 time
+Running findMaxFlow from: R1 to R8
+Starting BFS at node: R1
+looping bfs in adjecencymap at link  R1R2
+looping bfs in adjecencymap at link  R2R1
+looping bfs in adjecencymap at link  R1R4
+looping bfs in adjecencymap at link  R4R1
+looping bfs in adjecencymap at link  R1R2
+looping bfs in adjecencymap at link  R2R1
+looping bfs in adjecencymap at link  R2R3
+looping bfs in adjecencymap at link  R3R2
+looping bfs in adjecencymap at link  R2R4
+looping bfs in adjecencymap at link  R4R2
+looping bfs in adjecencymap at link  R2R9
+looping bfs in adjecencymap at link  R9R2
+looping bfs in adjecencymap at link  R1R4
+looping bfs in adjecencymap at link  R4R1
+looping bfs in adjecencymap at link  R2R4
+looping bfs in adjecencymap at link  R4R2
+looping bfs in adjecencymap at link  R3R4
+looping bfs in adjecencymap at link  R4R3
+looping bfs in adjecencymap at link  R4R6
+looping bfs in adjecencymap at link  R6R4
+looping bfs in adjecencymap at link  R2R3
+looping bfs in adjecencymap at link  R3R2
+looping bfs in adjecencymap at link  R3R4
+looping bfs in adjecencymap at link  R4R3
+looping bfs in adjecencymap at link  R3R7
+looping bfs in adjecencymap at link  R7R3
+looping bfs in adjecencymap at link  R2R9
+looping bfs in adjecencymap at link  R9R2
+looping bfs in adjecencymap at link  R7R9
+looping bfs in adjecencymap at link  R9R7
+looping bfs in adjecencymap at link  R4R6
+looping bfs in adjecencymap at link  R6R4
+looping bfs in adjecencymap at link  R6R7
+looping bfs in adjecencymap at link  R7R6
+looping bfs in adjecencymap at link  R6R8
+looping bfs in adjecencymap at link  R8R6
+looping bfs in adjecencymap at link  R3R7
+looping bfs in adjecencymap at link  R7R3
+looping bfs in adjecencymap at link  R6R7
+looping bfs in adjecencymap at link  R7R6
+looping bfs in adjecencymap at link  R7R9
+looping bfs in adjecencymap at link  R9R7
+looping bfs in adjecencymap at link  R6R8
+looping bfs in adjecencymap at link  R8R6
+looping bfs in adjecencymap at link  R8R10
+looping bfs in adjecencymap at link  R10R8
+looping bfs in adjecencymap at link  R8R10
+looping bfs in adjecencymap at link  R10R8
+Sink node R8 reached!
+Running dfs on link R1,R2
+Running dfs on link R1,R2
+Running dfs on link R2,R1
+Running dfs on link R2,R3
+Running dfs on link R2,R3
+Running dfs on link R3,R2
+Running dfs on link R3,R4
+Running dfs on link R4,R3
+Running dfs on link R3,R7
+Running dfs on link R3,R7
+Running dfs on link R7,R3
+Running dfs on link R6,R7
+Running dfs on link R7,R6
+Running dfs on link R7,R9
+Running dfs on link R9,R7
+Running dfs on link R7,R3
+Running dfs on link R3,R2
+Running dfs on link R2,R4
+Running dfs on link R4,R2
+Running dfs on link R2,R9
+Running dfs on link R2,R9
+Running dfs on link R9,R2
+Running dfs on link R7,R9
+Running dfs on link R9,R7
+Running dfs on link R9,R2
+Running dfs on link R2,R1
+Running dfs on link R1,R4
+Running dfs on link R1,R4
+Running dfs on link R4,R1
+Running dfs on link R2,R4
+Running dfs on link R4,R2
+Running dfs on link R3,R4
+Running dfs on link R4,R3
+Running dfs on link R4,R6
+Running dfs on link R4,R6
+Running dfs on link R6,R4
+Running dfs on link R6,R7
+Running dfs on link R7,R6
+Running dfs on link R6,R8
+bottleneck (by dfs) found: 6
+additional capacity found, now at:  12
+bottleneck : 6
+bottleneck (by dfs) found: 6
+additional capacity found, now at:  17
+bottleneck : 6
+bottleneck (by dfs) found: 6
+additional capacity found, now at:  23
+bottleneck : 6
+First maxflow: 0
+Current flow: 6
+Current maxflow: 6.000000
+Running dfs on link R1,R4
+Running dfs on link R4,R6
+Running dfs on link R6,R8
+Running dfs on link R8,R6
+Running dfs on link R6,R4
+Running dfs on link R4,R1
+Starting BFS at node: R1
+looping bfs in adjecencymap at link  R1R2
+looping bfs in adjecencymap at link  R2R1
+looping bfs in adjecencymap at link  R1R4
+looping bfs in adjecencymap at link  R4R1
+looping bfs in adjecencymap at link  R1R2
+looping bfs in adjecencymap at link  R2R1
+looping bfs in adjecencymap at link  R2R3
+looping bfs in adjecencymap at link  R3R2
+looping bfs in adjecencymap at link  R2R4
+looping bfs in adjecencymap at link  R4R2
+looping bfs in adjecencymap at link  R2R9
+looping bfs in adjecencymap at link  R9R2
+looping bfs in adjecencymap at link  R1R4
+looping bfs in adjecencymap at link  R4R1
+looping bfs in adjecencymap at link  R2R4
+looping bfs in adjecencymap at link  R4R2
+looping bfs in adjecencymap at link  R3R4
+looping bfs in adjecencymap at link  R4R3
+looping bfs in adjecencymap at link  R4R6
+looping bfs in adjecencymap at link  R6R4
+looping bfs in adjecencymap at link  R2R3
+looping bfs in adjecencymap at link  R3R2
+looping bfs in adjecencymap at link  R3R4
+looping bfs in adjecencymap at link  R4R3
+looping bfs in adjecencymap at link  R3R7
+looping bfs in adjecencymap at link  R7R3
+looping bfs in adjecencymap at link  R2R9
+looping bfs in adjecencymap at link  R9R2
+looping bfs in adjecencymap at link  R7R9
+looping bfs in adjecencymap at link  R9R7
+looping bfs in adjecencymap at link  R4R6
+looping bfs in adjecencymap at link  R6R4
+looping bfs in adjecencymap at link  R6R7
+looping bfs in adjecencymap at link  R7R6
+looping bfs in adjecencymap at link  R6R8
+looping bfs in adjecencymap at link  R8R6
+looping bfs in adjecencymap at link  R3R7
+looping bfs in adjecencymap at link  R7R3
+looping bfs in adjecencymap at link  R6R7
+looping bfs in adjecencymap at link  R7R6
+looping bfs in adjecencymap at link  R7R9
+looping bfs in adjecencymap at link  R9R7
+Sink node R8 not reachable!
+Final Max flow is: 6.000000
+
+
+
+
+
+
+running dinics for the 1 time
+Running findMaxFlow from: R8 to R4
+Starting BFS at node: R8
+looping bfs in adjecencymap at link  R6R8
+looping bfs in adjecencymap at link  R8R6
+looping bfs in adjecencymap at link  R8R10
+looping bfs in adjecencymap at link  R10R8
+looping bfs in adjecencymap at link  R4R6
+looping bfs in adjecencymap at link  R6R4
+looping bfs in adjecencymap at link  R6R7
+looping bfs in adjecencymap at link  R7R6
+looping bfs in adjecencymap at link  R6R8
+looping bfs in adjecencymap at link  R8R6
+looping bfs in adjecencymap at link  R8R10
+looping bfs in adjecencymap at link  R10R8
+looping bfs in adjecencymap at link  R1R4
+looping bfs in adjecencymap at link  R4R1
+looping bfs in adjecencymap at link  R2R4
+looping bfs in adjecencymap at link  R4R2
+looping bfs in adjecencymap at link  R3R4
+looping bfs in adjecencymap at link  R4R3
+looping bfs in adjecencymap at link  R4R6
+looping bfs in adjecencymap at link  R6R4
+looping bfs in adjecencymap at link  R3R7
+looping bfs in adjecencymap at link  R7R3
+looping bfs in adjecencymap at link  R6R7
+looping bfs in adjecencymap at link  R7R6
+looping bfs in adjecencymap at link  R7R9
+looping bfs in adjecencymap at link  R9R7
+looping bfs in adjecencymap at link  R1R2
+looping bfs in adjecencymap at link  R2R1
+looping bfs in adjecencymap at link  R1R4
+looping bfs in adjecencymap at link  R4R1
+looping bfs in adjecencymap at link  R1R2
+looping bfs in adjecencymap at link  R2R1
+looping bfs in adjecencymap at link  R2R3
+looping bfs in adjecencymap at link  R3R2
+looping bfs in adjecencymap at link  R2R4
+looping bfs in adjecencymap at link  R4R2
+looping bfs in adjecencymap at link  R2R9
+looping bfs in adjecencymap at link  R9R2
+looping bfs in adjecencymap at link  R2R3
+looping bfs in adjecencymap at link  R3R2
+looping bfs in adjecencymap at link  R3R4
+looping bfs in adjecencymap at link  R4R3
+looping bfs in adjecencymap at link  R3R7
+looping bfs in adjecencymap at link  R7R3
+looping bfs in adjecencymap at link  R2R9
+looping bfs in adjecencymap at link  R9R2
+looping bfs in adjecencymap at link  R7R9
+looping bfs in adjecencymap at link  R9R7
+Sink node R4 reached!
+Running dfs on link R6,R8
+Running dfs on link R8,R6
+Running dfs on link R4,R6
+Running dfs on link R6,R4
+bottleneck (by dfs) found: 12.000000
+additional capacity found, now at:  17.000000
+bottleneck : 12.000000
+bottleneck (by dfs) found: 12.000000
+additional capacity found, now at:  12.000000
+bottleneck : 12.000000
+First maxflow: 0.000000
+Current flow: 12.000000
+Current maxflow: 12.000000
+Running dfs on link R8,R6
+Running dfs on link R8,R10
+Running dfs on link R8,R10
+Running dfs on link R10,R8
+Running dfs on link R10,R8
+Starting BFS at node: R8
+looping bfs in adjecencymap at link  R6R8
+looping bfs in adjecencymap at link  R8R6
+looping bfs in adjecencymap at link  R8R10
+looping bfs in adjecencymap at link  R10R8
+looping bfs in adjecencymap at link  R8R10
+looping bfs in adjecencymap at link  R10R8
+Sink node R4 not reachable!
+Final Max flow is: 12.000000
+running dinics for the 2 time
+Running findMaxFlow from: R9 to R4
+Starting BFS at node: R9
+looping bfs in adjecencymap at link  R2R9
+looping bfs in adjecencymap at link  R9R2
+looping bfs in adjecencymap at link  R7R9
+looping bfs in adjecencymap at link  R9R7
+looping bfs in adjecencymap at link  R1R2
+looping bfs in adjecencymap at link  R2R1
+looping bfs in adjecencymap at link  R2R3
+looping bfs in adjecencymap at link  R3R2
+looping bfs in adjecencymap at link  R2R4
+looping bfs in adjecencymap at link  R4R2
+looping bfs in adjecencymap at link  R2R9
+looping bfs in adjecencymap at link  R9R2
+looping bfs in adjecencymap at link  R3R7
+looping bfs in adjecencymap at link  R7R3
+looping bfs in adjecencymap at link  R6R7
+looping bfs in adjecencymap at link  R7R6
+looping bfs in adjecencymap at link  R7R9
+looping bfs in adjecencymap at link  R9R7
+looping bfs in adjecencymap at link  R1R2
+looping bfs in adjecencymap at link  R2R1
+looping bfs in adjecencymap at link  R1R4
+looping bfs in adjecencymap at link  R4R1
+looping bfs in adjecencymap at link  R2R3
+looping bfs in adjecencymap at link  R3R2
+looping bfs in adjecencymap at link  R3R4
+looping bfs in adjecencymap at link  R4R3
+looping bfs in adjecencymap at link  R3R7
+looping bfs in adjecencymap at link  R7R3
+looping bfs in adjecencymap at link  R1R4
+looping bfs in adjecencymap at link  R4R1
+looping bfs in adjecencymap at link  R2R4
+looping bfs in adjecencymap at link  R4R2
+looping bfs in adjecencymap at link  R3R4
+looping bfs in adjecencymap at link  R4R3
+looping bfs in adjecencymap at link  R4R6
+looping bfs in adjecencymap at link  R6R4
+looping bfs in adjecencymap at link  R4R6
+looping bfs in adjecencymap at link  R6R4
+looping bfs in adjecencymap at link  R6R7
+looping bfs in adjecencymap at link  R7R6
+looping bfs in adjecencymap at link  R6R8
+looping bfs in adjecencymap at link  R8R6
+looping bfs in adjecencymap at link  R6R8
+looping bfs in adjecencymap at link  R8R6
+looping bfs in adjecencymap at link  R8R10
+looping bfs in adjecencymap at link  R10R8
+looping bfs in adjecencymap at link  R8R10
+looping bfs in adjecencymap at link  R10R8
+Sink node R4 reached!
+Running dfs on link R2,R9
+Running dfs on link R9,R2
+Running dfs on link R1,R2
+Running dfs on link R2,R1
+Running dfs on link R1,R2
+Running dfs on link R2,R1
+Running dfs on link R1,R4
+Running dfs on link R4,R1
+Running dfs on link R2,R3
+Running dfs on link R2,R3
+Running dfs on link R3,R2
+Running dfs on link R3,R4
+Running dfs on link R4,R3
+Running dfs on link R3,R7
+Running dfs on link R7,R3
+Running dfs on link R3,R2
+Running dfs on link R2,R4
+bottleneck (by dfs) found: 2.000000
+additional capacity found, now at:  4.000000
+bottleneck : 2.000000
+bottleneck (by dfs) found: 2.000000
+additional capacity found, now at:  8.000000
+bottleneck : 2.000000
+First maxflow: 0.000000
+Current flow: 2.000000
+Current maxflow: 2.000000
+Running dfs on link R9,R2
+Running dfs on link R2,R4
+Running dfs on link R4,R2
+Running dfs on link R2,R9
+Running dfs on link R9,R2
+Running dfs on link R7,R9
+Running dfs on link R9,R7
+Running dfs on link R3,R7
+Running dfs on link R7,R3
+Running dfs on link R6,R7
+Running dfs on link R7,R6
+Running dfs on link R4,R6
+Running dfs on link R6,R4
+Running dfs on link R6,R7
+Running dfs on link R7,R6
+Running dfs on link R6,R8
+Running dfs on link R6,R8
+Running dfs on link R8,R6
+Running dfs on link R8,R10
+Running dfs on link R8,R10
+Running dfs on link R10,R8
+Running dfs on link R10,R8
+Running dfs on link R8,R6
+Running dfs on link R7,R9
+Running dfs on link R9,R7
+Starting BFS at node: R9
+looping bfs in adjecencymap at link  R2R9
+looping bfs in adjecencymap at link  R9R2
+looping bfs in adjecencymap at link  R7R9
+looping bfs in adjecencymap at link  R9R7
+looping bfs in adjecencymap at link  R1R2
+looping bfs in adjecencymap at link  R2R1
+looping bfs in adjecencymap at link  R2R3
+looping bfs in adjecencymap at link  R3R2
+looping bfs in adjecencymap at link  R2R4
+looping bfs in adjecencymap at link  R4R2
+looping bfs in adjecencymap at link  R2R9
+looping bfs in adjecencymap at link  R9R2
+looping bfs in adjecencymap at link  R3R7
+looping bfs in adjecencymap at link  R7R3
+looping bfs in adjecencymap at link  R6R7
+looping bfs in adjecencymap at link  R7R6
+looping bfs in adjecencymap at link  R7R9
+looping bfs in adjecencymap at link  R9R7
+looping bfs in adjecencymap at link  R1R2
+looping bfs in adjecencymap at link  R2R1
+looping bfs in adjecencymap at link  R1R4
+looping bfs in adjecencymap at link  R4R1
+looping bfs in adjecencymap at link  R2R3
+looping bfs in adjecencymap at link  R3R2
+looping bfs in adjecencymap at link  R3R4
+looping bfs in adjecencymap at link  R4R3
+looping bfs in adjecencymap at link  R3R7
+looping bfs in adjecencymap at link  R7R3
+looping bfs in adjecencymap at link  R4R6
+looping bfs in adjecencymap at link  R6R4
+looping bfs in adjecencymap at link  R6R7
+looping bfs in adjecencymap at link  R7R6
+looping bfs in adjecencymap at link  R6R8
+looping bfs in adjecencymap at link  R8R6
+looping bfs in adjecencymap at link  R1R4
+looping bfs in adjecencymap at link  R4R1
+looping bfs in adjecencymap at link  R2R4
+looping bfs in adjecencymap at link  R4R2
+looping bfs in adjecencymap at link  R3R4
+looping bfs in adjecencymap at link  R4R3
+looping bfs in adjecencymap at link  R4R6
+looping bfs in adjecencymap at link  R6R4
+looping bfs in adjecencymap at link  R6R8
+looping bfs in adjecencymap at link  R8R6
+looping bfs in adjecencymap at link  R8R10
+looping bfs in adjecencymap at link  R10R8
+looping bfs in adjecencymap at link  R8R10
+looping bfs in adjecencymap at link  R10R8
+Sink node R4 reached!
+Running dfs on link R2,R9
+Running dfs on link R9,R2
+Running dfs on link R1,R2
+Running dfs on link R2,R1
+Running dfs on link R1,R2
+Running dfs on link R2,R1
+Running dfs on link R1,R4
+bottleneck (by dfs) found: 4.000000
+additional capacity found, now at:  27.000000
+bottleneck : 4.000000
+bottleneck (by dfs) found: 4.000000
+additional capacity found, now at:  18.000000
+bottleneck : 4.000000
+bottleneck (by dfs) found: 4.000000
+additional capacity found, now at:  12.000000
+bottleneck : 4.000000
+First maxflow: 2.000000
+Current flow: 4.000000
+Current maxflow: 6.000000
+Running dfs on link R9,R2
+Running dfs on link R7,R9
+Running dfs on link R9,R7
+Running dfs on link R3,R7
+Running dfs on link R7,R3
+Running dfs on link R2,R3
+Running dfs on link R3,R2
+Running dfs on link R3,R4
+bottleneck (by dfs) found: 3.000000
+additional capacity found, now at:  12.000000
+bottleneck : 3.000000
+bottleneck (by dfs) found: 3.000000
+additional capacity found, now at:  6.000000
+bottleneck : 3.000000
+bottleneck (by dfs) found: 3.000000
+additional capacity found, now at:  22.000000
+bottleneck : 3.000000
+First maxflow: 6.000000
+Current flow: 3.000000
+Current maxflow: 9.000000
+Running dfs on link R9,R7
+Running dfs on link R7,R3
+Running dfs on link R6,R7
+Running dfs on link R7,R6
+Running dfs on link R4,R6
+Running dfs on link R6,R4
+bottleneck (by dfs) found: 5.000000
+additional capacity found, now at:  22.000000
+bottleneck : 5.000000
+bottleneck (by dfs) found: 5.000000
+additional capacity found, now at:  13.000000
+bottleneck : 5.000000
+bottleneck (by dfs) found: 5.000000
+additional capacity found, now at:  27.000000
+bottleneck : 5.000000
+First maxflow: 9.000000
+Current flow: 5.000000
+Current maxflow: 14.000000
+Running dfs on link R9,R7
+Running dfs on link R7,R6
+Running dfs on link R6,R4
+Running dfs on link R6,R7
+Running dfs on link R7,R6
+Running dfs on link R6,R8
+Running dfs on link R6,R8
+Running dfs on link R8,R6
+Running dfs on link R8,R10
+Running dfs on link R8,R10
+Running dfs on link R10,R8
+Running dfs on link R10,R8
+Running dfs on link R8,R6
+Running dfs on link R7,R9
+Running dfs on link R9,R7
+Starting BFS at node: R9
+looping bfs in adjecencymap at link  R2R9
+looping bfs in adjecencymap at link  R9R2
+looping bfs in adjecencymap at link  R7R9
+looping bfs in adjecencymap at link  R9R7
+looping bfs in adjecencymap at link  R3R7
+looping bfs in adjecencymap at link  R7R3
+looping bfs in adjecencymap at link  R6R7
+looping bfs in adjecencymap at link  R7R6
+looping bfs in adjecencymap at link  R7R9
+looping bfs in adjecencymap at link  R9R7
+looping bfs in adjecencymap at link  R4R6
+looping bfs in adjecencymap at link  R6R4
+looping bfs in adjecencymap at link  R6R7
+looping bfs in adjecencymap at link  R7R6
+looping bfs in adjecencymap at link  R6R8
+looping bfs in adjecencymap at link  R8R6
+looping bfs in adjecencymap at link  R6R8
+looping bfs in adjecencymap at link  R8R6
+looping bfs in adjecencymap at link  R8R10
+looping bfs in adjecencymap at link  R10R8
+looping bfs in adjecencymap at link  R8R10
+looping bfs in adjecencymap at link  R10R8
+Sink node R4 not reachable!
+Final Max flow is: 14.000000
+running dinics for the 3 time
+Running findMaxFlow from: R1 to R7
+Starting BFS at node: R1
+looping bfs in adjecencymap at link  R1R2
+looping bfs in adjecencymap at link  R2R1
+looping bfs in adjecencymap at link  R1R4
+looping bfs in adjecencymap at link  R4R1
+looping bfs in adjecencymap at link  R1R2
+looping bfs in adjecencymap at link  R2R1
+looping bfs in adjecencymap at link  R2R3
+looping bfs in adjecencymap at link  R3R2
+looping bfs in adjecencymap at link  R2R4
+looping bfs in adjecencymap at link  R4R2
+looping bfs in adjecencymap at link  R2R9
+looping bfs in adjecencymap at link  R9R2
+looping bfs in adjecencymap at link  R1R4
+looping bfs in adjecencymap at link  R4R1
+looping bfs in adjecencymap at link  R2R4
+looping bfs in adjecencymap at link  R4R2
+looping bfs in adjecencymap at link  R3R4
+looping bfs in adjecencymap at link  R4R3
+looping bfs in adjecencymap at link  R4R6
+looping bfs in adjecencymap at link  R6R4
+looping bfs in adjecencymap at link  R2R3
+looping bfs in adjecencymap at link  R3R2
+looping bfs in adjecencymap at link  R3R4
+looping bfs in adjecencymap at link  R4R3
+looping bfs in adjecencymap at link  R3R7
+looping bfs in adjecencymap at link  R7R3
+looping bfs in adjecencymap at link  R2R9
+looping bfs in adjecencymap at link  R9R2
+looping bfs in adjecencymap at link  R7R9
+looping bfs in adjecencymap at link  R9R7
+looping bfs in adjecencymap at link  R4R6
+looping bfs in adjecencymap at link  R6R4
+looping bfs in adjecencymap at link  R6R7
+looping bfs in adjecencymap at link  R7R6
+looping bfs in adjecencymap at link  R6R8
+looping bfs in adjecencymap at link  R8R6
+looping bfs in adjecencymap at link  R3R7
+looping bfs in adjecencymap at link  R7R3
+looping bfs in adjecencymap at link  R6R7
+looping bfs in adjecencymap at link  R7R6
+looping bfs in adjecencymap at link  R7R9
+looping bfs in adjecencymap at link  R9R7
+looping bfs in adjecencymap at link  R6R8
+looping bfs in adjecencymap at link  R8R6
+looping bfs in adjecencymap at link  R8R10
+looping bfs in adjecencymap at link  R10R8
+looping bfs in adjecencymap at link  R8R10
+looping bfs in adjecencymap at link  R10R8
+Sink node R7 reached!
+Running dfs on link R1,R2
+Running dfs on link R1,R2
+Running dfs on link R2,R1
+Running dfs on link R2,R3
+Running dfs on link R2,R3
+Running dfs on link R3,R2
+Running dfs on link R3,R4
+Running dfs on link R4,R3
+Running dfs on link R3,R7
+bottleneck (by dfs) found: 5.000000
+additional capacity found, now at:  5.000000
+bottleneck : 5.000000
+bottleneck (by dfs) found: 5.000000
+additional capacity found, now at:  10.000000
+bottleneck : 5.000000
+bottleneck (by dfs) found: 5.000000
+additional capacity found, now at:  15.000000
+bottleneck : 5.000000
+First maxflow: 0.000000
+Current flow: 5.000000
+Current maxflow: 5.000000
+Running dfs on link R1,R2
+Running dfs on link R2,R3
+Running dfs on link R3,R2
+Running dfs on link R2,R4
+Running dfs on link R4,R2
+Running dfs on link R2,R9
+Running dfs on link R2,R9
+Running dfs on link R9,R2
+Running dfs on link R7,R9
+Running dfs on link R9,R7
+bottleneck (by dfs) found: 11.000000
+additional capacity found, now at:  38.000000
+bottleneck : 11.000000
+bottleneck (by dfs) found: 11.000000
+additional capacity found, now at:  11.000000
+bottleneck : 11.000000
+bottleneck (by dfs) found: 11.000000
+additional capacity found, now at:  26.000000
+bottleneck : 11.000000
+First maxflow: 5.000000
+Current flow: 11.000000
+Current maxflow: 16.000000
+Running dfs on link R1,R2
+Running dfs on link R2,R9
+Running dfs on link R9,R7
+Running dfs on link R9,R2
+Running dfs on link R2,R1
+Running dfs on link R1,R4
+Running dfs on link R1,R4
+Running dfs on link R4,R1
+Running dfs on link R2,R4
+Running dfs on link R4,R2
+Running dfs on link R3,R4
+Running dfs on link R4,R3
+Running dfs on link R3,R7
+bottleneck (by dfs) found: 1.000000
+additional capacity found, now at:  6.000000
+bottleneck : 1.000000
+bottleneck (by dfs) found: 1.000000
+additional capacity found, now at:  7.000000
+bottleneck : 1.000000
+bottleneck (by dfs) found: 1.000000
+additional capacity found, now at:  28.000000
+bottleneck : 1.000000
+First maxflow: 16.000000
+Current flow: 1.000000
+Current maxflow: 17.000000
+Running dfs on link R1,R4
+Running dfs on link R4,R3
+Running dfs on link R3,R7
+Running dfs on link R7,R3
+Running dfs on link R4,R6
+Running dfs on link R4,R6
+Running dfs on link R6,R4
+Running dfs on link R6,R7
+bottleneck (by dfs) found: 6.000000
+additional capacity found, now at:  9.000000
+bottleneck : 6.000000
+bottleneck (by dfs) found: 6.000000
+additional capacity found, now at:  6.000000
+bottleneck : 6.000000
+bottleneck (by dfs) found: 6.000000
+additional capacity found, now at:  34.000000
+bottleneck : 6.000000
+First maxflow: 17.000000
+Current flow: 6.000000
+Current maxflow: 23.000000
+Running dfs on link R1,R4
+Running dfs on link R4,R1
+Starting BFS at node: R1
+looping bfs in adjecencymap at link  R1R2
+looping bfs in adjecencymap at link  R2R1
+looping bfs in adjecencymap at link  R1R4
+looping bfs in adjecencymap at link  R4R1
+looping bfs in adjecencymap at link  R1R2
+looping bfs in adjecencymap at link  R2R1
+looping bfs in adjecencymap at link  R2R3
+looping bfs in adjecencymap at link  R3R2
+looping bfs in adjecencymap at link  R2R4
+looping bfs in adjecencymap at link  R4R2
+looping bfs in adjecencymap at link  R2R9
+looping bfs in adjecencymap at link  R9R2
+looping bfs in adjecencymap at link  R2R9
+looping bfs in adjecencymap at link  R9R2
+looping bfs in adjecencymap at link  R7R9
+looping bfs in adjecencymap at link  R9R7
+Sink node R7 not reachable!
+Final Max flow is: 23.000000
+running dinics for the 4 time
+Running findMaxFlow from: R2 to R4
+Starting BFS at node: R2
+looping bfs in adjecencymap at link  R1R2
+looping bfs in adjecencymap at link  R2R1
+looping bfs in adjecencymap at link  R2R3
+looping bfs in adjecencymap at link  R3R2
+looping bfs in adjecencymap at link  R2R4
+looping bfs in adjecencymap at link  R4R2
+looping bfs in adjecencymap at link  R2R9
+looping bfs in adjecencymap at link  R9R2
+looping bfs in adjecencymap at link  R1R2
+looping bfs in adjecencymap at link  R2R1
+looping bfs in adjecencymap at link  R1R4
+looping bfs in adjecencymap at link  R4R1
+looping bfs in adjecencymap at link  R2R9
+looping bfs in adjecencymap at link  R9R2
+looping bfs in adjecencymap at link  R7R9
+looping bfs in adjecencymap at link  R9R7
+Sink node R4 not reachable!
+Final Max flow is: 0.000000

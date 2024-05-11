@@ -1,5 +1,5 @@
 #include "graphmaker.h"
-#include "sheetreader.h"
+#include "Sheetreader.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <string.h>
@@ -239,7 +239,7 @@ void MainWindow::simulateProcessingOne()
 {
     std::cout << "ProcessingOne" << std::endl;
 
-    SimulatorController::runDinics("R1", "R10");
+    SimulatorController::runDinics("R1", "R8");
 
     // int currentValue = ui->progressBar->value();
     // if (currentValue < 100) {
@@ -252,7 +252,7 @@ void MainWindow::simulateProcessingTwo()
     std::cout << "ProcessingTwo" << std::endl;
     bool amountOK = !skipQuery;
     int amountPUV = 5;
-    int amountPaths = 2;
+    int amountPaths = 5;
     if (!skipQuery)
         amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, 7, 1, &amountOK);
 

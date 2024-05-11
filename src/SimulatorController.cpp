@@ -13,8 +13,8 @@ DinicAlgorithm SimulatorController::dinicsInstance;
 
 void SimulatorController::runDinics(const std::string source, const std::string sink)
 {
-    dinicsInstance.addLinks(graphData.linksData);
-    dinicsInstance.findMaxFlow(source, sink);
+    dinicsInstance.PopulateAdjecencymap(graphData.Augmentedlinks, graphData.MappedRouterVector);
+    // dinicsInstance.findMaxFlow(source, sink);
 }
 
 graphDataStruct &SimulatorController::getGraphDataPointer()
@@ -29,8 +29,12 @@ void SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(int amountPUV, in
     Networkmanipulator::reduceVector(peakset, amountPUV);
     vector<Paths> problempaths = Networkmanipulator::findLinksInPaths(peakset, amountPUV, getGraphDataPointer());
     Networkmanipulator::reduceVector(problempaths, amountPaths);
+    std::cout << "ProblemPaths length: " << problempaths.size() << std::endl;
+    int dinicscounter = 0;
     for (const auto &path : problempaths)
     {
+        std::cout << "running dinics for the " << dinicscounter << " time" << std::endl;
+        dinicscounter++;
         runDinics(path.origin, path.destination);
     }
 

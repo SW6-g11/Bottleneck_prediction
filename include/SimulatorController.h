@@ -2,7 +2,7 @@
 #define SIMULATORCONTROLLER
 
 #include <string.h>
-#include "path.h"
+#include "Path.h"
 #include "graphDataStruct.h"
 #include "DinicAlgorithm.h"
 

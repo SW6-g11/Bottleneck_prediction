@@ -8,11 +8,11 @@
 #include <typeinfo>
 #include <vector>
 #include "inputverifyer.h"
-#include "link.h"
-#include "linkutils.h"
-#include "path.h"
-#include "router.h"
-#include "traffic.h"
+#include "Link.h"
+#include "Linkutils.h"
+#include "Path.h"
+#include "Router.h"
+#include "Traffic.h"
 // class Linkutils;
 // class Traffic;
 // class Paths;

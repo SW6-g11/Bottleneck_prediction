@@ -217,8 +217,12 @@ void Networkmanipulator::findPeakUtilValues(int amountofBottleneckLinks, vector<
     std::unordered_map<std::string, Link> PUVMap;
     for (int i = 0; i < graphData.linksData.size(); i++)
     {
+        // Accidental "first in" duplicate deletetion, apparently doesn't matter
         const std::string fingerprint = makeFingerPrint(graphData.linksData[i]);
-        PUVMap.insert({fingerprint, graphData.linksData[i]});
+        if (!PUVMap.insert(std::pair(fingerprint, graphData.linksData[i])).second)
+        {
+            std::cout << "Duplicate detected, algorithm will no longer working correctly" << std::endl;
+        }
     }
     for (auto &pair : PUVMap)
     {
@@ -251,7 +255,7 @@ void Networkmanipulator::findPeakUtilValues(int amountofBottleneckLinks, vector<
         // DinicAlgorithm::DinicAlgorithm(())
     }
     // Output the rest of the results to the console
-    std::cout << "***Remaining results:****" << std::endl;
+    std::cout << "***Left over BottleLinks:****" << std::endl;
     for (int i = amountofBottleneckLinks; i < BottleLinks.size(); ++i)
     {
         const auto &pair = BottleLinks[i];

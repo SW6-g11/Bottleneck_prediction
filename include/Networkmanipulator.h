@@ -1,7 +1,7 @@
 #include <string.h>
-#include "path.h"
+#include "Path.h"
 #include "graphDataStruct.h"
-#include "linkutils.h"
+#include "Linkutils.h"
 #include <unordered_map>
 
 class Networkmanipulator
