@@ -333,9 +333,9 @@ void MainWindow::simulateProcessingOne()
 
 void MainWindow::simulateProcessingTwo()
 {
-    int currentValue = ui->progressBar->value();
+    int currentValue = ui->progressBar_2->value();
     if (currentValue < 100) {
-    ui->progressBar->setValue(currentValue + 20);
+    ui->progressBar_2->setValue(currentValue + 20);
     }
 }
 
