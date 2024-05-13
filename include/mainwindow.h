@@ -27,6 +27,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    void openGraphvizImage(string filePath);
     void simulateProcessingOne();
     void simulateProcessingTwo();
     void simulateProcessingThree(int barValue);
