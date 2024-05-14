@@ -35,7 +35,7 @@ std::unordered_map<std::string, Linkutils> Networkmanipulator::findPeaks(graphDa
         }
         else // if the link is already present in the peakset
         {
-            std::cout << "Found in peakSet, comparing: " + fingerprint + "\"" << std::endl;
+            std::cout << "Found in peakSet, comparing: " + fingerprint + "\" " << peakSet[fingerprint].avgUtilization << " | " << graphData.linkUtilsData[i].avgUtilization << std::endl;
             if (peakSet[fingerprint].avgUtilization < graphData.linkUtilsData[i].avgUtilization)
             {
                 peakSet.insert_or_assign(fingerprint, graphData.linkUtilsData[i]);
@@ -234,7 +234,7 @@ void Networkmanipulator::findPeakUtilValues(int amountofBottleneckLinks, vector<
         }
         else
         {
-            std::cout << "WHOOOOO" << std::endl;
+            // std::cout << "WHOOOOO" << std::endl;
         }
         // avgUtilization is actually peakutilization implicitly because it is in peakSet
         peakSet[pair.first].PeakUtilValue = peakSet[pair.first].avgUtilization / pair.second.capacity;

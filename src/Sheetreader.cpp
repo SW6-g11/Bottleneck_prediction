@@ -33,7 +33,7 @@ void SheetReader::readType(istringstream &iss, Linkutils &linkUtilsItem)
 template <>
 void SheetReader::readType<Traffic>(istringstream &iss, Traffic &trafficItem)
 {
-    // cout << "type traffic" << endl;
+    // cout << "typetraffic" << endl;
     string timestamp, origin, destination;
     double avgTraffic;
     if (getline(iss, timestamp, ',') &&

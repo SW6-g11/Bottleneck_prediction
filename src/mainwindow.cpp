@@ -239,7 +239,7 @@ void MainWindow::simulateProcessingOne()
 {
     std::cout << "ProcessingOne" << std::endl;
 
-    SimulatorController::runDinics("R1", "R8");
+    SimulatorController::runDinics("R1", "R9");
 
     // int currentValue = ui->progressBar->value();
     // if (currentValue < 100) {

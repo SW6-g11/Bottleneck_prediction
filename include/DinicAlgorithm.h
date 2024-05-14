@@ -24,12 +24,18 @@ private:
     vector<MappedRouter> nodes_;
     deque<AugmentedLink> arcs_;
 
-    void applyindices();
-    int compute_flow(int source_i, int sink_i);
+    void applyindices(vector<AugmentedLink> &links);
+    bool getIndexOfSourceAndSink(int &indexSource, int &indexSink, std::string source, std::string sink);
+    template <typename T>
+    void printArr(const std::vector<T> &arr, const std::string name);
+    // Specialization for when T is int
+    void printArr(const std::vector<int> &arr, const std::string name);
 
 public:
     DinicAlgorithm();
-    void PopulateAdjecencymap(const vector<AugmentedLink> &links, vector<MappedRouter> &routers);
+    void PopulateAdjecencymap(vector<AugmentedLink> &links, vector<MappedRouter> &routers, bool overwrite);
+    void populateDinics(vector<AugmentedLink> &links, vector<MappedRouter> &routers, bool overwrite);
+    int compute_flow(std::string source, std::string sink);
     // double findMaxFlow(const std::string &source, const std::string &sink);
     // int compute_flow(int source_i, int sink_i);
 };

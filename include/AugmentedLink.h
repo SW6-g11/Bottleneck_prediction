@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "Link.h"
+#include <iostream>
 using namespace std;
 
 class AugmentedLink : public Link
@@ -12,10 +13,7 @@ public:
     AugmentedLink() : Link(){};
     int start_;
     int end_;
-    std::string start;
-    std::string end;
-    double flow;
-    double capacity;
+    double flow = 0;
     int get_dest(int from) const
     { // Return the destination node if we were to traverse the arc from node `from`
         if (from == start_)
@@ -44,12 +42,22 @@ public:
     { // Gets the capacity of the edge if the originating vertex is `from`
         if (from == start_)
         {
+            std::cout << "From " << from << "=" << start_ << " start" << std::endl;
             return capacity - flow;
         }
         else
         {
+            std::cout << "From " << from << "!=" << start_ << " start" << std::endl;
             return flow;
         }
+    }
+    std::string toString() const
+    {
+        return linkStart + "" + linkEnd + " indexes: " + std::to_string(start_) + "," + std::to_string(end_) + ", capacity: " + std::to_string(capacity) + ", flow: " + std::to_string(flow);
+    }
+    std::string to_string() const
+    {
+        return "(" + linkStart + "," + linkEnd + "),i:(" + std::to_string(start_) + "," + std::to_string(end_) + "))";
     }
 };
 #endif
