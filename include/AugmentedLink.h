@@ -13,6 +13,7 @@ public:
     AugmentedLink() : Link(){};
     int start_;
     int end_;
+    double preload = 0.0;
     double flow = 0;
     int get_dest(int from) const
     { // Return the destination node if we were to traverse the arc from node `from`
@@ -38,17 +39,18 @@ public:
         }
     }
 
-    int getRemainingCapacity(int from) const
+    int getRemainingCapacity(int from, bool usePreLoad) const
     { // Gets the capacity of the edge if the originating vertex is `from`
+        // std::cout << "preload? " << usePreLoad << " capacity; " << capacity << " preload value: " << preload << " return: " << (preload ? capacity - preload - flow : capacity - flow) << std::endl;
         if (from == start_)
         {
-            std::cout << "From " << from << "=" << start_ << " start" << std::endl;
-            return capacity - flow;
+            // std::cout << "From " << from << "=" << start_ << " start" << std::endl;
+            return (preload ? capacity - preload - flow : capacity - flow);
         }
         else
         {
-            std::cout << "From " << from << "!=" << start_ << " start" << std::endl;
-            return flow;
+            // std::cout << "From " << from << "!=" << start_ << " start" << std::endl;
+            return (preload ? flow - preload : flow);
         }
     }
     std::string toString() const

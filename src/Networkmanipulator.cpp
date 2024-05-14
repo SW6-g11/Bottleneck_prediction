@@ -10,6 +10,7 @@
 #include <regex>
 #include <unordered_map>
 
+const bool sortDescending = true;
 // void Networkmanipulator::AugmentNetworkbyTimeStamp(string timestamp, vector<Linkutils> &Linkutildata, vector<Linkutils> &AugmentedLinks)
 // {
 
@@ -43,7 +44,6 @@ std::unordered_map<std::string, Linkutils> Networkmanipulator::findPeaks(graphDa
         }
     }
     std::cout << peakSet.size() << std::endl;
-
     //
     // vector<Linkutils> PeakValueArray;
     // PeakValueArray.reserve(peakSet.size());
@@ -59,9 +59,18 @@ std::string Networkmanipulator::makeFingerPrint(Linkutils LinkUtils)
 {
     return LinkUtils.linkStart + "," + LinkUtils.linkEnd;
 }
-std::string Networkmanipulator::makeFingerPrint(Link link)
+std::string Networkmanipulator::makeFingerPrint(AugmentedLink link)
 {
     return link.linkStart + "," + link.linkEnd;
+}
+std::string Networkmanipulator::makeFingerPrint(Paths link)
+{
+    std::string temp = link.origin + ",";
+    for (int i = 0; i < link.path.size(); i++)
+    {
+        temp += link.path[i] + ",";
+    }
+    return temp + link.destination;
 }
 
 vector<Paths> Networkmanipulator::findLinksInPaths(std::vector<std::pair<std::string, Linkutils>> peakset, int amountofBottleneckLinks, graphDataStruct &graphData)
@@ -132,7 +141,14 @@ bool Networkmanipulator::comparePeakUtilValues(const std::pair<std::string, Link
 bool Networkmanipulator::comparePathLength(const Paths &a, const Paths &b)
 {
     std::cout << to_string(a.pathLength) + "|" + to_string(b.pathLength) << std::endl;
-    return a.pathLength > b.pathLength;
+    if (sortDescending)
+    {
+        return a.pathLength > b.pathLength;
+    }
+    else
+    {
+        return a.pathLength < b.pathLength;
+    }
 }
 /*
 bool Networkmanipulator::comparePathFingerprint(const Paths &a, const Paths &b)
@@ -210,20 +226,35 @@ string Networkmanipulator::PathCorrector(Paths chaoticpath)
     return correctedpath;
 }
 
+void Networkmanipulator::populateWithPeakValues(vector<AugmentedLink> *links, std::unordered_map<std::string, Linkutils> peakset)
+{
+    for (int i = 0; i < (*links).size(); i++)
+    {
+        const std::string linkFingerPrint = makeFingerPrint((*links)[i]);
+        std::cout << "Adding preload: " << linkFingerPrint << " value:" << peakset[linkFingerPrint].avgUtilization << std::endl;
+        //  avgUtilization is implicitly peakUtilization because it is in peakset
+        (*links)[i].preload = peakset[linkFingerPrint].avgUtilization;
+    }
+}
+
 void Networkmanipulator::findPeakUtilValues(int amountofBottleneckLinks, vector<std::pair<std::string, Linkutils>> &BottleLinks, graphDataStruct &graphData)
 {
     std::unordered_map<std::string, Linkutils> peakSet = findPeaks(graphData);
+    populateWithPeakValues(&graphData.Augmentedlinks, peakSet);
 
-    std::unordered_map<std::string, Link> PUVMap;
-    for (int i = 0; i < graphData.linksData.size(); i++)
+    std::unordered_map<std::string, Link>
+        PUVMap;
+    std::cout << "Kage: " << graphData.Augmentedlinks.size() << std::endl;
+    for (int i = 0; i < graphData.Augmentedlinks.size(); i++)
     {
         // Accidental "first in" duplicate deletetion, apparently doesn't matter
-        const std::string fingerprint = makeFingerPrint(graphData.linksData[i]);
-        if (!PUVMap.insert(std::pair(fingerprint, graphData.linksData[i])).second)
+        const std::string fingerprint = makeFingerPrint(graphData.Augmentedlinks[i]);
+        if (!PUVMap.insert(std::pair(fingerprint, graphData.Augmentedlinks[i])).second)
         {
             std::cout << "Duplicate detected, algorithm will no longer working correctly" << std::endl;
         }
     }
+    std::cout << PUVMap.size() << std::endl;
     for (auto &pair : PUVMap)
     {
         std::cout << pair.first << std::endl;
@@ -234,7 +265,7 @@ void Networkmanipulator::findPeakUtilValues(int amountofBottleneckLinks, vector<
         }
         else
         {
-            // std::cout << "WHOOOOO" << std::endl;
+            std::cout << "WHOOOOO" << std::endl;
         }
         // avgUtilization is actually peakutilization implicitly because it is in peakSet
         peakSet[pair.first].PeakUtilValue = peakSet[pair.first].avgUtilization / pair.second.capacity;
@@ -245,10 +276,18 @@ void Networkmanipulator::findPeakUtilValues(int amountofBottleneckLinks, vector<
     BottleLinks.clear();
     BottleLinks.assign(peakSet.begin(), peakSet.end());
     std::sort(BottleLinks.begin(), BottleLinks.end(), &Networkmanipulator::comparePeakUtilValues);
+    std::string temp = "PeakSet=[";
+    for (const auto &peak : BottleLinks)
+    {
+        temp += std::to_string(peak.second.avgUtilization) + ",";
+    }
+    temp.pop_back();
+    temp += "]";
+    std::cout << temp << std::endl;
 
     // Output sorted results
     std::cout << "***Sorted BottleLinks:****" << std::endl;
-    for (int i = 0; i < amountofBottleneckLinks && i < BottleLinks.size(); ++i)
+    for (int i = 0; /*i < amountofBottleneckLinks && */ i < BottleLinks.size(); ++i)
     {
         const auto &pair = BottleLinks[i];
         std::cout << pair.first << " - PeakUtilValue: " << pair.second.PeakUtilValue << std::endl;

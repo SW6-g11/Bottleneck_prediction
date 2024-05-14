@@ -12,24 +12,34 @@ DinicAlgorithm::DinicAlgorithm()
 
 void DinicAlgorithm::populateDinics(vector<AugmentedLink> &links, vector<MappedRouter> &routers, bool overwrite)
 {
-    std::cout << "Populating" << std::endl;
-    if (nodes_.size() > 0 || arcs_.size() > 0 && !overwrite)
+    // std::cout << "Populating" << std::endl;
+
+    for (auto &link : links)
     {
-        std::cerr << "Not empty, skipping" << std::endl;
-        return;
+        std::cout << "resetting" << std::endl;
+        link.flow = 0;
     }
+
     if (overwrite)
     {
         nodes_.clear();
         arcs_.clear();
     }
-    std::cout << "Populating2" << std::endl;
-    std::cout << "Sizes: R: " << routers.size() << endl;
-    MappedRouter::populateMappedRouters(links, routers);
-    nodes_ = routers;
-    std::cout << "Sizes: N,R: " << routers.size() << endl;
+    // std::cout << "Populating2" << std::endl;
+    // std::cout << "Sizes: R: " << routers.size() << endl;
+    routers.erase(std::remove_if(routers.begin(), routers.end(), isEmpty), routers.end());
+    if (overwrite)
+    {
+        MappedRouter::populateMappedRouters(links, routers);
+        nodes_ = routers;
+    }
+    // std::cout << "Sizes: N,R: " << routers.size() << endl;
     applyindices(links);
     arcs_ = deque(links.begin(), links.end());
+}
+bool DinicAlgorithm::isEmpty(const Router &router)
+{
+    return router.id == "";
 }
 
 void DinicAlgorithm::applyindices(vector<AugmentedLink> &links)
@@ -42,8 +52,8 @@ void DinicAlgorithm::applyindices(vector<AugmentedLink> &links)
     for (int i = 0; i < links.size(); i++)
     {
         links[i].start_ = positions[links[i].linkStart];
-        std::cout << "sta mapping: " << links[i].linkStart << "->" << positions[links[i].linkStart] << std::endl;
-        std::cout << "end mapping: " << links[i].linkEnd << "->" << positions[links[i].linkEnd] << std::endl;
+        // std::cout << "sta mapping: " << links[i].linkStart << "->" << positions[links[i].linkStart] << std::endl;
+        // std::cout << "end mapping: " << links[i].linkEnd << "->" << positions[links[i].linkEnd] << std::endl;
         links[i].end_ = positions[links[i].linkEnd];
     }
 }
@@ -56,18 +66,18 @@ bool DinicAlgorithm::getIndexOfSourceAndSink(int &indexSource, int &indexSink, s
     // std::cout << "Node size at get: " << nodes_.size() << std::endl;
     for (int i = 0; i < nodes_.size(); i++)
     {
-        std::cout << "Node ID: " << nodes_[i].id << std::endl;
+        // std::cout << "Node ID: " << nodes_[i].id << std::endl;
         if (nodes_[i].id == source)
         {
             foundSource = true;
             indexSource = i;
-            std::cout << "indexSource: " << indexSource << std::endl;
+            // std::cout << "indexSource: " << indexSource << std::endl;
         }
         if (nodes_[i].id == sink)
         {
             foundSink = true;
             indexSink = i;
-            std::cout << "indexSink: " << indexSink << std::endl;
+            // std::cout << "indexSink: " << indexSink << std::endl;
         }
         if (foundSource && foundSink)
             return false;
@@ -75,8 +85,9 @@ bool DinicAlgorithm::getIndexOfSourceAndSink(int &indexSource, int &indexSink, s
     return true;
 }
 
-int DinicAlgorithm::compute_flow(std::string source, std::string sink)
+int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool usePreLoad)
 { // Compute the maximum flow with the Dinic's algorithm
+    std::cout << "ComputeFLow is asking for Preload?: " << usePreLoad << std::endl;
     int source_i;
     int sink_i;
     if (getIndexOfSourceAndSink(source_i, sink_i, source, sink))
@@ -84,7 +95,7 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink)
         std::cerr << "Could not find source or sink" << std::endl;
         return -1;
     }
-    std::cout << "nodes_.size():" << nodes_.size() << std::endl;
+    // std::cout << "nodes_.size():" << nodes_.size() << std::endl;
     if (nodes_.size() < 1)
     {
         std::cerr << "No nodes in dinics" << std::endl;
@@ -93,47 +104,49 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink)
 
     int asd = 0;
     int result = 0;
-    while (asd < 10)
+    while (true)
     {
         asd++;
-        std::cout << "While1" << std::endl;
-        // First divide into layers with a breadth-first search
+        // std::cout << "While1" << std::endl;
+        //  First divide into layers with a breadth-first search
         std::vector<int> level(nodes_.size(), -1);
         printArr(level, "Level");
         {
-            std::cout << "Source_I: " << source_i << endl;
+            // std::cout << "Source_I: " << source_i << endl;
             std::deque<std::tuple<int, int>> queue(1, std::make_tuple(0, source_i));
             level[source_i] = 0;
 
             while (queue.size() > 0)
             {
-                std::cout << "While2" << std::endl;
+                // std::cout << "While2" << std::endl;
                 int current_level;
-                std::cout << "While2.1" << std::endl;
+                // std::cout << "While2.1" << std::endl;
                 int current_node_i;
-                std::cout << "While2.2" << std::endl;
+                // std::cout << "While2.2" << std::endl;
                 std::tie(current_level, current_node_i) = queue.front(); // Extract the values from queue
-                std::cout << "While2.3" << std::endl;
+                // std::cout << "While2.3" << std::endl;
                 queue.pop_front();
-                std::cout << "While2.4" << std::endl;
+                // std::cout << "While2.4" << std::endl;
 
-                std::cout << "Current_node_i: " << current_node_i << std::endl;
-                std::cout << "Current_node_i: " << nodes_[current_node_i].to_string() << std::endl;
-                std::cout << "outputs.size : " << nodes_[current_node_i].getInAndOutputs().size() << std::endl;
-                std::cout << "Node name : " << nodes_[current_node_i].id << std::endl;
+                // std::cout << "Current_node_i: " << current_node_i << std::endl;
+                // std::cout << "Current_node_i: " << nodes_[current_node_i].to_string() << std::endl;
+                // std::cout << "outputs.size : " << nodes_[current_node_i].getInAndOutputs().size() << std::endl;
+                // std::cout << "Node name : " << nodes_[current_node_i].id << std::endl;
 
                 for (const AugmentedLink *arc : nodes_[current_node_i].getOutputs()) // TODO: getOutputs or getInAndOutputs?
                 {
-                    std::cout << "arc: " << arc->toString() << std::endl;
-                    if (!arc->getRemainingCapacity(current_node_i) > 0)
+                    // std::cout << "arc: " << arc->toString() << std::endl;
+                    // std::cout << "ComputeFLow2 is asking for Preload?: " << usePreLoad << std::endl;
+
+                    if (arc->getRemainingCapacity(current_node_i, usePreLoad) <= 0)
                     {
-                        std::cout << "Node capacity: " << arc->getRemainingCapacity(current_node_i) << std::endl;
+                        std::cout << "Node capacity: " << arc->getRemainingCapacity(current_node_i, usePreLoad) << std::endl;
                         continue;
                     }
-                    std::cout << "For1" << std::endl;
+                    // std::cout << "For1" << std::endl;
 
                     int next_i = arc->get_dest(current_node_i);
-                    std::cout << "next_i: " << next_i << std::endl;
+                    // std::cout << "next_i: " << next_i << std::endl;
                     if (level[next_i] == -1)
                     {
                         std::cout << "level[next_i] = -1" << std::endl;
@@ -143,7 +156,7 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink)
                 }
             }
             printArr(level, "Level");
-            std::cout << sink_i << std::endl;
+            // std::cout << sink_i << std::endl;
             if (level[sink_i] == -1)
             {
                 std::cout << "Path to sink no longer exists, so return" << std::endl;
@@ -165,17 +178,17 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink)
 
             for (int &i = arc_index[cur_i]; i < (int)nodes_[cur_i].getOutputs().size(); i++)
             {
-                std::cout << "For2" << std::endl;
+                // std::cout << "For2" << std::endl;
 
                 AugmentedLink *arc = nodes_[cur_i].getOutputs()[i];
                 int next_i = arc->get_dest(cur_i);
-                if (arc->getRemainingCapacity(cur_i) > 0 && level[cur_i] < level[next_i])
+                if (arc->getRemainingCapacity(cur_i, usePreLoad) > 0 && level[cur_i] < level[next_i])
                 {
-                    int pushed_flow = dfs(next_i, std::min(capacity, arc->getRemainingCapacity(cur_i)));
+                    int pushed_flow = dfs(next_i, std::min(capacity, arc->getRemainingCapacity(cur_i, usePreLoad)));
                     if (pushed_flow > 0)
                     {
                         (*arc).addFlow(cur_i, pushed_flow);
-                        std::cout << "Returned pushed flow: " + pushed_flow << std::endl;
+                        // std::cout << "Returned pushed flow: " + pushed_flow << std::endl;
                         return pushed_flow;
                     }
                 }
@@ -187,7 +200,7 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink)
         {
             pushed_flow = dfs(source_i, std::numeric_limits<int>::max());
             result += pushed_flow;
-            std::cout << "While3" << std::endl;
+            // std::cout << "While3" << std::endl;
 
         } while (pushed_flow > 0);
     }
@@ -205,7 +218,7 @@ void DinicAlgorithm::printArr(const std::vector<T> &arr, const std::string name)
             stringResult += ",";
     }
     stringResult += "]";
-    std::cout << stringResult << std::endl;
+    // std::cout << stringResult << std::endl;
 }
 
 void DinicAlgorithm::printArr(const std::vector<int> &arr, const std::string name)
@@ -218,5 +231,5 @@ void DinicAlgorithm::printArr(const std::vector<int> &arr, const std::string nam
             stringResult += ",";
     }
     stringResult += "]";
-    std::cout << stringResult << std::endl;
+    // std::cout << stringResult << std::endl;
 }

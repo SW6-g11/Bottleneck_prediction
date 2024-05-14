@@ -11,7 +11,7 @@ class SimulatorController
 public:
     SimulatorController() = delete;
 
-    static void runDinics(const std::string startLink, const std::string endLink);
+    static int runDinics(const std::string startLink, const std::string endLink, bool usePreLoad);
 
     static graphDataStruct &getGraphDataPointer();
 
@@ -32,7 +32,7 @@ public:
         return result;
     }
 
-    static void DinicsOnBottlenecksNoAugmentedNetork(int amountPUV, int amountPaths);
+    static void DinicsOnBottlenecksNoAugmentedNetork(int amountPUV, int amountPaths, bool usePreLoad);
 
 private:
     static graphDataStruct graphData;

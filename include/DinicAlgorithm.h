@@ -27,15 +27,16 @@ private:
     void applyindices(vector<AugmentedLink> &links);
     bool getIndexOfSourceAndSink(int &indexSource, int &indexSink, std::string source, std::string sink);
     template <typename T>
-    void printArr(const std::vector<T> &arr, const std::string name);
+    static void printArr(const std::vector<T> &arr, const std::string name);
     // Specialization for when T is int
-    void printArr(const std::vector<int> &arr, const std::string name);
+    static void printArr(const std::vector<int> &arr, const std::string name);
+    static bool isEmpty(const Router &router);
 
 public:
     DinicAlgorithm();
     void PopulateAdjecencymap(vector<AugmentedLink> &links, vector<MappedRouter> &routers, bool overwrite);
     void populateDinics(vector<AugmentedLink> &links, vector<MappedRouter> &routers, bool overwrite);
-    int compute_flow(std::string source, std::string sink);
+    int compute_flow(std::string source, std::string sink, bool usePreLoad);
     // double findMaxFlow(const std::string &source, const std::string &sink);
     // int compute_flow(int source_i, int sink_i);
 };

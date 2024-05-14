@@ -238,9 +238,9 @@ void MainWindow::radioButtonClicked(bool checked)
 void MainWindow::simulateProcessingOne()
 {
     std::cout << "ProcessingOne" << std::endl;
-
-    SimulatorController::runDinics("R1", "R9");
-
+    // TODO: add preload prompt?
+    int result = SimulatorController::runDinics("R1", "R7", false);
+    std::cout << "Result: " << result << std::endl;
     // int currentValue = ui->progressBar->value();
     // if (currentValue < 100) {
     //     ui->progressBar->setValue(currentValue + 20);
@@ -256,11 +256,18 @@ void MainWindow::simulateProcessingTwo()
     if (!skipQuery)
         amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, 7, 1, &amountOK);
 
-    SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths);
+    SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, false);
 }
 
 void MainWindow::simulateProcessingThree()
 {
+    bool amountOK = !skipQuery;
+    int amountPUV = 5;
+    int amountPaths = 5;
+    if (!skipQuery)
+        amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, 7, 1, &amountOK);
+
+    SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, true);
     std::cout << "ProcessingThree" << std::endl;
 }
 void MainWindow::simulateProcessingFour()

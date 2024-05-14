@@ -14,7 +14,7 @@ struct graphDataStruct
   std::vector<Traffic> trafficData;
   std::vector<Paths> pathsData;
   // std::vector<Router> routersData;
-  std::vector<Link> linksData;
+  // std::vector<Link> linksData;
   std::vector<AugmentedLink> Augmentedlinks;
   std::vector<MappedRouter> MappedRouterVector;
   graphDataStruct()
@@ -22,8 +22,8 @@ struct graphDataStruct
         trafficData(),
         pathsData(),
         // routersData(),
-        linksData(),
-        // Augmentedlinks(),
+        // linksData(),
+        Augmentedlinks(),
         MappedRouterVector()
   {
   }

@@ -52,22 +52,22 @@ void MappedRouter::populateMappedRouters(vector<AugmentedLink> &links, vector<Ma
         if (routers[indexStart].id != link.linkStart || routers[indexEnd].id != link.linkEnd)
         {
             std::cerr << "Invalid link found, router not found: " << link.linkStart << link.linkEnd << std::endl;
-            std::cout << "Invalid link found, router not found: " << link.linkStart << link.linkEnd << std::endl;
+            // std::cout << "Invalid link found, router not found: " << link.linkStart << link.linkEnd << std::endl;
             continue;
         }
         if (indexStart == -1)
         {
             std::cerr << "RouterStart not found" << std::endl;
-            std::cout << "RouterStart not found" << std::endl;
+            // std::cout << "RouterStart not found" << std::endl;
         }
         if (indexEnd == -1)
         {
             std::cerr << "RouterEnd not found" << std::endl;
-            std::cout << "RouterEnd not found" << std::endl;
+            // std::cout << "RouterEnd not found" << std::endl;
         }
-        std::cout << "indexStart: " << indexStart << std::endl;
-        std::cout << "indexEnd: " << indexEnd << std::endl;
-        std::cout << "Populated Mappedrouter " << routers[indexStart].id << " and " << routers[indexEnd].id << std::endl;
+        // std::cout << "indexStart: " << indexStart << std::endl;
+        // std::cout << "indexEnd: " << indexEnd << std::endl;
+        // std::cout << "Populated Mappedrouter " << routers[indexStart].id << " and " << routers[indexEnd].id << std::endl;
         routers[indexStart].outputs.push_back(&link);
         routers[indexEnd].inputs.push_back(&link);
     }
@@ -93,7 +93,7 @@ bool MappedRouter::compareRouters(const MappedRouter &a, const MappedRouter &b)
 template <typename ARR, typename TARGET>
 int MappedRouter::binarySearch(vector<ARR> arr, int low, unsigned long high, TARGET target, bool (*compareFunction)(ARR &, TARGET), bool (*greaterThanFunction)(ARR &, TARGET))
 {
-    std::cout << "Searching for: " << target << std::endl;
+    // std::cout << "Searching for: " << target << std::endl;
     while (low <= high)
     {
 
