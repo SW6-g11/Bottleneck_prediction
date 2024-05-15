@@ -1,5 +1,6 @@
 #include "DinicAlgorithm.h"
 #include <functional>
+#include <algorithm>
 
 using namespace std;
 
