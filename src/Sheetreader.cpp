@@ -96,6 +96,7 @@ void SheetReader::readType<Paths>(istringstream &iss, Paths &pathsItem)
     string buffer;
     std::smatch matches;
 
+
     // std::cout << "BeforeLoop" << std::endl;
 
     // Loop over each token separated by the tab character ('\t') in the input string stream (iss)
@@ -124,7 +125,6 @@ void SheetReader::readType<Paths>(istringstream &iss, Paths &pathsItem)
 template <>
 void SheetReader::readType<MappedRouter>(istringstream &iss, MappedRouter &routerItem)
 {
-    // cout << "type Router" << endl;
     string id, type;
     double latitude, longitude;
     if (getline(iss, id, ',') &&

@@ -6,7 +6,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
+    MainWindow& w = MainWindow::getInstance(); // Retrieve the singleton instance
     w.show();
     return a.exec();
 }

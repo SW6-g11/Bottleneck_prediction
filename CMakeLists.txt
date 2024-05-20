@@ -24,6 +24,7 @@ set(SOURCE_DIR "${CMAKE_SOURCE_DIR}/src")
 include_directories(${FORMS_DIR})
 include_directories(${INCLUDE_DIR})
 include_directories(${SOURCE_DIR})
+include_directories(${GRAPHVIZ_DIR})
 
 file(GLOB_RECURSE SOURCES
     "${FORMS_DIR}/*.ui"

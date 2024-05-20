@@ -5,7 +5,7 @@
 #include <map>
 #include <regex>
 #include <vector>
-#include "paths.h"
+#include "path.h"
 #include <Networkmanipulator.h>
 
 graphDataStruct SimulatorController::graphData;

@@ -2,9 +2,19 @@
 #include "Sheetreader.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <string.h>
 
+#include <string.h>
 #include "SimulatorController.h"
+#include "graphviz.h"
+MainWindow* MainWindow::instance = nullptr;
+
+// Implement the getInstance() static member function
+MainWindow& MainWindow::getInstance() {
+    if (!instance) {
+        instance = new MainWindow(); // Create a new instance if it doesn't exist
+    }
+    return *instance;
+}
 
 const bool skipQuery = true;
 
@@ -38,6 +48,7 @@ MainWindow::MainWindow(QWidget *parent)
     {
         radioButton->setEnabled(false);
     }
+    ui->pushButton_2->setEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -80,6 +91,8 @@ void MainWindow::openDirectory()
                 // Call processDataForDay with the directory path, day, and limit
                 graphOne.processDataForDay(directoryPathStdString, day, limit, SimulatorController::getGraphDataPointer());
                 // SimulatorController::addData(SimulatorController::getGraphDataPointer());
+                ui->pushButton_2->setEnabled(true);
+
             }
         }
     }
@@ -197,6 +210,81 @@ QRadioButton *MainWindow::findNextAvailableRadioButton(QRadioButton *startRadioB
     return nullptr;
 }
 
+// void MainWindow::openGraphvizImage(string filePath){
+//     if (ui->radioButton_5->property("imagePath").toString().isEmpty()){
+//         QPixmap image(filePath);
+//         ui->label->setPixmap(image);
+//         QSize imageSize = image.size();
+//         ui->label->setFixedSize(imageSize);
+
+//         // Find the next available radio button starting from radio button 1
+//         QRadioButton *nextRadioButton = nullptr;
+
+//         // Check if no radio button is currently checked
+//         if (!ui->radioButton->isChecked() && !ui->radioButton_2->isChecked() &&
+//         !ui->radioButton_3->isChecked() && !ui->radioButton_4->isChecked() &&
+//         !ui->radioButton_5->isChecked()){
+//             nextRadioButton = ui->radioButton; // If no radio button is checked, start from radio button 1
+//         }
+//         else{
+//             // Otherwise, find the next available radio button
+//             QList<QRadioButton *> radioButtons = {ui->radioButton_2, ui->radioButton_3,
+//                                                 ui->radioButton_4, ui->radioButton_5};
+//             for (QRadioButton *radioButton : radioButtons){
+//                 if (!radioButton->isChecked()){
+//                     nextRadioButton = radioButton;
+//                     break;
+//                 }
+//             }
+//         }
+
+//         // Store the file path and size as properties of the radio button
+//         if (nextRadioButton != nullptr){
+//             QString currentImagePath = nextRadioButton->property("imagePath").toString();
+//             if (currentImagePath.isEmpty()){
+//                 // No image associated, this radio button is available
+//                 nextRadioButton->setProperty("imagePath", filePath);
+//                 nextRadioButton->setProperty("imageSize", imageSize);
+//                 nextRadioButton->setEnabled(true); // Enable the radio button
+//                 nextRadioButton->setChecked(true); // Automatically check the radio button
+//             }
+//             else{
+//                 // Radio button already has an image associated, try finding the next available one
+//                 QRadioButton *availableRadioButton = nullptr;
+//                 for (int i = 2; i <= 5; ++i){ // Start checking from radio button 2
+//                     QString radioButtonName = QString("radioButton_%1").arg(i);
+//                     availableRadioButton = findChild<QRadioButton *>(radioButtonName);
+//                     // If the radio button is available, break out of the loop
+//                     if (availableRadioButton && !availableRadioButton->isChecked() && availableRadioButton->property("imagePath").toString().isEmpty()){
+//                         break;
+//                     }
+//                 }
+
+//                 // Check if an available radio button was found
+//                 if (availableRadioButton){
+//                     // Assign the image path and size to the available radio button
+//                     availableRadioButton->setProperty("imagePath", filePath);
+//                     availableRadioButton->setProperty("imageSize", imageSize);
+//                     availableRadioButton->setEnabled(true); // Enable the radio button
+//                     availableRadioButton->setChecked(true); // Automatically check the radio button
+//                 }    
+//                 else{
+//                     // No available radio button found, display a message or handle accordingly
+//                     qDebug() << "No available radio button found.";
+//                 }
+//             }
+//         }
+//         else{
+//             // No available radio button found, display a message or handle accordingly
+//             qDebug() << "No available radio button found.";
+//         }
+//     else{
+//         // Display a message indicating that all radio buttons are occupied
+//         QMessageBox::information(this, tr("All Radio Buttons Occupied"), tr("All radio buttons are occupied. Cannot load more images."));
+//     }
+    
+// }
+
 void MainWindow::radioButtonClicked(bool checked)
 {
     // Get the sender radiobutton
@@ -237,19 +325,74 @@ void MainWindow::radioButtonClicked(bool checked)
 
 void MainWindow::simulateProcessingOne()
 {
-    std::cout << "ProcessingOne" << std::endl;
-    // TODO: add preload prompt?
-    int result = SimulatorController::runDinics("R1", "R7", false, false);
-    std::cout << "Result: " << result << std::endl;
-    // int currentValue = ui->progressBar->value();
-    // if (currentValue < 100) {
-    //     ui->progressBar->setValue(currentValue + 20);
-    // }
+    int currentValue = ui->progressBar->value();
+    if (currentValue < 100) {
+        ui->progressBar->setValue(currentValue + 20);
+    }
 }
 
 void MainWindow::simulateProcessingTwo()
 {
-    std::cout << "ProcessingTwo" << std::endl;
+    int currentValue = ui->progressBar_2->value();
+    if (currentValue < 100) {
+    ui->progressBar_2->setValue(currentValue + 20);
+    }
+}
+
+
+void MainWindow::simulateProcessingThree(int barValue){
+    int currentValue = ui->progressBar_3->value();
+    if (currentValue < 100) {
+        ui->progressBar_3->setValue(currentValue + barValue);
+    }
+}
+
+void MainWindow::generateGraph()
+{
+    bool ok;
+    QString filename  = QInputDialog::getText(nullptr, "Input", "Enter the filename for the Graphviz output:", QLineEdit::Normal, "", &ok);
+    if (ok && !filename.isEmpty()) {
+        // User entered something and pressed OK
+        Graphviz graphviz;
+        graphviz.GenerateGraphViz((filename + ".dot").toStdString());
+    }
+}
+
+    
+void MainWindow::runAlgorithms(){    
+    ui->progressBar_3->setValue(0);
+    ui->pushButton_4->setEnabled(false);
+    QList<QCheckBox*> checkboxes = findChildren<QCheckBox*>();
+    for (QCheckBox* checkbox : checkboxes) {
+        checkbox->setEnabled(false);
+    }
+
+    int checkedCount = 0;
+    int barValue = 100;
+    for (QCheckBox* checkbox : checkboxes) {
+        if (checkbox->isChecked()) {
+            checkedCount++;
+        }
+    }
+    if(checkedCount == 0){
+        ui->pushButton_4->setEnabled(true);
+        for (QCheckBox* checkbox : checkboxes) {
+            checkbox->setEnabled(true);
+        }
+        return;
+    }
+    if(checkedCount != 0){
+            barValue =  100 / checkedCount;
+    }
+
+    if(ui->checkBox->isChecked()){
+    //TODO: should prompt for router inputs! function only used to run dinics on specific routers
+    //  to find maxflow between these routers, when no toher traffic is on the network.
+    SimulatorController::runDinics("R1", "R10", false, false);
+    simulateProcessingThree(barValue);
+    }
+
+    if(ui->checkBox_2->isChecked()){
     bool amountOK = !skipQuery;
     int amountPUV = 5;
     int amountPaths = 5;
@@ -257,9 +400,38 @@ void MainWindow::simulateProcessingTwo()
         amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, 7, 1, &amountOK);
 
     SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, false);
+    simulateProcessingThree(barValue);
+    }
+
+    if(ui->checkBox_3->isChecked()){
+    runAlgorithmThree();
+    simulateProcessingThree(barValue);
+    }
+
+    if(ui->checkBox_4->isChecked()){
+    runAlgorithmFour();
+    simulateProcessingThree(barValue);
+    }
+
+    if(ui->progressBar_3->value() != 100){
+        ui->progressBar_3->setValue(100);
+    }
+
+    ui->pushButton_4->setEnabled(true);
+    for (QCheckBox* checkbox : checkboxes) {
+        checkbox->setEnabled(true);
+    }
 }
 
-void MainWindow::simulateProcessingThree()
+
+void MainWindow::runAlgorithmOne(){
+    std::cout << "ProcessingOne" << std::endl;
+    // TODO: add preload prompt?
+    int result = SimulatorController::runDinics("R1", "R7", false, false);
+    std::cout << "Result: " << result << std::endl;
+    }
+    
+void MainWindow::runAlgorithmThree()
 {
     std::cout << "ProcessingThree" << std::endl;
     bool amountOK = !skipQuery;
@@ -271,84 +443,18 @@ void MainWindow::simulateProcessingThree()
         amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, 7, 1, &PUVOK);
         amountPaths = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of Paths's wanted"), 1, 1, 7, 1, &amountOK);
     }
-
     SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, true);
 }
-void MainWindow::simulateProcessingFour()
+
+void MainWindow::runAlgorithmFour()
 {
     std::cout << "ProcessingThree" << std::endl;
     SimulatorController::minCut("R1", "R4", true);
 }
 
-void MainWindow::generateGraph()
-{
-    // Call the function to generate the graph (not implemented yet)
-    // replace `functionToGenerateGraph()` with your actual function call
-    // functionToGenerateGraph();3
-}
+//
 
-void MainWindow::runAlgorithms()
-{
-
-    ui->progressBar_3->setValue(0);
-    ui->pushButton_4->setEnabled(false);
-    QList<QCheckBox *> checkboxes = findChildren<QCheckBox *>();
-    for (QCheckBox *checkbox : checkboxes)
-    {
-        checkbox->setEnabled(false);
-    }
-
-    int checkedCount = 0;
-    int barValue = 100;
-    for (QCheckBox *checkbox : checkboxes)
-    {
-        if (checkbox->isChecked())
-        {
-            checkedCount++;
-        }
-    }
-    if (checkedCount == 0)
-    {
-        ui->pushButton_4->setEnabled(true);
-        for (QCheckBox *checkbox : checkboxes)
-        {
-            checkbox->setEnabled(true);
-        }
-        return;
-    }
-    if (checkedCount != 0)
-    {
-        barValue = 100 / checkedCount;
-    }
-
-    if (ui->checkBox->isChecked())
-    {
-        simulateProcessingOne();
-    }
-
-    if (ui->checkBox_2->isChecked())
-    {
-        simulateProcessingTwo();
-    }
-
-    if (ui->checkBox_3->isChecked())
-    {
-        simulateProcessingThree();
-    }
-
-    if (ui->checkBox_4->isChecked())
-    {
-        simulateProcessingFour();
-    }
-
-    if (ui->progressBar_3->value() != 100)
-    {
-        ui->progressBar_3->setValue(100);
-    }
-
-    ui->pushButton_4->setEnabled(true);
-    for (QCheckBox *checkbox : checkboxes)
-    {
-        checkbox->setEnabled(true);
-    }
-}
+// void MainWindow::runAlgorithmNoAugmentedNetwork(){
+//     SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths);
+//     simulateProcessingThree(barValue);
+// }
