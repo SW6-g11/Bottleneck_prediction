@@ -1,17 +1,17 @@
 #ifndef SHEETREADER_H
 #define SHEETREADER_H
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <string>
 #include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
 #include <typeinfo>
-#include "path.h"
-#include "link.h"
-#include "router.h"
+#include <vector>
 #include "inputverifyer.h"
+#include "link.h"
 #include "linkutils.h"
+#include "path.h"
+#include "router.h"
 #include "traffic.h"
 // class Linkutils;
 // class Traffic;
@@ -26,72 +26,64 @@ using namespace std;
 class SheetReader
 {
 public:
-    // Constructor(s), destructor, and any other public members
-    // overloading constructor (have one use the other) gives us an optional input "limit"
-    SheetReader(int Limit) : limit(Limit)
-    {
-        // Line limit(for ram usage) 0 = unlimited(in theory)
-    }
+  // Constructor(s), destructor, and any other public members
+  // overloading constructor (have one use the other) gives us an optional input
+  // "limit"
+  SheetReader(int Limit) : limit(Limit)
+  {
+    // Line limit(for ram usage) 0 = unlimited(in theory)
+  }
 
-    SheetReader()
-    {
-        // Line limit(for ram usage) 0 = unlimited(in theory)
-        // Default value defined above
-    }
+  SheetReader()
+  {
+    // Line limit(for ram usage) 0 = unlimited(in theory)
+    // Default value defined above
+  }
 
-    template <typename T>
-    void readData(const string &fileName, vector<T> &data, bool debug)
+  template <typename T>
+  void readData(const string &fileName, vector<T> &data, bool debug)
+  {
+    ifstream file(fileName);
+    if (!file)
     {
-        // cout << "Inside function 1 ";
-        if (debug)
-            cout << "Inside function 1 ";
-        ifstream file(fileName);
-        if (debug)
-            cout << "2 ";
-        if (!file)
-        {
-            cout << "Error ";
-            cerr << "Error: Unable to open file " << fileName << endl;
-            return;
-        }
-        if (debug)
-            cout << "3 ";
-        const int bufferSize = 1024; // Adjust buffer size as needed
-        if (debug)
-            cout << "4 ";
-        char buffer[bufferSize];
-        if (debug)
-            cout << "5 ";
-        int count = 0;
-        if (debug)
-            cout << "6 ";
-        int i = 0;
-        while (file.getline(buffer, bufferSize) && i > 0 && i < limit)
-        {
-            i++;
-            if (debug)
-            {
-                cout << to_string(count) + fileName + ": ";
-            }
-            istringstream iss(buffer);
-            T item;
-            readType(iss, item);
-            data.push_back(item);
-            count++;
-        }
+      cout << "Error ";
+      cerr << "Error: Unable to open file " << fileName << endl;
+      return;
     }
-    // void readData(const std::string &fileName, std::vector<T> &data, void (*readFunction)(std::istringstream &, T &), bool debug);
+    const int bufferSize = 1024; // Adjust buffer size as needed
+    char buffer[bufferSize];
+    int count = 0;
+    int i = 0;
+    cout << "the filename is : " + fileName + " : " << endl;
+    cout << "Data line: " + (to_string(i)) + " out of " + to_string(limit) + ": " << endl;
+    while (file.getline(buffer, bufferSize) && ((std::is_same<T, Router>::value || std::is_same<T, Link>::value) || (i < limit || limit == 0)))
+    {
+      // std::cout << i << std::endl;
+      i++;
+      if (debug)
+      {
+        cout << "reading line " + (to_string(count)) + fileName + ": " << endl;
+      }
+
+      istringstream iss(buffer);
+      T item;
+      readType(iss, item);
+      data.push_back(item);
+      count++;
+    }
+  }
+
 
 private:
-    const int limit = DEFAULTLIMIT;
-    // Private member functions for reading specific types of data
-    // void readLinkUtils(istringstream &iss, Linkutils &linkUtilsItem);
-    // void readTraffic(istringstream &iss, Traffic &trafficItem);
-    // void readPaths(istringstream &iss, Paths &pathsItem);
-    // void readRouters(istringstream &iss, Router &routerItem);
-    // void readLinks(istringstream &iss, Link &linkItem);
-    template <typename T>
-    void readType(istringstream &iss, T &typeItem);
+  const int limit = DEFAULTLIMIT;
+  // Private member functions for reading specific types of data
+  // void readLinkUtils(istringstream &iss, Linkutils &linkUtilsItem);
+  // void readTraffic(istringstream &iss, Traffic &trafficItem);
+  // void readPaths(istringstream &iss, Paths &pathsItem);
+  // void readRouters(istringstream &iss, Router &routerItem);
+  // void readLinks(istringstream &iss, Link &linkItem);
+  template <typename T>
+  void readType(istringstream &iss, T &typeItem);
 };
 
-#endif // SHEETREADER_H
+#endif // SHEEHTREADER_

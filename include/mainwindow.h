@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include <string>
+#include <vector>
 #include <QMainWindow>
 #include <QCheckBox>
 #include <QFileDialog>
@@ -10,10 +11,12 @@
 #include <QRadioButton>
 #include <QMessageBox>
 #include <QInputDialog>
+#include "graphDataStruct.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
+namespace Ui
+{
+    class MainWindow;
 }
 QT_END_NAMESPACE
 
@@ -24,10 +27,12 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    void openGraphvizImage(string filePath);
     void simulateProcessingOne();
     void simulateProcessingTwo();
+    void simulateProcessingThree(int barValue);
+
+    static MainWindow& getInstance();
 
 private slots:
     void openDirectory();
@@ -42,10 +47,15 @@ private:
     QLabel *imageLabel;
     QProgressBar *progressBar;
 
-    QRadioButton* findNextAvailableRadioButton(QRadioButton* startRadioButton);
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
 
-    void simulateProcessingThree(int barValue);
+    QRadioButton *findNextAvailableRadioButton(QRadioButton *startRadioButton);
 
-    QRadioButton* lastCheckedRadioButton;
+    QRadioButton *lastCheckedRadioButton;
+
+    graphDataStruct graphdata;
+
+    static MainWindow* instance;
 };
 #endif // MAINWINDOW_H

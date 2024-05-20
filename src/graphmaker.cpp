@@ -5,44 +5,37 @@
 #include "path.h"
 #include "router.h"
 #include "link.h"
-// #include "sheetreader.cpp"
+#include "graphDataStruct.h"
+#include <iostream>
+#include <vector>
+#include <mainwindow.h>
+
 using namespace std;
 
-void Graphmaker::processDataForDay(string &directoryPath, int day, int Limit)
+void Graphmaker::processDataForDay(string &directoryPath, int day, int Limit, graphDataStruct &graphdata)
 {
     SheetReader Readmaster(Limit);
-    vector<Linkutils> linkUtilsData;
-    vector<Traffic> trafficData;
-    vector<Paths> pathsData;
-    vector<Router> routersData;
-    vector<Link> linksData;
+    MainWindow& mainWindow = MainWindow::getInstance(); 
 
-    // vector<int> intData;
-    // Readmaster.readData("hello", intData, false);
-
-    cout << "Processing linkutils" << endl;
-    // Read link utilities data
     string linkUtilsFileName = directoryPath + "/link-util-day" + to_string(day) + ".csv";
-    Readmaster.readData(linkUtilsFileName, linkUtilsData, false);
-    cout << "Processing flowfile" << endl;
-    // Read flows data
+    Readmaster.readData(linkUtilsFileName, graphdata.linkUtilsData, false);
+    mainWindow.simulateProcessingOne();
+
     string flowsFileName = directoryPath + "/flow-traffic-day" + to_string(day) + ".csv";
-    Readmaster.readData(flowsFileName, trafficData, false);
-    cout << "Processing pathfile" << endl;
-    // Read paths data
+    Readmaster.readData(flowsFileName, graphdata.trafficData, false);
+    mainWindow.simulateProcessingOne();
+    
     string pathsFileName = directoryPath + "/flow-paths-day" + to_string(day) + ".csv";
-    Readmaster.readData(pathsFileName, pathsData, false);
-    cout << "Processing routerdata" << endl;
-    // Read routers data
+    Readmaster.readData(pathsFileName, graphdata.pathsData, false);
+    mainWindow.simulateProcessingOne();
+
     string routersFileName = directoryPath + "/routers.csv";
-    Readmaster.readData(routersFileName, routersData, false);
-    cout << "Processing links" << endl;
-    // Read links data
+    Readmaster.readData(routersFileName, graphdata.routersData, true);
+    mainWindow.simulateProcessingOne();
+
     string linksFileName = directoryPath + "/links.csv";
-    Readmaster.readData(linksFileName, linksData, false);
+    Readmaster.readData(linksFileName, graphdata.linksData, true);
+    mainWindow.simulateProcessingOne();
 
-    cout << "Done" << endl;
-
-    int userInput;
-    cin >> userInput;
 };
+
