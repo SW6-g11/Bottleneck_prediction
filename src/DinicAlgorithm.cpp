@@ -86,7 +86,7 @@ bool DinicAlgorithm::getIndexOfSourceAndSink(int &indexSource, int &indexSink, s
     return true;
 }
 
-int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool usePreLoad)
+int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool usePreLoad, bool isCalculatingMincut)
 { // Compute the maximum flow with the Dinic's algorithm
     std::cout << "ComputeFLow is asking for Preload?: " << usePreLoad << std::endl;
     int source_i;
@@ -139,9 +139,9 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool useP
                     // std::cout << "arc: " << arc->toString() << std::endl;
                     // std::cout << "ComputeFLow2 is asking for Preload?: " << usePreLoad << std::endl;
 
-                    if (arc->getRemainingCapacity(current_node_i, usePreLoad) <= 0)
+                    if (arc->getRemainingCapacity(current_node_i, usePreLoad, isCalculatingMincut) <= 0)
                     {
-                        std::cout << "Node capacity: " << arc->getRemainingCapacity(current_node_i, usePreLoad) << std::endl;
+                        std::cout << "Node capacity: " << arc->getRemainingCapacity(current_node_i, usePreLoad, isCalculatingMincut) << std::endl;
                         continue;
                     }
                     // std::cout << "For1" << std::endl;
@@ -183,9 +183,9 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool useP
 
                 AugmentedLink *arc = nodes_[cur_i].getOutputs()[i];
                 int next_i = arc->get_dest(cur_i);
-                if (arc->getRemainingCapacity(cur_i, usePreLoad) > 0 && level[cur_i] < level[next_i])
+                if (arc->getRemainingCapacity(cur_i, usePreLoad, isCalculatingMincut) > 0 && level[cur_i] < level[next_i])
                 {
-                    int pushed_flow = dfs(next_i, std::min(capacity, arc->getRemainingCapacity(cur_i, usePreLoad)));
+                    int pushed_flow = dfs(next_i, std::min(capacity, arc->getRemainingCapacity(cur_i, usePreLoad, isCalculatingMincut)));
                     if (pushed_flow > 0)
                     {
                         (*arc).addFlow(cur_i, pushed_flow);
@@ -208,6 +208,97 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool useP
     return -1;
 };
 
+void DinicAlgorithm::findMinCut(string source, vector<int> &level, vector<pair<string, string>> &minCut)
+{
+    cout << "Start of MinCut" << endl;
+    int source_i;
+    int sink_i;
+    getIndexOfSourceAndSink(source_i, sink_i, source, source);
+    // Use BFS to mark all reachable vertices from the source in the residual graph
+    vector<bool> visited(nodes_.size(), false);
+    deque<int> queue(1, source_i);
+    visited[source_i] = true;
+
+    while (!queue.empty())
+    {
+        int current = queue.front();
+        queue.pop_front();
+
+        for (const AugmentedLink *arc : nodes_[current].getOutputs())
+        {
+            int next_i = arc->get_dest(current);
+            if (!visited[next_i] && arc->getRemainingCapacity(current, false, true) > 0)
+            {
+                visited[next_i] = true;
+                queue.push_back(next_i);
+            }
+        }
+    }
+
+    // Find all edges that cross the cut
+    for (int i = 0; i < nodes_.size(); ++i)
+    {
+        if (visited[i])
+        {
+            for (const AugmentedLink *arc : nodes_[i].getOutputs())
+            {
+                int next_i = arc->get_dest(i);
+                if (!visited[next_i])
+                {
+                    minCut.push_back({nodes_[i].id, nodes_[next_i].id});
+                }
+            }
+        }
+    }
+    cout << "end of MinCut" << endl;
+}
+/*
+int DinicAlgorithm::findMinCut2(string source, string &sink, vector<pair<string, string>> &minCut)
+{
+    int source_i;
+    int sink_i;
+    getIndexOfSourceAndSink(source_i, sink_i, source, source);
+    // Use BFS to mark all reachable vertices from the source in the residual graph
+    vector<bool> visited(nodes_.size(), false);
+    deque<int> queue(1, source_i);
+    visited[source_i] = true;
+
+    while (!queue.empty())
+    {
+        int current = queue.front();
+        queue.pop_front();
+
+        for (const AugmentedLink *arc : nodes_[current].getOutputs())
+        {
+            int next_i = arc->get_dest(current);
+            if (!visited[next_i] && arc->getRemainingCapacity(current, false) > 0)
+            {
+                visited[next_i] = true;
+                queue.push_back(next_i);
+            }
+        }
+    }
+
+    // Find all edges that cross the cut and sum their capacities
+    int minCutValue = 0;
+    for (int i = 0; i < nodes_.size(); ++i)
+    {
+        if (visited[i])
+        {
+            for (const AugmentedLink *arc : nodes_[i].getOutputs())
+            {
+                int next_i = arc->get_dest(i);
+                if (!visited[next_i])
+                {
+                    minCut.push_back({nodes_[i].id, nodes_[next_i].id});
+                    minCutValue += arc->capacity;
+                }
+            }
+        }
+    }
+    return minCutValue;
+}
+*/
 template <typename T>
 void DinicAlgorithm::printArr(const std::vector<T> &arr, const std::string name)
 {
@@ -233,4 +324,9 @@ void DinicAlgorithm::printArr(const std::vector<int> &arr, const std::string nam
     }
     stringResult += "]";
     // std::cout << stringResult << std::endl;
+}
+
+vector<MappedRouter> DinicAlgorithm::getNodes()
+{
+    return nodes_;
 }

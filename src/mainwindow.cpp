@@ -239,7 +239,7 @@ void MainWindow::simulateProcessingOne()
 {
     std::cout << "ProcessingOne" << std::endl;
     // TODO: add preload prompt?
-    int result = SimulatorController::runDinics("R1", "R7", false);
+    int result = SimulatorController::runDinics("R1", "R7", false, false);
     std::cout << "Result: " << result << std::endl;
     // int currentValue = ui->progressBar->value();
     // if (currentValue < 100) {
@@ -261,25 +261,30 @@ void MainWindow::simulateProcessingTwo()
 
 void MainWindow::simulateProcessingThree()
 {
+    std::cout << "ProcessingThree" << std::endl;
     bool amountOK = !skipQuery;
+    bool PUVOK = !skipQuery;
     int amountPUV = 5;
     int amountPaths = 5;
     if (!skipQuery)
-        amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, 7, 1, &amountOK);
+    {
+        amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, 7, 1, &PUVOK);
+        amountPaths = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of Paths's wanted"), 1, 1, 7, 1, &amountOK);
+    }
 
     SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, true);
-    std::cout << "ProcessingThree" << std::endl;
 }
 void MainWindow::simulateProcessingFour()
 {
-    std::cout << "ProcessingFour" << std::endl;
+    std::cout << "ProcessingThree" << std::endl;
+    SimulatorController::minCut("R1", "R4", true);
 }
 
 void MainWindow::generateGraph()
 {
     // Call the function to generate the graph (not implemented yet)
     // replace `functionToGenerateGraph()` with your actual function call
-    // functionToGenerateGraph();
+    // functionToGenerateGraph();3
 }
 
 void MainWindow::runAlgorithms()

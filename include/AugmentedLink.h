@@ -39,19 +39,20 @@ public:
         }
     }
 
-    int getRemainingCapacity(int from, bool usePreLoad) const
+    int getRemainingCapacity(int from, bool usePreLoad, bool isCalculatingMincut) const
     { // Gets the capacity of the edge if the originating vertex is `from`
         // std::cout << "preload? " << usePreLoad << " capacity; " << capacity << " preload value: " << preload << " return: " << (preload ? capacity - preload - flow : capacity - flow) << std::endl;
+        if (isCalculatingMincut)
+        {
+            return 1 - flow;
+        }
         if (from == start_)
         {
             // std::cout << "From " << from << "=" << start_ << " start" << std::endl;
             return (preload ? capacity - preload - flow : capacity - flow);
         }
-        else
-        {
-            // std::cout << "From " << from << "!=" << start_ << " start" << std::endl;
-            return (preload ? flow - preload : flow);
-        }
+        // std::cout << "From " << from << "!=" << start_ << " start" << std::endl;
+        return (preload ? flow - preload : flow);
     }
     std::string toString() const
     {

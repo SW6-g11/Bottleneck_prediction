@@ -36,9 +36,12 @@ public:
     DinicAlgorithm();
     void PopulateAdjecencymap(vector<AugmentedLink> &links, vector<MappedRouter> &routers, bool overwrite);
     void populateDinics(vector<AugmentedLink> &links, vector<MappedRouter> &routers, bool overwrite);
-    int compute_flow(std::string source, std::string sink, bool usePreLoad);
+    void findMinCut(string source_i, vector<int> &level, vector<pair<string, string>> &minCut);
+    int findMinCut2(string source, string &sink, vector<pair<string, string>> &minCut);
+    int compute_flow(std::string source, std::string sink, bool usePreLoad, bool isCalculatingMincut);
     // double findMaxFlow(const std::string &source, const std::string &sink);
     // int compute_flow(int source_i, int sink_i);
+    vector<MappedRouter> getNodes();
 };
 
 #endif // DINICALGORITHM_H

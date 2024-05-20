@@ -103,6 +103,7 @@
 		"xutility": "cpp",
 		"ranges": "cpp",
 		"regex": "cpp",
-		"*.ipp": "cpp"
+		"*.ipp": "cpp",
+		"text_encoding": "cpp"
 	}
 }
