@@ -2,26 +2,31 @@
 #define GRAPHDATASTRUCT
 #include <vector>
 #include "link.h"
-#include "linkutils.h"
-#include "path.h"
-#include "router.h"
-#include "traffic.h"
+#include "Linkutils.h"
+#include "Path.h"
+#include "Router.h"
+#include "Traffic.h"
+#include "MappedRouter.h"
 
 struct graphDataStruct
 {
   std::vector<Linkutils> linkUtilsData;
   std::vector<Traffic> trafficData;
   std::vector<Paths> pathsData;
-  std::vector<Router> routersData;
-  std::vector<Link> linksData;
-  std::vector<Link> Augmentedlinks;
+  // std::vector<Router> routersData;
+  // std::vector<Link> linksData;
+  std::vector<AugmentedLink> Augmentedlinks;
+  std::vector<MappedRouter> MappedRouterVector;
   graphDataStruct()
       : linkUtilsData(),
         trafficData(),
         pathsData(),
-        routersData(),
-        linksData(),
-        Augmentedlinks() {}
+        // routersData(),
+        // linksData(),
+        Augmentedlinks(),
+        MappedRouterVector()
+  {
+  }
 };
 
 #endif

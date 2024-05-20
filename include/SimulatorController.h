@@ -2,7 +2,7 @@
 #define SIMULATORCONTROLLER
 
 #include <string.h>
-#include "path.h"
+#include "Path.h"
 #include "graphDataStruct.h"
 #include "DinicAlgorithm.h"
 
@@ -11,7 +11,7 @@ class SimulatorController
 public:
     SimulatorController() = delete;
 
-    static void runDinics(const std::string startLink, const std::string endLink);
+    static int runDinics(const std::string startLink, const std::string endLink, bool usePreLoad, bool isCalculatingMincut);
 
     static graphDataStruct &getGraphDataPointer();
 
@@ -32,7 +32,9 @@ public:
         return result;
     }
 
-    static void DinicsOnBottlenecksNoAugmentedNetork(int amountPUV, int amountPaths);
+    static void DinicsOnBottlenecksNoAugmentedNetork(int amountPUV, int amountPaths, bool usePreLoad);
+
+    static vector<pair<string, string>> minCut(std::string source, std::string sink, bool usePreload);
 
 private:
     static graphDataStruct graphData;

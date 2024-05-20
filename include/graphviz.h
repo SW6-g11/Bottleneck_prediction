@@ -26,4 +26,4 @@ private:
     static void writeLinkUtils(ofstream& dotFile, const vector<Linkutils>& linkUtilsData);
     static void writeLinks(ofstream& dotFile, const vector<Link>& linksData);
 };
-#endif;  // GRAPHVIZ_H
+#endif  // GRAPHVIZ_H

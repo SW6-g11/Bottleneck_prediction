@@ -49,7 +49,7 @@ void Graphviz::GenerateGraphViz(const string& filename) {
         cerr << "Error: Failed to write to file " << filename << endl;
         return;
     }
-    mainWindow.openGraphvizImage(filePath);
+    // mainWindow.openGraphvizImage(filePath);
 }
 
 void Graphviz::writeRouters(ofstream& dotFile, const vector<Router>& routersData) {

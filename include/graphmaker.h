@@ -1,6 +1,6 @@
 #ifndef GRAPHMAKER_H
 #define GRAPHMAKER_H
-#include "sheetreader.h"
+#include "Sheetreader.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>

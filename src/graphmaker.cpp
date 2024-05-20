@@ -1,10 +1,10 @@
 #include "graphmaker.h"
-#include "sheetreader.h"
-#include "linkutils.h"
-#include "traffic.h"
-#include "path.h"
-#include "router.h"
-#include "link.h"
+#include "Sheetreader.h"
+#include "Linkutils.h"
+#include "Traffic.h"
+#include "Path.h"
+#include "Router.h"
+#include "Link.h"
 #include "graphDataStruct.h"
 #include <iostream>
 #include <vector>
@@ -30,11 +30,11 @@ void Graphmaker::processDataForDay(string &directoryPath, int day, int Limit, gr
     mainWindow.simulateProcessingOne();
 
     string routersFileName = directoryPath + "/routers.csv";
-    Readmaster.readData(routersFileName, graphdata.routersData, true);
+    Readmaster.readData(routersFileName, graphdata.MappedRouterVector, true);
     mainWindow.simulateProcessingOne();
 
     string linksFileName = directoryPath + "/links.csv";
-    Readmaster.readData(linksFileName, graphdata.linksData, true);
+    Readmaster.readData(linksFileName, graphdata.Augmentedlinks, true);
     mainWindow.simulateProcessingOne();
 
 };

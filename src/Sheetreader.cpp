@@ -1,11 +1,13 @@
-#include "sheetreader.h"
-#include "path.h"
+#include "Sheetreader.h"
+#include "Path.h"
 #include "link.h"
-#include "router.h"
+#include "Router.h"
 #include "inputverifyer.h"
-#include "linkutils.h"
-#include "traffic.h"
+#include "Linkutils.h"
+#include "Traffic.h"
 #include <regex>
+#include <MappedRouter.h>
+#include <AugmentedLink.h>
 
 using namespace std;
 
@@ -31,6 +33,7 @@ void SheetReader::readType(istringstream &iss, Linkutils &linkUtilsItem)
 template <>
 void SheetReader::readType<Traffic>(istringstream &iss, Traffic &trafficItem)
 {
+    // cout << "typetraffic" << endl;
     string timestamp, origin, destination;
     double avgTraffic;
     if (getline(iss, timestamp, ',') &&
@@ -120,7 +123,7 @@ void SheetReader::readType<Paths>(istringstream &iss, Paths &pathsItem)
 }
 
 template <>
-void SheetReader::readType<Router>(istringstream &iss, Router &routerItem)
+void SheetReader::readType<MappedRouter>(istringstream &iss, MappedRouter &routerItem)
 {
     string id, type;
     double latitude, longitude;
@@ -131,7 +134,7 @@ void SheetReader::readType<Router>(istringstream &iss, Router &routerItem)
         iss.ignore() && // Skip the comma
         getline(iss, type))
     {
-        routerItem = Router(id, latitude, longitude, type);
+        routerItem = MappedRouter(id, latitude, longitude, type);
     }
     else
     {
@@ -139,7 +142,7 @@ void SheetReader::readType<Router>(istringstream &iss, Router &routerItem)
     }
 }
 template <>
-void SheetReader::readType<Link>(istringstream &iss, Link &linkItem)
+void SheetReader::readType<AugmentedLink>(istringstream &iss, AugmentedLink &linkItem)
 {
     // cout << "type link" << endl;
     string linkStart, linkEnd;
@@ -148,7 +151,7 @@ void SheetReader::readType<Link>(istringstream &iss, Link &linkItem)
         getline(iss, linkEnd, ',') &&
         iss >> capacity)
     {
-        linkItem = Link(linkStart, linkEnd, capacity);
+        linkItem = AugmentedLink(linkStart, linkEnd, capacity);
     }
     else
     {

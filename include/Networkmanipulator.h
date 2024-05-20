@@ -1,7 +1,7 @@
 #include <string.h>
-#include "path.h"
+#include "Path.h"
 #include "graphDataStruct.h"
-#include "linkutils.h"
+#include "Linkutils.h"
 #include <unordered_map>
 
 class Networkmanipulator
@@ -22,6 +22,7 @@ public:
 
         vector.erase(vector.begin() + Y, vector.end());
     }
+    static std::string makeFingerPrint(Paths link);
 
 private:
     // void reducePathvector(std::unordered_map<std::string, Paths> &vec, int Y);
@@ -31,11 +32,12 @@ private:
 
     // vector<T &> replaceByFingerPrint(std::string (SimulatorController::makeFingerPrintFunction)(T), T linkObj, vector<T>arr);
     static std::string makeFingerPrint(Linkutils LinkUtils);
-    static std::string makeFingerPrint(Link link);
+    static std::string makeFingerPrint(AugmentedLink link);
 
     static bool comparePeakUtilValues(const std::pair<std::string, Linkutils> &a, const std::pair<std::string, Linkutils> &b);
     static bool comparePathLength(const Paths &a, const Paths &b);
     // void AugmentNetworkbyTimeStamp(string timestamp, vector<Linkutils> &Linkutildata, vector<Linkutils> &AugmentedLinks);
 
     static string PathCorrector(Paths chaoticpath);
+    static void populateWithPeakValues(vector<AugmentedLink> *links, std::unordered_map<std::string, Linkutils> peakset);
 };

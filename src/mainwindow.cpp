@@ -1,5 +1,5 @@
 #include "graphmaker.h"
-#include "sheetreader.h"
+#include "Sheetreader.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -210,80 +210,80 @@ QRadioButton *MainWindow::findNextAvailableRadioButton(QRadioButton *startRadioB
     return nullptr;
 }
 
-void MainWindow::openGraphvizImage(string filePath){
-    if (ui->radioButton_5->property("imagePath").toString().isEmpty()){
-        QPixmap image(filePath);
-        ui->label->setPixmap(image);
-        QSize imageSize = image.size();
-        ui->label->setFixedSize(imageSize);
+// void MainWindow::openGraphvizImage(string filePath){
+//     if (ui->radioButton_5->property("imagePath").toString().isEmpty()){
+//         QPixmap image(filePath);
+//         ui->label->setPixmap(image);
+//         QSize imageSize = image.size();
+//         ui->label->setFixedSize(imageSize);
 
-        // Find the next available radio button starting from radio button 1
-        QRadioButton *nextRadioButton = nullptr;
+//         // Find the next available radio button starting from radio button 1
+//         QRadioButton *nextRadioButton = nullptr;
 
-        // Check if no radio button is currently checked
-        if (!ui->radioButton->isChecked() && !ui->radioButton_2->isChecked() &&
-        !ui->radioButton_3->isChecked() && !ui->radioButton_4->isChecked() &&
-        !ui->radioButton_5->isChecked()){
-            nextRadioButton = ui->radioButton; // If no radio button is checked, start from radio button 1
-        }
-        else{
-            // Otherwise, find the next available radio button
-            QList<QRadioButton *> radioButtons = {ui->radioButton_2, ui->radioButton_3,
-                                                ui->radioButton_4, ui->radioButton_5};
-            for (QRadioButton *radioButton : radioButtons){
-                if (!radioButton->isChecked()){
-                    nextRadioButton = radioButton;
-                    break;
-                }
-            }
-        }
+//         // Check if no radio button is currently checked
+//         if (!ui->radioButton->isChecked() && !ui->radioButton_2->isChecked() &&
+//         !ui->radioButton_3->isChecked() && !ui->radioButton_4->isChecked() &&
+//         !ui->radioButton_5->isChecked()){
+//             nextRadioButton = ui->radioButton; // If no radio button is checked, start from radio button 1
+//         }
+//         else{
+//             // Otherwise, find the next available radio button
+//             QList<QRadioButton *> radioButtons = {ui->radioButton_2, ui->radioButton_3,
+//                                                 ui->radioButton_4, ui->radioButton_5};
+//             for (QRadioButton *radioButton : radioButtons){
+//                 if (!radioButton->isChecked()){
+//                     nextRadioButton = radioButton;
+//                     break;
+//                 }
+//             }
+//         }
 
-        // Store the file path and size as properties of the radio button
-        if (nextRadioButton != nullptr){
-            QString currentImagePath = nextRadioButton->property("imagePath").toString();
-            if (currentImagePath.isEmpty()){
-                // No image associated, this radio button is available
-                nextRadioButton->setProperty("imagePath", filePath);
-                nextRadioButton->setProperty("imageSize", imageSize);
-                nextRadioButton->setEnabled(true); // Enable the radio button
-                nextRadioButton->setChecked(true); // Automatically check the radio button
-            }
-            else{
-                // Radio button already has an image associated, try finding the next available one
-                QRadioButton *availableRadioButton = nullptr;
-                for (int i = 2; i <= 5; ++i){ // Start checking from radio button 2
-                    QString radioButtonName = QString("radioButton_%1").arg(i);
-                    availableRadioButton = findChild<QRadioButton *>(radioButtonName);
-                    // If the radio button is available, break out of the loop
-                    if (availableRadioButton && !availableRadioButton->isChecked() && availableRadioButton->property("imagePath").toString().isEmpty()){
-                        break;
-                    }
-                }
+//         // Store the file path and size as properties of the radio button
+//         if (nextRadioButton != nullptr){
+//             QString currentImagePath = nextRadioButton->property("imagePath").toString();
+//             if (currentImagePath.isEmpty()){
+//                 // No image associated, this radio button is available
+//                 nextRadioButton->setProperty("imagePath", filePath);
+//                 nextRadioButton->setProperty("imageSize", imageSize);
+//                 nextRadioButton->setEnabled(true); // Enable the radio button
+//                 nextRadioButton->setChecked(true); // Automatically check the radio button
+//             }
+//             else{
+//                 // Radio button already has an image associated, try finding the next available one
+//                 QRadioButton *availableRadioButton = nullptr;
+//                 for (int i = 2; i <= 5; ++i){ // Start checking from radio button 2
+//                     QString radioButtonName = QString("radioButton_%1").arg(i);
+//                     availableRadioButton = findChild<QRadioButton *>(radioButtonName);
+//                     // If the radio button is available, break out of the loop
+//                     if (availableRadioButton && !availableRadioButton->isChecked() && availableRadioButton->property("imagePath").toString().isEmpty()){
+//                         break;
+//                     }
+//                 }
 
-                // Check if an available radio button was found
-                if (availableRadioButton){
-                    // Assign the image path and size to the available radio button
-                    availableRadioButton->setProperty("imagePath", filePath);
-                    availableRadioButton->setProperty("imageSize", imageSize);
-                    availableRadioButton->setEnabled(true); // Enable the radio button
-                    availableRadioButton->setChecked(true); // Automatically check the radio button
-                }    
-                else{
-                    // No available radio button found, display a message or handle accordingly
-                    qDebug() << "No available radio button found.";
-                }
-            }
-        }
-        else{
-            // No available radio button found, display a message or handle accordingly
-            qDebug() << "No available radio button found.";
-        }
-    else{
-        // Display a message indicating that all radio buttons are occupied
-        QMessageBox::information(this, tr("All Radio Buttons Occupied"), tr("All radio buttons are occupied. Cannot load more images."));
-    }
+//                 // Check if an available radio button was found
+//                 if (availableRadioButton){
+//                     // Assign the image path and size to the available radio button
+//                     availableRadioButton->setProperty("imagePath", filePath);
+//                     availableRadioButton->setProperty("imageSize", imageSize);
+//                     availableRadioButton->setEnabled(true); // Enable the radio button
+//                     availableRadioButton->setChecked(true); // Automatically check the radio button
+//                 }    
+//                 else{
+//                     // No available radio button found, display a message or handle accordingly
+//                     qDebug() << "No available radio button found.";
+//                 }
+//             }
+//         }
+//         else{
+//             // No available radio button found, display a message or handle accordingly
+//             qDebug() << "No available radio button found.";
+//         }
+//     else{
+//         // Display a message indicating that all radio buttons are occupied
+//         QMessageBox::information(this, tr("All Radio Buttons Occupied"), tr("All radio buttons are occupied. Cannot load more images."));
+//     }
     
-}
+// }
 
 void MainWindow::radioButtonClicked(bool checked)
 {
@@ -358,8 +358,8 @@ void MainWindow::generateGraph()
     }
 }
 
-void MainWindow::runAlgorithms(){
-
+    
+void MainWindow::runAlgorithms(){    
     ui->progressBar_3->setValue(0);
     ui->pushButton_4->setEnabled(false);
     QList<QCheckBox*> checkboxes = findChildren<QCheckBox*>();
@@ -386,27 +386,30 @@ void MainWindow::runAlgorithms(){
     }
 
     if(ui->checkBox->isChecked()){
+    //TODO: should prompt for router inputs! function only used to run dinics on specific routers
+    //  to find maxflow between these routers, when no toher traffic is on the network.
+    SimulatorController::runDinics("R1", "R10", false, false);
     simulateProcessingThree(barValue);
-    SimulatorController::runDinics("R1", "R10");
     }
 
     if(ui->checkBox_2->isChecked()){
     bool amountOK = !skipQuery;
     int amountPUV = 5;
-    int amountPaths = 2;
+    int amountPaths = 5;
     if (!skipQuery)
         amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, 7, 1, &amountOK);
 
-    SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths);
+    SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, false);
     simulateProcessingThree(barValue);
     }
 
     if(ui->checkBox_3->isChecked()){
+    runAlgorithmThree();
     simulateProcessingThree(barValue);
-
     }
 
     if(ui->checkBox_4->isChecked()){
+    runAlgorithmFour();
     simulateProcessingThree(barValue);
     }
 
@@ -419,3 +422,39 @@ void MainWindow::runAlgorithms(){
         checkbox->setEnabled(true);
     }
 }
+
+
+void MainWindow::runAlgorithmOne(){
+    std::cout << "ProcessingOne" << std::endl;
+    // TODO: add preload prompt?
+    int result = SimulatorController::runDinics("R1", "R7", false, false);
+    std::cout << "Result: " << result << std::endl;
+    }
+    
+void MainWindow::runAlgorithmThree()
+{
+    std::cout << "ProcessingThree" << std::endl;
+    bool amountOK = !skipQuery;
+    bool PUVOK = !skipQuery;
+    int amountPUV = 5;
+    int amountPaths = 5;
+    if (!skipQuery)
+    {
+        amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, 7, 1, &PUVOK);
+        amountPaths = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of Paths's wanted"), 1, 1, 7, 1, &amountOK);
+    }
+    SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, true);
+}
+
+void MainWindow::runAlgorithmFour()
+{
+    std::cout << "ProcessingThree" << std::endl;
+    SimulatorController::minCut("R1", "R4", true);
+}
+
+//
+
+// void MainWindow::runAlgorithmNoAugmentedNetwork(){
+//     SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths);
+//     simulateProcessingThree(barValue);
+// }
