@@ -31,7 +31,10 @@ public:
     void simulateProcessingOne();
     void simulateProcessingTwo();
     void simulateProcessingThree(int barValue);
-
+    void runAlgorithmNoAugmentedNetwork();
+    void runAlgorithmOne();
+    void runAlgorithmThree();
+    void runAlgorithmFour();
     static MainWindow& getInstance();
 
 private slots:
