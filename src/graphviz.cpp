@@ -52,7 +52,7 @@ void Graphviz::GenerateGraphViz(const string& filename) {
         return;
     }
 
-    Graphviz::GenerateImageFromDotFile(filename);
+    Graphviz::GenerateImageFromDotFile(filePath);
 
     // mainWindow.openGraphvizImage(filePath);
 }
@@ -76,6 +76,14 @@ void Graphviz::writeRouters(ofstream& dotFile, vector<MappedRouter>& routervecto
 //     }
 // }
 
+
+// //write
+// void Graphviz::writeTraffic(std::ofstream& dotFile, const std::vector<AugmentedLink>& linksData) {
+//     for (const auto& AugmentedLink : linksData) {
+//         dotFile << "\t" << AugmentedLink.linkStart << " -> " << AugmentedLink.linkEnd << " [label=" << AugmentedLink.getRemainingCapacity(); << ", color=green];\n";
+//     }
+// }
+
 void Graphviz::writeLinks(std::ofstream& dotFile, const std::vector<AugmentedLink>& linksData) {
     for (const auto& AugmentedLink : linksData) {
         dotFile << "\t" << AugmentedLink.linkStart << " -> " << AugmentedLink.linkEnd << " [label=" << AugmentedLink.capacity << ", color=green];\n";
@@ -92,7 +100,7 @@ void Graphviz::GenerateImageFromDotFile(string dotFilename){
         
         process.start("dot", arguments);
         process.waitForFinished(-1);  // Wait for the process to finish
-        cout
+        std:cout<<"looking for file: " << dotFilename<<endl;
         if (process.exitCode() == 0) {
             QMessageBox::information(nullptr, "Success", "Graphviz output successfully generated as PNG.");
         } else {

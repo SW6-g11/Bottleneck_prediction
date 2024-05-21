@@ -355,7 +355,8 @@ void MainWindow::generateGraph()
         // User entered something and pressed OK
         Graphviz graphviz;
         graphviz.GenerateGraphViz((filename + ".dot").toStdString());
-        // dot -Tpng graph1.dot -o (filename+ ".png").toStdString;
+        
+
     }
 }
 
