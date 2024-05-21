@@ -92,6 +92,7 @@ void Graphviz::writeLinks(std::ofstream& dotFile, const std::vector<AugmentedLin
 
 
 void Graphviz::GenerateImageFromDotFile(string dotFilename){
+    MainWindow& mainWindow = MainWindow::getInstance(); 
       // Use QProcess to run the dot command
         QProcess process;
         QStringList arguments;
@@ -106,6 +107,7 @@ void Graphviz::GenerateImageFromDotFile(string dotFilename){
         } else {
             QMessageBox::warning(nullptr, "Error", "Failed to generate PNG from DOT file.");
         }
+        mainWindow.imageSaver(pngFilename);
 }
 
 
