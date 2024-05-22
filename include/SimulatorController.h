@@ -32,7 +32,7 @@ public:
         return result;
     }
 
-    static void DinicsOnBottlenecksNoAugmentedNetork(int amountPUV, int amountPaths, bool usePreLoad);
+    static vector<std::pair<std::string, int>> DinicsOnBottlenecksNoAugmentedNetork(int amountPUV, int amountPaths, bool usePreLoad);
 
     static vector<pair<string, string>> minCut(std::string source, std::string sink, bool usePreload);
 
