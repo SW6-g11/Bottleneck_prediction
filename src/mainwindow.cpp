@@ -2,21 +2,29 @@
 #include "Sheetreader.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include "SearchableComboBoxDialog.h"
 #include <string.h>
 #include "SimulatorController.h"
 #include "graphviz.h"
-MainWindow* MainWindow::instance = nullptr;
+#include "SearchableComboBox.h"
+#include "prompts.h"
+const bool skipQuery = false;
+
+// This gets calculated later
+int maxPUVandPaths = 0;
+int checkedCount = 0;
+
+MainWindow *MainWindow::instance = nullptr;
 
 // Implement the getInstance() static member function
-MainWindow& MainWindow::getInstance() {
-    if (!instance) {
+MainWindow &MainWindow::getInstance()
+{
+    if (!instance)
+    {
         instance = new MainWindow(); // Create a new instance if it doesn't exist
     }
     return *instance;
 }
-
-const bool skipQuery = true;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -38,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Initialize the QLabel with width and height set to 0
     ui->label->setFixedSize(0, 0);
-    ui->progressBar->setValue(0);
+    ui->progressBar_1->setValue(0);
     ui->progressBar_2->setValue(0);
     ui->progressBar_3->setValue(0);
 
@@ -71,7 +79,8 @@ void MainWindow::openDirectory()
         bool ok = skipQuery;
         int day = 1;
         if (!skipQuery)
-            day = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter a number indicating which day to be processed:"), 1, 1, 7, 1, &ok);
+            // TODO: If day doesn't exist??
+            day = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter a number indicating which day to be processed:"), 1, 1, INT_MAX, 1, &ok);
         // Check if the user clicked OK and entered a valid number
         if (ok)
         {
@@ -92,7 +101,6 @@ void MainWindow::openDirectory()
                 graphOne.processDataForDay(directoryPathStdString, day, limit, SimulatorController::getGraphDataPointer());
                 // SimulatorController::addData(SimulatorController::getGraphDataPointer());
                 ui->pushButton_2->setEnabled(true);
-
             }
         }
     }
@@ -267,7 +275,7 @@ QRadioButton *MainWindow::findNextAvailableRadioButton(QRadioButton *startRadioB
 //                     availableRadioButton->setProperty("imageSize", imageSize);
 //                     availableRadioButton->setEnabled(true); // Enable the radio button
 //                     availableRadioButton->setChecked(true); // Automatically check the radio button
-//                 }    
+//                 }
 //                 else{
 //                     // No available radio button found, display a message or handle accordingly
 //                     qDebug() << "No available radio button found.";
@@ -282,7 +290,7 @@ QRadioButton *MainWindow::findNextAvailableRadioButton(QRadioButton *startRadioB
 //         // Display a message indicating that all radio buttons are occupied
 //         QMessageBox::information(this, tr("All Radio Buttons Occupied"), tr("All radio buttons are occupied. Cannot load more images."));
 //     }
-    
+
 // }
 
 void MainWindow::radioButtonClicked(bool checked)
@@ -323,26 +331,29 @@ void MainWindow::radioButtonClicked(bool checked)
     }
 }
 
-void MainWindow::simulateProcessingOne()
+void MainWindow::simulateProcessingOne(int barValue)
 {
-    int currentValue = ui->progressBar->value();
-    if (currentValue < 100) {
-        ui->progressBar->setValue(currentValue + 20);
+    int currentValue = ui->progressBar_1->value();
+    if (currentValue < 100)
+    {
+        ui->progressBar_1->setValue(currentValue + barValue);
     }
 }
 
-void MainWindow::simulateProcessingTwo()
+void MainWindow::simulateProcessingTwo(int barValue)
 {
-    int currentValue = ui->progressBar_2->value();
-    if (currentValue < 100) {
-    ui->progressBar_2->setValue(currentValue + 20);
+    int currentValue = ui->progressBar_2->value() / checkedCount;
+    if (currentValue < 100)
+    {
+        ui->progressBar_2->setValue(currentValue + barValue);
     }
 }
 
-
-void MainWindow::simulateProcessingThree(int barValue){
+void MainWindow::simulateProcessingThree(int barValue)
+{
     int currentValue = ui->progressBar_3->value();
-    if (currentValue < 100) {
+    if (currentValue < 100)
+    {
         ui->progressBar_3->setValue(currentValue + barValue);
     }
 }
@@ -350,88 +361,142 @@ void MainWindow::simulateProcessingThree(int barValue){
 void MainWindow::generateGraph()
 {
     bool ok;
-    QString filename  = QInputDialog::getText(nullptr, "Input", "Enter the filename for the Graphviz output:", QLineEdit::Normal, "", &ok);
-    if (ok && !filename.isEmpty()) {
+    QString filename = QInputDialog::getText(nullptr, "Input", "Enter the filename for the Graphviz output:", QLineEdit::Normal, "", &ok);
+    if (ok && !filename.isEmpty())
+    {
         // User entered something and pressed OK
         Graphviz graphviz;
         graphviz.GenerateGraphViz((filename + ".dot").toStdString());
     }
 }
 
-    
-void MainWindow::runAlgorithms(){    
+void MainWindow::runAlgorithms()
+{
+    maxPUVandPaths = SimulatorController::getGraphDataPointer().MappedRouterVector.size();
+
+    Prompts prompter = Prompts();
     ui->progressBar_3->setValue(0);
     ui->pushButton_4->setEnabled(false);
-    QList<QCheckBox*> checkboxes = findChildren<QCheckBox*>();
-    for (QCheckBox* checkbox : checkboxes) {
+    QList<QCheckBox *> checkboxes = findChildren<QCheckBox *>();
+    for (QCheckBox *checkbox : checkboxes)
+    {
         checkbox->setEnabled(false);
     }
 
-    int checkedCount = 0;
+    int checkedCount_ = 0;
     int barValue = 100;
-    for (QCheckBox* checkbox : checkboxes) {
-        if (checkbox->isChecked()) {
-            checkedCount++;
+    for (QCheckBox *checkbox : checkboxes)
+    {
+        if (checkbox->isChecked())
+        {
+            checkedCount_++;
         }
     }
-    if(checkedCount == 0){
+    checkedCount = checkedCount_;
+    if (checkedCount == 0)
+    {
         ui->pushButton_4->setEnabled(true);
-        for (QCheckBox* checkbox : checkboxes) {
+        for (QCheckBox *checkbox : checkboxes)
+        {
             checkbox->setEnabled(true);
         }
         return;
     }
-    if(checkedCount != 0){
-            barValue =  100 / checkedCount;
+    if (checkedCount != 0)
+    {
+        barValue = 100 / checkedCount;
     }
 
-    if(ui->checkBox->isChecked()){
-    //TODO: should prompt for router inputs! function only used to run dinics on specific routers
-    //  to find maxflow between these routers, when no toher traffic is on the network.
-    SimulatorController::runDinics("R1", "R10", false, false);
-    simulateProcessingThree(barValue);
+    if (ui->checkBox->isChecked())
+    {
+        // TODO: should prompt for router inputs! function only used to run dinics on specific routers
+        //   to find maxflow between these routers, when no toher traffic is on the network.
+        runAlgorithmOne(prompter);
+        // simulateProcessingTwo(barValue);
     }
 
-    if(ui->checkBox_2->isChecked()){
-    bool amountOK = !skipQuery;
-    int amountPUV = 5;
-    int amountPaths = 5;
-    if (!skipQuery)
-        amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, 7, 1, &amountOK);
-
-    SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, false);
-    simulateProcessingThree(barValue);
+    if (ui->checkBox_2->isChecked())
+    {
+        runAlgorithmTwo(prompter);
+        // simulateProcessingTwo(barValue);
     }
 
-    if(ui->checkBox_3->isChecked()){
-    runAlgorithmThree();
-    simulateProcessingThree(barValue);
+    if (ui->checkBox_3->isChecked())
+    {
+        runAlgorithmThree(prompter);
+        // simulateProcessingTwo(barValue);
     }
 
-    if(ui->checkBox_4->isChecked()){
-    runAlgorithmFour();
-    simulateProcessingThree(barValue);
+    if (ui->checkBox_4->isChecked())
+    {
+        runAlgorithmFour(prompter);
+        // simulateProcessingTwo(barValue);
     }
 
-    if(ui->progressBar_3->value() != 100){
+    if (ui->progressBar_3->value() != 100)
+    {
         ui->progressBar_3->setValue(100);
     }
 
     ui->pushButton_4->setEnabled(true);
-    for (QCheckBox* checkbox : checkboxes) {
+    for (QCheckBox *checkbox : checkboxes)
+    {
         checkbox->setEnabled(true);
     }
 }
 
+void showResults(std::string title, std::string message)
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(QString::fromStdString(title));
+    msgBox.setText(QString::fromStdString(message));
+    msgBox.setMinimumSize(600, 200); // Set the desired minimum width and height
+    msgBox.setSizeGripEnabled(true);
+    msgBox.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    msgBox.setMaximumSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
+    msgBox.exec();
+}
 
-void MainWindow::runAlgorithmOne(){
+void MainWindow::runAlgorithmOne(Prompts &prompter)
+{
     std::cout << "ProcessingOne" << std::endl;
     // TODO: add preload prompt?
-    int result = SimulatorController::runDinics("R1", "R7", false, false);
+    std::cout << "ProcessingOne1" << std::endl;
+    std::string source = prompter.promptRouter(this, "Source?");
+    if (source == "")
+        return;
+    std::string sink = prompter.promptRouter(this, "Sink?");
+    if (sink == "")
+        return;
+    int result = SimulatorController::runDinics(source, sink, false, false);
     std::cout << "Result: " << result << std::endl;
+    showResults("Dinic's MaxFlow no preload", "Result: " + std::to_string(result));
+}
+
+void MainWindow::runAlgorithmTwo(Prompts &prompter)
+{
+    bool amountOK = !skipQuery;
+    int amountPUV = 5;
+    bool PUVOK = !skipQuery;
+    int amountPaths = 5;
+    bool responseOK = !skipQuery;
+    std::string response = "";
+    if (!skipQuery)
+    {
+        amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, maxPUVandPaths, 1, &amountOK);
+        amountPaths = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of Paths's wanted"), 1, 1, maxPUVandPaths, 1, &PUVOK);
     }
-    
-void MainWindow::runAlgorithmThree()
+
+    auto dinicsResults = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, false);
+    std::string compiledOut = "";
+    for (const auto &dinicsResult : dinicsResults)
+    {
+        compiledOut += dinicsResult.first + ": " + std::to_string(dinicsResult.second) + "\n";
+    }
+    showResults("Dinic's Auto Preload OFF", compiledOut);
+}
+
+void MainWindow::runAlgorithmThree(Prompts &prompter)
 {
     std::cout << "ProcessingThree" << std::endl;
     bool amountOK = !skipQuery;
@@ -440,15 +505,28 @@ void MainWindow::runAlgorithmThree()
     int amountPaths = 5;
     if (!skipQuery)
     {
-        amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, 7, 1, &PUVOK);
-        amountPaths = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of Paths's wanted"), 1, 1, 7, 1, &amountOK);
+        amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, maxPUVandPaths, 1, &PUVOK);
+        amountPaths = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of Paths's wanted"), 1, 1, maxPUVandPaths, 1, &amountOK);
     }
-    SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, true);
+    auto dinicsResults = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, true);
+    std::string compiledOut = "";
+    for (const auto &dinicsResult : dinicsResults)
+    {
+        compiledOut += dinicsResult.first + ": " + std::to_string(dinicsResult.second) + "\n";
+    }
+    showResults("Dinic's Auto Preload ON", compiledOut);
 }
 
-void MainWindow::runAlgorithmFour()
+void MainWindow::runAlgorithmFour(Prompts &prompter)
 {
-    std::cout << "ProcessingThree" << std::endl;
+    std::string source = "R1";
+    std::string sink = "R4";
+    if (!skipQuery)
+    {
+        source = prompter.promptRouter(this, "Source?");
+        sink = prompter.promptRouter(this, "Sink?");
+    }
+    std::cout << "Processing" << std::endl;
     SimulatorController::minCut("R1", "R4", true);
 }
 

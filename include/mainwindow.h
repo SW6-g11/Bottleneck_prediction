@@ -12,6 +12,7 @@
 #include <QMessageBox>
 #include <QInputDialog>
 #include "graphDataStruct.h"
+#include "prompts.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -28,14 +29,17 @@ class MainWindow : public QMainWindow
 
 public:
     void openGraphvizImage(string filePath);
-    void simulateProcessingOne();
-    void simulateProcessingTwo();
+    void simulateProcessingOne(int barValue);
+    void simulateProcessingTwo(int barValue);
     void simulateProcessingThree(int barValue);
+    void simulateProcessingFour(int barValue);
     void runAlgorithmNoAugmentedNetwork();
-    void runAlgorithmOne();
-    void runAlgorithmThree();
-    void runAlgorithmFour();
-    static MainWindow& getInstance();
+    void runAlgorithmOne(Prompts &prompter);
+    void runAlgorithmTwo(Prompts &prompter);
+    void runAlgorithmThree(Prompts &prompter);
+    void runAlgorithmFour(Prompts &prompter);
+    std::string promptRouter();
+    static MainWindow &getInstance();
 
 private slots:
     void openDirectory();
@@ -59,6 +63,6 @@ private:
 
     graphDataStruct graphdata;
 
-    static MainWindow* instance;
+    static MainWindow *instance;
 };
 #endif // MAINWINDOW_H

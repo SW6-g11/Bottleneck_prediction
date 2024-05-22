@@ -58,7 +58,7 @@ public:
     cout << "Data line: " + (to_string(i)) + " out of " + to_string(limit) + ": " << endl;
     while (file.getline(buffer, bufferSize) && ((std::is_same<T, Router>::value || std::is_same<T, Link>::value) || (i < limit || limit == 0)))
     {
-      // std::cout << i << std::endl;
+
       i++;
       if (debug)
       {
@@ -66,13 +66,17 @@ public:
       }
 
       istringstream iss(buffer);
+      if (iss.peek() == std::istringstream::traits_type::eof())
+      {
+        cout << "Empty " << endl;
+        continue;
+      }
       T item;
       readType(iss, item);
       data.push_back(item);
       count++;
     }
   }
-
 
 private:
   const int limit = DEFAULTLIMIT;
