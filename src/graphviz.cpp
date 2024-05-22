@@ -18,7 +18,7 @@
 
 using namespace std;
 
-void Graphviz::GenerateGraphViz(const string& filename) {
+void Graphviz::GenerateGraphViz(const string& filename, bool usePreLoad) {
     graphDataStruct& graphdata = SimulatorController::getGraphDataPointer();
     MainWindow& mainWindow = MainWindow::getInstance(); 
     
@@ -38,8 +38,12 @@ void Graphviz::GenerateGraphViz(const string& filename) {
     // writeTraffic(dotFile, trafficData);
     mainWindow.simulateProcessingTwo();
     // writePaths(dotFile, pathsData);
-
-    writeLinks(dotFile, graphdata.Augmentedlinks);
+    if(usePreLoad){
+        writeTraffic(dotFile, graphdata.Augmentedlinks, usePreLoad);
+    }else{
+        writeLinks(dotFile, graphdata.Augmentedlinks);
+        }
+    
     mainWindow.simulateProcessingTwo();
     mainWindow.simulateProcessingTwo();
     // writeLinkUtils(dotFile, linkUtilsData);    
@@ -63,26 +67,15 @@ void Graphviz::writeRouters(ofstream& dotFile, vector<MappedRouter>& routervecto
     for (const auto& router : routervector) {
         dotFile << "\t" << router.id << "[pos=\""<< router.longitude <<","<< router.latitude <<"\"];\n";
     }
-
-    // if(last line=pos)
-    //     delete last line;
 }
 
 
-//todo: need a timestamp
-// void Graphviz::writeLinkUtils(ofstream& dotFile, const vector<Linkutils>& linkUtilsData) {
-//     for (const auto& linkUtils : linkUtilsData) {
-//         dotFile << "\t\"" << linkUtils.linkStart << "\" -> \"" << linkUtils.linkEnd << "\" [label=\"" << linkUtils.avgUtilization << "\", color=blue];" << endl;
-//     }
-// }
 
-
-// //write
-// void Graphviz::writeTraffic(std::ofstream& dotFile, const std::vector<AugmentedLink>& linksData) {
-//     for (const auto& AugmentedLink : linksData) {
-//         dotFile << "\t" << AugmentedLink.linkStart << " -> " << AugmentedLink.linkEnd << " [label=" << AugmentedLink.getRemainingCapacity(); << ", color=green];\n";
-//     }
-// }
+void Graphviz::writeTraffic(std::ofstream& dotFile, const std::vector<AugmentedLink>& linksData, bool usePreLoad) {
+    for (const auto& AugmentedLink : linksData) {
+        dotFile << "\t" << AugmentedLink.linkStart << " -> " << AugmentedLink.linkEnd << " [label=" << AugmentedLink.getRemainingCapacity(AugmentedLink.start_, usePreLoad, false) << ", color=yellow];\n";
+    }
+}
 
 void Graphviz::writeLinks(std::ofstream& dotFile, const std::vector<AugmentedLink>& linksData) {
     for (const auto& AugmentedLink : linksData) {
@@ -107,7 +100,10 @@ void Graphviz::GenerateImageFromDotFile(string dotFilename){
             QMessageBox::warning(nullptr, "Error", "Failed to generate PNG from DOT file.");
         }
 }
-
+void Graphviz::InvertDotFile(const std::string& dotFilename){
+    std:string peakfile ="NetworkDuringTheoreticPeak";
+    
+}
 
  std::string Graphviz::convertDotToPngFilename(const std::string& dotFilename) {
     std::string pngFilename = dotFilename;

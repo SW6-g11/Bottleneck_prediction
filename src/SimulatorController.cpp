@@ -6,7 +6,8 @@
 #include <regex>
 #include <vector>
 #include "path.h"
-#include <Networkmanipulator.h>
+#include "Networkmanipulator.h"
+#include "graphviz.h"
 
 graphDataStruct SimulatorController::graphData;
 DinicAlgorithm SimulatorController::dinicsInstance;
@@ -32,6 +33,8 @@ void SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(int amountPUV, in
 
     std::vector<std::pair<std::string, Linkutils>> peakset;
     Networkmanipulator::findPeakUtilValues(amountPUV, peakset, getGraphDataPointer());
+    
+    Graphviz::GenerateGraphViz("NetworkDuringTheoreticPeak", usePreLoad);
     Networkmanipulator::reduceVector(peakset, amountPUV);
     vector<Paths> problempaths = Networkmanipulator::findLinksInPaths(peakset, amountPUV, getGraphDataPointer());
     Networkmanipulator::reduceVector(problempaths, amountPaths);

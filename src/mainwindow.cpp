@@ -354,7 +354,7 @@ void MainWindow::generateGraph()
     if (ok && !filename.isEmpty()) {
         // User entered something and pressed OK
         Graphviz graphviz;
-        graphviz.GenerateGraphViz((filename + ".dot").toStdString());
+        graphviz.GenerateGraphViz((filename + ".dot").toStdString(), false);
         
 
     }
