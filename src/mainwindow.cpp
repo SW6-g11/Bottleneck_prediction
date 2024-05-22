@@ -98,99 +98,82 @@ void MainWindow::openDirectory()
     }
 }
 
+
+
 void MainWindow::openImage()
 {
     if (ui->radioButton_5->property("imagePath").toString().isEmpty())
     {
-        QString filePath = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("All Files (*.*)"));
-        if (!filePath.isEmpty())
-        {
-            QPixmap image(filePath);
-            ui->label->setPixmap(image);
-            QSize imageSize = image.size();
-            ui->label->setFixedSize(imageSize);
+        QString filepath = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("All Files (*.*)"));
+        string filePath = filepath.toStdString();
+        if (!filePath.empty()){
+            imageSaver(filePath);
+        }
+    }
+}
 
-            // Find the next available radio button starting from radio button 1
-            QRadioButton *nextRadioButton = nullptr;
+void MainWindow::imageSaver(string filePath){
+    QString qFilePath = QString::fromStdString(filePath);
+    QPixmap image(qFilePath);
+    ui->label->setPixmap(image);
+    QSize imageSize = image.size();
+    ui->label->setFixedSize(imageSize);
 
-            // Check if no radio button is currently checked
-            if (!ui->radioButton->isChecked() && !ui->radioButton_2->isChecked() &&
-                !ui->radioButton_3->isChecked() && !ui->radioButton_4->isChecked() &&
-                !ui->radioButton_5->isChecked())
-            {
-                nextRadioButton = ui->radioButton; // If no radio button is checked, start from radio button 1
-            }
-            else
-            {
-                // Otherwise, find the next available radio button
-                QList<QRadioButton *> radioButtons = {ui->radioButton_2, ui->radioButton_3,
-                                                      ui->radioButton_4, ui->radioButton_5};
-                for (QRadioButton *radioButton : radioButtons)
-                {
-                    if (!radioButton->isChecked())
-                    {
-                        nextRadioButton = radioButton;
+    // Find the next available radio button starting from radio button 1
+    QRadioButton *nextRadioButton = nullptr;
+
+    // Check if no radio button is currently checked
+    if (!ui->radioButton->isChecked() && !ui->radioButton_2->isChecked() &&
+        !ui->radioButton_3->isChecked() && !ui->radioButton_4->isChecked() &&
+        !ui->radioButton_5->isChecked()){
+        nextRadioButton = ui->radioButton; // If no radio button is checked, start from radio button 1
+    }
+    else{
+        // Otherwise, find the next available radio button
+        QList<QRadioButton *> radioButtons = {ui->radioButton_2, ui->radioButton_3,
+                                              ui->radioButton_4, ui->radioButton_5};
+        for (QRadioButton *radioButton : radioButtons){
+            if (!radioButton->isChecked()){
+                nextRadioButton = radioButton;
                         break;
-                    }
+            }
+        }
+    }
+    // Store the file path and size as properties of the radio button
+    if (nextRadioButton != nullptr){
+        QString currentImagePath = nextRadioButton->property("imagePath").toString();
+        if (currentImagePath.isEmpty()){
+            // No image associated, this radio button is available
+            nextRadioButton->setProperty("imagePath", qFilePath);
+            nextRadioButton->setProperty("imageSize", imageSize);
+            nextRadioButton->setEnabled(true); // Enable the radio button
+            nextRadioButton->setChecked(true); // Automatically check the radio button
+        }
+        else{
+            // Radio button already has an image associated, try finding the next available one
+            QRadioButton *availableRadioButton = nullptr;
+            for (int i = 2; i <= 5; ++i){ 
+                // Start checking from radio button 2
+                QString radioButtonName = QString("radioButton_%1").arg(i);
+                availableRadioButton = findChild<QRadioButton *>(radioButtonName);
+                // If the radio button is available, break out of the loop
+                if (availableRadioButton && !availableRadioButton->isChecked() && availableRadioButton->property("imagePath").toString().isEmpty()){
+                    break;
                 }
             }
-
-            // Store the file path and size as properties of the radio button
-            if (nextRadioButton != nullptr)
-            {
-                QString currentImagePath = nextRadioButton->property("imagePath").toString();
-                if (currentImagePath.isEmpty())
-                {
-                    // No image associated, this radio button is available
-                    nextRadioButton->setProperty("imagePath", filePath);
-                    nextRadioButton->setProperty("imageSize", imageSize);
-                    nextRadioButton->setEnabled(true); // Enable the radio button
-                    nextRadioButton->setChecked(true); // Automatically check the radio button
-                }
-                else
-                {
-                    // Radio button already has an image associated, try finding the next available one
-                    QRadioButton *availableRadioButton = nullptr;
-                    for (int i = 2; i <= 5; ++i)
-                    { // Start checking from radio button 2
-                        QString radioButtonName = QString("radioButton_%1").arg(i);
-                        availableRadioButton = findChild<QRadioButton *>(radioButtonName);
-
-                        // If the radio button is available, break out of the loop
-                        if (availableRadioButton && !availableRadioButton->isChecked() && availableRadioButton->property("imagePath").toString().isEmpty())
-                        {
-                            break;
-                        }
-                    }
-
-                    // Check if an available radio button was found
-                    if (availableRadioButton)
-                    {
-                        // Assign the image path and size to the available radio button
-                        availableRadioButton->setProperty("imagePath", filePath);
-                        availableRadioButton->setProperty("imageSize", imageSize);
-                        availableRadioButton->setEnabled(true); // Enable the radio button
-                        availableRadioButton->setChecked(true); // Automatically check the radio button
-                    }
-                    else
-                    {
-                        // No available radio button found, display a message or handle accordingly
-                        qDebug() << "No available radio button found.";
-                    }
-                }
+            // Check if an available radio button was found
+            if (availableRadioButton){
+                // Assign the image path and size to the available radio button
+                availableRadioButton->setProperty("imagePath", qFilePath);
+                availableRadioButton->setProperty("imageSize", imageSize);
+                availableRadioButton->setEnabled(true); // Enable the radio button
+                availableRadioButton->setChecked(true); // Automatically check the radio button
             }
-            else
-            {
+            else{
                 // No available radio button found, display a message or handle accordingly
                 qDebug() << "No available radio button found.";
             }
         }
-    }
-    else
-    {
-        // Display a message indicating that all radio buttons are occupied
-        QMessageBox::information(this, tr("All Radio Buttons Occupied"),
-                                 tr("All radio buttons are occupied. Cannot load more images."));
     }
 }
 
@@ -210,80 +193,6 @@ QRadioButton *MainWindow::findNextAvailableRadioButton(QRadioButton *startRadioB
     return nullptr;
 }
 
-// void MainWindow::openGraphvizImage(string filePath){
-//     if (ui->radioButton_5->property("imagePath").toString().isEmpty()){
-//         QPixmap image(filePath);
-//         ui->label->setPixmap(image);
-//         QSize imageSize = image.size();
-//         ui->label->setFixedSize(imageSize);
-
-//         // Find the next available radio button starting from radio button 1
-//         QRadioButton *nextRadioButton = nullptr;
-
-//         // Check if no radio button is currently checked
-//         if (!ui->radioButton->isChecked() && !ui->radioButton_2->isChecked() &&
-//         !ui->radioButton_3->isChecked() && !ui->radioButton_4->isChecked() &&
-//         !ui->radioButton_5->isChecked()){
-//             nextRadioButton = ui->radioButton; // If no radio button is checked, start from radio button 1
-//         }
-//         else{
-//             // Otherwise, find the next available radio button
-//             QList<QRadioButton *> radioButtons = {ui->radioButton_2, ui->radioButton_3,
-//                                                 ui->radioButton_4, ui->radioButton_5};
-//             for (QRadioButton *radioButton : radioButtons){
-//                 if (!radioButton->isChecked()){
-//                     nextRadioButton = radioButton;
-//                     break;
-//                 }
-//             }
-//         }
-
-//         // Store the file path and size as properties of the radio button
-//         if (nextRadioButton != nullptr){
-//             QString currentImagePath = nextRadioButton->property("imagePath").toString();
-//             if (currentImagePath.isEmpty()){
-//                 // No image associated, this radio button is available
-//                 nextRadioButton->setProperty("imagePath", filePath);
-//                 nextRadioButton->setProperty("imageSize", imageSize);
-//                 nextRadioButton->setEnabled(true); // Enable the radio button
-//                 nextRadioButton->setChecked(true); // Automatically check the radio button
-//             }
-//             else{
-//                 // Radio button already has an image associated, try finding the next available one
-//                 QRadioButton *availableRadioButton = nullptr;
-//                 for (int i = 2; i <= 5; ++i){ // Start checking from radio button 2
-//                     QString radioButtonName = QString("radioButton_%1").arg(i);
-//                     availableRadioButton = findChild<QRadioButton *>(radioButtonName);
-//                     // If the radio button is available, break out of the loop
-//                     if (availableRadioButton && !availableRadioButton->isChecked() && availableRadioButton->property("imagePath").toString().isEmpty()){
-//                         break;
-//                     }
-//                 }
-
-//                 // Check if an available radio button was found
-//                 if (availableRadioButton){
-//                     // Assign the image path and size to the available radio button
-//                     availableRadioButton->setProperty("imagePath", filePath);
-//                     availableRadioButton->setProperty("imageSize", imageSize);
-//                     availableRadioButton->setEnabled(true); // Enable the radio button
-//                     availableRadioButton->setChecked(true); // Automatically check the radio button
-//                 }    
-//                 else{
-//                     // No available radio button found, display a message or handle accordingly
-//                     qDebug() << "No available radio button found.";
-//                 }
-//             }
-//         }
-//         else{
-//             // No available radio button found, display a message or handle accordingly
-//             qDebug() << "No available radio button found.";
-//         }
-//     else{
-//         // Display a message indicating that all radio buttons are occupied
-//         QMessageBox::information(this, tr("All Radio Buttons Occupied"), tr("All radio buttons are occupied. Cannot load more images."));
-//     }
-    
-// }
 
 void MainWindow::radioButtonClicked(bool checked)
 {
