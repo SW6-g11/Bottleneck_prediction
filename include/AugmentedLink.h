@@ -55,6 +55,7 @@ public:
         return (preload ? flow - preload : flow);
     }
 
+
     std::string toString() const
     {
         return linkStart + "" + linkEnd + " indexes: " + std::to_string(start_) + "," + std::to_string(end_) + ", capacity: " + std::to_string(capacity) + ", flow: " + std::to_string(flow);
