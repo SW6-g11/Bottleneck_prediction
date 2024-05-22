@@ -65,7 +65,7 @@ void Graphviz::GenerateGraphViz(const string& filename, bool usePreLoad) {
 void Graphviz::writeRouters(ofstream& dotFile, vector<MappedRouter>& routervector) {
     std:cout<<routervector.size()<<endl;
     for (const auto& router : routervector) {
-        dotFile << "\t" << router.id << "[pos=\""<< router.longitude <<","<< router.latitude <<"\"];\n";
+        dotFile << "\t" << router.id << "[pos=\""<< router.longitude <<","<< router.latitude <<"!\"];\n";
     }
 }
 
@@ -100,10 +100,10 @@ void Graphviz::GenerateImageFromDotFile(string dotFilename){
             QMessageBox::warning(nullptr, "Error", "Failed to generate PNG from DOT file.");
         }
 }
-void Graphviz::InvertDotFile(const std::string& dotFilename){
-    std:string peakfile ="NetworkDuringTheoreticPeak";
+// void Graphviz::InvertDotFile(const std::string& dotFilename){
+//     std:string peakfile ="NetworkDuringTheoreticPeak";
     
-}
+// }
 
  std::string Graphviz::convertDotToPngFilename(const std::string& dotFilename) {
     std::string pngFilename = dotFilename;

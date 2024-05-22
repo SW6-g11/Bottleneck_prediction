@@ -21,8 +21,6 @@ struct graphDataStruct
       : linkUtilsData(),
         trafficData(),
         pathsData(),
-        // routersData(),
-        // linksData(),
         Augmentedlinks(),
         MappedRouterVector()
   {
