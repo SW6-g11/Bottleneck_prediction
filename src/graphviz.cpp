@@ -1,11 +1,11 @@
 #include "graphviz.h"
 #include "graphmaker.h"
-#include "link.h"
-#include "linkutils.h"
-#include "path.h"
-#include "router.h"
-#include "sheetreader.h"
-#include "traffic.h"
+#include "Link.h"
+#include "Linkutils.h"
+#include "Path.h"
+#include "Router.h"
+#include "Sheetreader.h"
+#include "Traffic.h"
 #include <iostream>
 #include <fstream>
 #include <mainwindow.h>

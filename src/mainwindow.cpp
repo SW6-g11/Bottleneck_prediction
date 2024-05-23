@@ -388,7 +388,8 @@ void MainWindow::runAlgorithms(){
     if(ui->checkBox->isChecked()){
     //TODO: should prompt for router inputs! function only used to run dinics on specific routers
     //  to find maxflow between these routers, when no toher traffic is on the network.
-    SimulatorController::runDinics("R1", "R10", false, false);
+    //SimulatorController::runDinics("R1", "R10", false, false);
+    runAlgorithmOne();
     simulateProcessingThree(barValue);
     }
 
@@ -427,7 +428,7 @@ void MainWindow::runAlgorithms(){
 void MainWindow::runAlgorithmOne(){
     std::cout << "ProcessingOne" << std::endl;
     // TODO: add preload prompt?
-    int result = SimulatorController::runDinics("R1", "R7", false, false);
+    int result = SimulatorController::runDinics("R1", "R4", false, false);
     std::cout << "Result: " << result << std::endl;
     }
     

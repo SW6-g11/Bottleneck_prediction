@@ -9,3 +9,4 @@ cd $DIRECTORY
 cmake ..
 make
 ./Network_Simulator
+./testing
