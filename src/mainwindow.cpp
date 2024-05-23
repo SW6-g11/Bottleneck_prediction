@@ -321,25 +321,25 @@ void MainWindow::runAlgorithms()
         // TODO: should prompt for router inputs! function only used to run dinics on specific routers
         //   to find maxflow between these routers, when no toher traffic is on the network.
         runAlgorithmOne(prompter);
-        simulateProcessingThree(barValue);
+        // simulateProcessingTwo(barValue);
     }
 
     if (ui->checkBox_2->isChecked())
     {
         runAlgorithmTwo(prompter);
-        simulateProcessingThree(barValue);
+        // simulateProcessingTwo(barValue);
     }
 
     if (ui->checkBox_3->isChecked())
     {
         runAlgorithmThree(prompter);
-        simulateProcessingThree(barValue);
+        // simulateProcessingTwo(barValue);
     }
 
     if (ui->checkBox_4->isChecked())
     {
         runAlgorithmFour(prompter);
-        simulateProcessingThree(barValue);
+        // simulateProcessingTwo(barValue);
     }
 
     if (ui->progressBar_3->value() != 100)
