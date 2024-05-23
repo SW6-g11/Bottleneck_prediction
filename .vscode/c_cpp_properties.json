@@ -4,7 +4,8 @@
             "name": "Windows-MSVC",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/include/x86_64-linux-gnu/qt6/QtWidgets"
+                "/usr/lib/qt6/**",
+                "/usr/include/qt/QtWidgets"
             ],
             "defines": [],
             "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe",

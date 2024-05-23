@@ -1,11 +1,11 @@
 #include "graphviz.h"
 #include "graphmaker.h"
 #include "link.h"
-#include "linkutils.h"
-#include "path.h"
-#include "router.h"
-#include "sheetreader.h"
-#include "traffic.h"
+#include "Linkutils.h"
+#include "Path.h"
+#include "Router.h"
+#include "Sheetreader.h"
+#include "Traffic.h"
 #include <iostream>
 #include <fstream>
 #include <mainwindow.h>
@@ -26,10 +26,12 @@ void Graphviz::GenerateGraphViz(const string& filename, bool usePreLoad) {
     string filePath = "../images/" + filename;
     ofstream dotFile(filePath);
 
-    if (!dotFile.is_open()) {
+    if (!dotFile.is_open())
+    {
         cerr << "Error: Failed to open file " << filename << endl;
         return;
     }
+
     
     dotFile << "digraph G { \n" << endl;
     dotFile << "\t" << "graph [layout=neato];" << endl;
@@ -48,10 +50,12 @@ void Graphviz::GenerateGraphViz(const string& filename, bool usePreLoad) {
     mainWindow.simulateProcessingTwo();
     // writeLinkUtils(dotFile, linkUtilsData);    
     dotFile << "}\n" << endl;
-    dotFile.close();
-    mainWindow.simulateProcessingTwo();
 
-    if (dotFile.fail()) {
+    dotFile.close();
+    mainWindow.simulateProcessingThree(15);
+
+    if (dotFile.fail())
+    {
         cerr << "Error: Failed to write to file " << filename << endl;
         return;
     }
@@ -60,7 +64,6 @@ void Graphviz::GenerateGraphViz(const string& filename, bool usePreLoad) {
 
     // mainWindow.openGraphvizImage(filePath);
 }
-
 
 void Graphviz::writeRouters(ofstream& dotFile, vector<MappedRouter>& routervector) {
     std:cout<<routervector.size()<<endl;
@@ -118,6 +121,7 @@ void Graphviz::InvertDotFile(const std::string& dotFilename){
     } else {
         // If it doesn't end with ".dot", just append ".png"
         pngFilename += ".png";
+
     }
     return pngFilename;
 }

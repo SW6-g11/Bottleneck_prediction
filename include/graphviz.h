@@ -5,17 +5,18 @@
 #include <iostream>
 #include "graphmaker.h"
 #include "link.h"
-#include "linkutils.h"
-#include "path.h"
-#include "router.h"
-#include "sheetreader.h"
-#include "traffic.h"
+#include "Linkutils.h"
+#include "Path.h"
+#include "Router.h"
+#include "Sheetreader.h"
+#include "Traffic.h"
 #include <iostream>
 #include <fstream>
 #include <mainwindow.h>
 using namespace std;
 
-class Graphviz {
+class Graphviz
+{
 public:
     static void GenerateGraphViz(const string& filename, bool usepreload);
 
@@ -28,5 +29,6 @@ private:
     static void  GenerateImageFromDotFile(string dotFilename);
     static std::string convertDotToPngFilename(const std::string& dotFilename);
     static void InvertDotFile(const std::string& dotFilename);
+
 };
-#endif  // GRAPHVIZ_H
+#endif // GRAPHVIZ_H
