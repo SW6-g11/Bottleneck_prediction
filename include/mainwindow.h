@@ -28,11 +28,11 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    void openGraphvizImage(string filePath);
-    void simulateProcessingOne(int barValue);
-    void simulateProcessingTwo(int barValue);
+
+    void imageSaver(string filePath);
+    void simulateProcessingOne();
+    void simulateProcessingTwo();
     void simulateProcessingThree(int barValue);
-    void simulateProcessingFour(int barValue);
     void runAlgorithmNoAugmentedNetwork();
     void runAlgorithmOne(Prompts &prompter);
     void runAlgorithmTwo(Prompts &prompter);

@@ -5,8 +5,11 @@
 #include <map>
 #include <regex>
 #include <vector>
-#include "Path.h"
-#include <Networkmanipulator.h>
+#include "path.h"
+#include "Networkmanipulator.h"
+#include "graphviz.h"
+
+
 
 graphDataStruct SimulatorController::graphData;
 DinicAlgorithm SimulatorController::dinicsInstance;
@@ -32,6 +35,8 @@ vector<std::pair<std::string, int>> SimulatorController::DinicsOnBottlenecksNoAu
 
     std::vector<std::pair<std::string, Linkutils>> peakset;
     Networkmanipulator::findPeakUtilValues(amountPUV, peakset, getGraphDataPointer());
+    
+    Graphviz::GenerateGraphViz("NetworkDuringTheoreticPeak", usePreLoad);
     Networkmanipulator::reduceVector(peakset, amountPUV);
     vector<Paths> problempaths = Networkmanipulator::findLinksInPaths(peakset, amountPUV, getGraphDataPointer());
     Networkmanipulator::reduceVector(problempaths, amountPaths);

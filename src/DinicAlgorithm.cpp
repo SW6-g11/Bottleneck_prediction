@@ -1,7 +1,9 @@
 #include "DinicAlgorithm.h"
 #include <functional>
 #include <algorithm>
-
+#include "graphviz.h"
+#include <iostream>
+#include <string>
 using namespace std;
 
 // constant to represent infinity
@@ -62,6 +64,7 @@ void DinicAlgorithm::applyindices(vector<AugmentedLink> &links)
 // returns false if both are found ok
 bool DinicAlgorithm::getIndexOfSourceAndSink(int &indexSource, int &indexSink, std::string source, std::string sink)
 {
+
     bool foundSource = false;
     bool foundSink = false;
     // std::cout << "Node size at get: " << nodes_.size() << std::endl;
@@ -102,7 +105,7 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool useP
         std::cerr << "No nodes in dinics" << std::endl;
         return -1;
     }
-
+    
     int asd = 0;
     int result = 0;
     while (true)
@@ -163,6 +166,7 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool useP
                 std::cout << "Path to sink no longer exists, so return" << std::endl;
                 return result; // Path to sink no longer exists, so return
             }
+            
         }
 
         // Now perform DFS to push through the blocking flow
@@ -204,6 +208,8 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool useP
             // std::cout << "While3" << std::endl;
 
         } while (pushed_flow > 0);
+        string filename = ("Flow_" + source + "---" + sink);
+        Graphviz::GenerateGraphViz(filename, usePreLoad);
     }
     return -1;
 };
