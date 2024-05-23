@@ -19,21 +19,21 @@ void Graphmaker::processDataForDay(string &directoryPath, int day, int Limit, gr
 
     string linkUtilsFileName = directoryPath + "/link-util-day" + to_string(day) + ".csv";
     Readmaster.readData(linkUtilsFileName, graphdata.linkUtilsData, false);
-    mainWindow.simulateProcessingOne(35);
+    mainWindow.simulateProcessingOne();
 
     string flowsFileName = directoryPath + "/flow-traffic-day" + to_string(day) + ".csv";
     Readmaster.readData(flowsFileName, graphdata.trafficData, false);
-    mainWindow.simulateProcessingOne(35);
+    mainWindow.simulateProcessingOne();
 
     string pathsFileName = directoryPath + "/flow-paths-day" + to_string(day) + ".csv";
     Readmaster.readData(pathsFileName, graphdata.pathsData, false);
-    mainWindow.simulateProcessingOne(10);
+    mainWindow.simulateProcessingOne();
 
     string routersFileName = directoryPath + "/routers.csv";
     Readmaster.readData(routersFileName, graphdata.MappedRouterVector, true);
-    mainWindow.simulateProcessingOne(10);
+    mainWindow.simulateProcessingOne();
 
     string linksFileName = directoryPath + "/links.csv";
     Readmaster.readData(linksFileName, graphdata.Augmentedlinks, true);
-    mainWindow.simulateProcessingOne(10);
+    mainWindow.simulateProcessingOne();
 };

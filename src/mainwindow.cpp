@@ -240,21 +240,19 @@ void MainWindow::radioButtonClicked(bool checked)
     }
 }
 
-void MainWindow::simulateProcessingOne(int barValue)
+void MainWindow::simulateProcessingOne()
 {
     int currentValue = ui->progressBar_1->value();
-    if (currentValue < 100)
-    {
-        ui->progressBar_1->setValue(currentValue + barValue);
+    if (currentValue < 100) {
+        ui->progressBar_1->setValue(currentValue + 20);
     }
 }
 
-void MainWindow::simulateProcessingTwo(int barValue)
+void MainWindow::simulateProcessingTwo()
 {
-    int currentValue = ui->progressBar_2->value() / checkedCount;
-    if (currentValue < 100)
-    {
-        ui->progressBar_2->setValue(currentValue + barValue);
+    int currentValue = ui->progressBar_2->value();
+    if (currentValue < 100) {
+    ui->progressBar_2->setValue(currentValue + 20);
     }
 }
 
@@ -323,25 +321,25 @@ void MainWindow::runAlgorithms()
         // TODO: should prompt for router inputs! function only used to run dinics on specific routers
         //   to find maxflow between these routers, when no toher traffic is on the network.
         runAlgorithmOne(prompter);
-        // simulateProcessingTwo(barValue);
+        simulateProcessingThree(barValue);
     }
 
     if (ui->checkBox_2->isChecked())
     {
         runAlgorithmTwo(prompter);
-        // simulateProcessingTwo(barValue);
+        simulateProcessingThree(barValue);
     }
 
     if (ui->checkBox_3->isChecked())
     {
         runAlgorithmThree(prompter);
-        // simulateProcessingTwo(barValue);
+        simulateProcessingThree(barValue);
     }
 
     if (ui->checkBox_4->isChecked())
     {
         runAlgorithmFour(prompter);
-        // simulateProcessingTwo(barValue);
+        simulateProcessingThree(barValue);
     }
 
     if (ui->progressBar_3->value() != 100)
