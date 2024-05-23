@@ -106,12 +106,12 @@ void Graphviz::GenerateImageFromDotFile(string dotFilename){
         mainWindow.imageSaver(pngFilename);
 }
 
-// This is not implemented yet!!!
-void Graphviz::InvertDotFile(const std::string& dotFilename){
-    std:string peakfile ="NetworkDuringTheoreticPeak";
-    std:int tempflow = 0;
+// // This is not implemented yet!!!
+// void Graphviz::InvertDotFile(const std::string& dotFilename){
+//     std:string peakfile ="NetworkDuringTheoreticPeak";
+//     std:int tempflow = 0;
     
-}
+// }
 
  std::string Graphviz::convertDotToPngFilename(const std::string& dotFilename) {
     std::string pngFilename = dotFilename;
