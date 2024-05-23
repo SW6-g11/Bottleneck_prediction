@@ -52,7 +52,7 @@ void Graphviz::GenerateGraphViz(const string& filename, bool usePreLoad) {
     dotFile << "}\n" << endl;
 
     dotFile.close();
-    mainWindow.simulateProcessingThree(15);
+    mainWindow.simulateProcessingTwo();
 
     if (dotFile.fail())
     {
