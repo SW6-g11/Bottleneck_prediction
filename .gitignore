@@ -43,4 +43,5 @@ CMakeCache.txt
 build/
 CMakeLists.txt.user
 Graphviz/
-images/*
+images/*.dot
+images/*.png
