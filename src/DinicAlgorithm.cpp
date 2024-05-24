@@ -89,7 +89,7 @@ bool DinicAlgorithm::getIndexOfSourceAndSink(int &indexSource, int &indexSink, s
     return true;
 }
 
-int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool usePreLoad, bool isCalculatingMincut)
+int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool usePreLoad, bool isCalculatingMincut, bool useTraffic)
 { // Compute the maximum flow with the Dinic's algorithm
     std::cout << "ComputeFLow is asking for Preload?: " << usePreLoad << std::endl;
     int source_i;
@@ -208,8 +208,8 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool useP
             // std::cout << "While3" << std::endl;
 
         } while (pushed_flow > 0);
-        string filename = ("Flow_" + source + "---" + sink);
-        Graphviz::GenerateGraphViz(filename, usePreLoad);
+    string filename = ("Flow_" + source + "---" + sink);
+    Graphviz::GenerateDotandPNGFile(filename, usePreLoad, useTraffic);
     }
     return -1;
 };

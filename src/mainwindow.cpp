@@ -275,7 +275,7 @@ void MainWindow::generateGraph()
     {
         // User entered something and pressed OK
         Graphviz graphviz;
-        graphviz.GenerateGraphViz((filename + ".dot").toStdString(), false);
+        graphviz.GenerateDotandPNGFile((filename + ".dot").toStdString(), false, false);
         
 
     }
@@ -379,7 +379,7 @@ void MainWindow::runAlgorithmOne(Prompts &prompter)
     std::string sink = prompter.promptRouter(this, "Sink?");
     if (sink == "")
         return;
-    int result = SimulatorController::runDinics(source, sink, false, false);
+    int result = SimulatorController::runDinics(source, sink, false, false, true);
     std::cout << "Result: " << result << std::endl;
     showResults("Dinic's MaxFlow no preload", "Result: " + std::to_string(result));
 }

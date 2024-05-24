@@ -18,7 +18,7 @@
 
 using namespace std;
 
-void Graphviz::GenerateGraphViz(const string& filename, bool usePreLoad) {
+void Graphviz::GenerateDotandPNGFile(const string& filename, bool usePreLoad, bool useTraffic) {
     graphDataStruct& graphdata = SimulatorController::getGraphDataPointer();
     MainWindow& mainWindow = MainWindow::getInstance(); 
     
@@ -31,26 +31,22 @@ void Graphviz::GenerateGraphViz(const string& filename, bool usePreLoad) {
         cerr << "Error: Failed to open file " << filename << endl;
         return;
     }
-
     
     dotFile << "digraph G { \n" << endl;
     dotFile << "\t" << "graph [layout=neato];" << endl;
-    writeRouters(dotFile, graphdata.MappedRouterVector);
-    mainWindow.simulateProcessingTwo();
-    // writeTraffic(dotFile, trafficData);
-    mainWindow.simulateProcessingTwo();
-    // writePaths(dotFile, pathsData);
-    if(usePreLoad){
-        writeTraffic(dotFile, graphdata.Augmentedlinks, usePreLoad);
-    }else{
-        writeLinks(dotFile, graphdata.Augmentedlinks);
-        }
     
-    mainWindow.simulateProcessingTwo();
-    mainWindow.simulateProcessingTwo();
-    // writeLinkUtils(dotFile, linkUtilsData);    
-    dotFile << "}\n" << endl;
+    writeRouters(dotFile, graphdata.MappedRouterVector);
+    bool peaksetgraph = (filename == "NetworkDuringTheoreticPeak");
 
+    if(!useTraffic){
+        writeLinks(dotFile, graphdata.Augmentedlinks);
+    }
+    else{
+        writeTraffic(dotFile, graphdata.Augmentedlinks, usePreLoad, peaksetgraph);
+    }
+
+
+    dotFile << "}\n" << endl;
     dotFile.close();
     mainWindow.simulateProcessingTwo();
 
@@ -74,9 +70,13 @@ void Graphviz::writeRouters(ofstream& dotFile, vector<MappedRouter>& routervecto
 
 
 
-void Graphviz::writeTraffic(std::ofstream& dotFile, const std::vector<AugmentedLink>& linksData, bool usePreLoad) {
+void Graphviz::writeTraffic(std::ofstream& dotFile, const std::vector<AugmentedLink>& linksData, bool usePreLoad, bool PeaksetOnly) {
     for (const auto& AugmentedLink : linksData) {
-        dotFile << "\t" << AugmentedLink.linkStart << " -> " << AugmentedLink.linkEnd << " [label=" << AugmentedLink.getRemainingCapacity(AugmentedLink.start_, usePreLoad, false) << ", color=yellow];\n";
+        if(PeaksetOnly){
+            dotFile << "\t" << AugmentedLink.linkStart << " -> " << AugmentedLink.linkEnd << " [label=" << AugmentedLink.getRemainingCapacity(AugmentedLink.start_, usePreLoad, false) << ", color=brown];\n";
+        }else{
+            dotFile << "\t" << AugmentedLink.linkStart << " -> " << AugmentedLink.linkEnd << " [label=" << AugmentedLink.getRemainingCapacity(AugmentedLink.start_, usePreLoad, false) << ", color=darkblue];\n";
+        }
     }
 }
 
