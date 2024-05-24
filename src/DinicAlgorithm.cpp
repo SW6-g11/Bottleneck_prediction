@@ -13,8 +13,8 @@ DinicAlgorithm::DinicAlgorithm()
 
 void DinicAlgorithm::populateDinics(vector<AugmentedLink> &links, vector<MappedRouter> &routers, bool overwrite)
 {
-    // std::cout << "Populating" << std::endl;
-
+    std::cout << "Populating" << std::endl;
+    
     for (auto &link : links)
     {
         std::cout << "resetting" << std::endl;
