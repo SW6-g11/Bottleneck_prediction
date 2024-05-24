@@ -87,7 +87,9 @@ void MainWindow::openDirectory()
 
                 // Create an instance of the Graphmaker class
                 Graphmaker graphOne;
-
+                std::cout << "Directory path is: "<< directoryPathStdString << std::endl;
+                std::cout << "Day is: "<< day << std::endl;
+                std::cout << "Limit is: "<< limit << std::endl;
                 // Call processDataForDay with the directory path, day, and limit
                 graphOne.processDataForDay(directoryPathStdString, day, limit, SimulatorController::getGraphDataPointer());
                 // SimulatorController::addData(SimulatorController::getGraphDataPointer());
