@@ -5,8 +5,9 @@
 #include <map>
 #include <regex>
 #include <vector>
+#include "Networkmanipulator.h"
+#include "graphviz.h"
 #include "Path.h"
-#include <Networkmanipulator.h>
 
 graphDataStruct SimulatorController::graphData;
 DinicAlgorithm SimulatorController::dinicsInstance;
@@ -16,7 +17,7 @@ int SimulatorController::runDinics(const std::string source, const std::string s
     dinicsInstance.populateDinics(graphData.Augmentedlinks, graphData.MappedRouterVector, true);
 
     int result = dinicsInstance.compute_flow(source, sink, usePreLoad, isCalculatingMincut);
-    // std::cout << "Result: " << result << std::endl;
+    std::cout << "Result 2: " << result << std::endl;
     return result;
 }
 
@@ -25,13 +26,15 @@ graphDataStruct &SimulatorController::getGraphDataPointer()
     return graphData;
 }
 
-void SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(int amountPUV, int amountPaths, bool usePreLoad)
+vector<std::pair<std::string, int>> SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(int amountPUV, int amountPaths, bool usePreLoad)
 {
     std::cout << "DinicsOnBottlenecksNoAugmentedNetork true: " << true << std::endl;
     std::cout << "DinicsOnBottlenecksNoAugmentedNetork is asking for Preload?: " << usePreLoad << std::endl;
 
     std::vector<std::pair<std::string, Linkutils>> peakset;
     Networkmanipulator::findPeakUtilValues(amountPUV, peakset, getGraphDataPointer());
+    
+    Graphviz::GenerateGraphViz("NetworkDuringTheoreticPeak", usePreLoad);
     Networkmanipulator::reduceVector(peakset, amountPUV);
     vector<Paths> problempaths = Networkmanipulator::findLinksInPaths(peakset, amountPUV, getGraphDataPointer());
     Networkmanipulator::reduceVector(problempaths, amountPaths);
@@ -50,6 +53,7 @@ void SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(int amountPUV, in
     {
         std::cout << "Result: " << dinicsResult.first << ": " << dinicsResult.second << std::endl;
     }
+    return dinicsResults;
 }
 
 vector<pair<string, string>> SimulatorController::minCut(std::string source, std::string sink, bool usePreload)

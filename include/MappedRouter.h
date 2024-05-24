@@ -39,6 +39,8 @@ public:
         concatenatedResult.insert(concatenatedResult.end(), outputs.begin(), outputs.end());
         return concatenatedResult;
     }
+
+    std::string toString() const { return id; };
 };
 
 #endif
