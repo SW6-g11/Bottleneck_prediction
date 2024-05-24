@@ -12,11 +12,11 @@
 graphDataStruct SimulatorController::graphData;
 DinicAlgorithm SimulatorController::dinicsInstance;
 
-int SimulatorController::runDinics(const std::string source, const std::string sink, bool usePreLoad, bool isCalculatingMincut, bool useTraffic)
+int SimulatorController::runDinics(const std::string source, const std::string sink, bool usePreLoad, bool isCalculatingMincut)
 {
     dinicsInstance.populateDinics(graphData.Augmentedlinks, graphData.MappedRouterVector, true);
 
-    int result = dinicsInstance.compute_flow(source, sink, usePreLoad, isCalculatingMincut, useTraffic);
+    int result = dinicsInstance.compute_flow(source, sink, usePreLoad, isCalculatingMincut);
     std::cout << "Result 2: " << result << std::endl;
     return result;
 }
@@ -33,8 +33,7 @@ vector<std::pair<std::string, int>> SimulatorController::DinicsOnBottlenecksNoAu
 
     std::vector<std::pair<std::string, Linkutils>> peakset;
     Networkmanipulator::findPeakUtilValues(amountPUV, peakset, getGraphDataPointer());
-    
-    Graphviz::GenerateDotandPNGFile("NetworkDuringTheoreticPeak", true, true);
+
     Networkmanipulator::reduceVector(peakset, amountPUV);
     vector<Paths> problempaths = Networkmanipulator::findLinksInPaths(peakset, amountPUV, getGraphDataPointer());
     Networkmanipulator::reduceVector(problempaths, amountPaths);
@@ -47,7 +46,7 @@ vector<std::pair<std::string, int>> SimulatorController::DinicsOnBottlenecksNoAu
     {
         std::cout << "running dinics for the " << dinicscounter << " time" << std::endl;
         dinicscounter++;
-        dinicsResults.push_back(std::pair(Networkmanipulator::makeFingerPrint(path), runDinics(path.origin, path.destination, usePreLoad, false, true)));
+        dinicsResults.push_back(std::pair(Networkmanipulator::makeFingerPrint(path), runDinics(path.origin, path.destination, usePreLoad, false)));
     }
     for (const auto &dinicsResult : dinicsResults)
     {
@@ -58,7 +57,7 @@ vector<std::pair<std::string, int>> SimulatorController::DinicsOnBottlenecksNoAu
 
 vector<pair<string, string>> SimulatorController::minCut(std::string source, std::string sink, bool usePreload)
 {
-    int maxFlow = runDinics(source, sink, usePreload, true, true);
+    int maxFlow = runDinics(source, sink, usePreload, true);
     vector<MappedRouter> nodes = dinicsInstance.getNodes();
     vector<int> level = vector<int>(nodes.size(), -1);
     vector<pair<string, string>> minCut;

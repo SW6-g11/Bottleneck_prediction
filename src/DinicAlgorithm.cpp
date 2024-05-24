@@ -16,7 +16,7 @@ DinicAlgorithm::DinicAlgorithm()
 void DinicAlgorithm::populateDinics(vector<AugmentedLink> &links, vector<MappedRouter> &routers, bool overwrite)
 {
     std::cout << "Populating" << std::endl;
-    
+
     for (auto &link : links)
     {
         std::cout << "resetting" << std::endl;
@@ -89,7 +89,7 @@ bool DinicAlgorithm::getIndexOfSourceAndSink(int &indexSource, int &indexSink, s
     return true;
 }
 
-int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool usePreLoad, bool isCalculatingMincut, bool useTraffic)
+int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool usePreLoad, bool isCalculatingMincut)
 { // Compute the maximum flow with the Dinic's algorithm
     std::cout << "ComputeFLow is asking for Preload?: " << usePreLoad << std::endl;
     int source_i;
@@ -105,7 +105,7 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool useP
         std::cerr << "No nodes in dinics" << std::endl;
         return -1;
     }
-    
+
     int asd = 0;
     int result = 0;
     while (true)
@@ -166,7 +166,6 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool useP
                 std::cout << "Path to sink no longer exists, so return" << std::endl;
                 return result; // Path to sink no longer exists, so return
             }
-            
         }
 
         // Now perform DFS to push through the blocking flow
@@ -208,8 +207,6 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool useP
             // std::cout << "While3" << std::endl;
 
         } while (pushed_flow > 0);
-    string filename = ("Flow_" + source + "---" + sink);
-    Graphviz::GenerateDotandPNGFile(filename, usePreLoad, useTraffic);
     }
     return -1;
 };

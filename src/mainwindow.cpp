@@ -8,6 +8,7 @@
 #include "graphviz.h"
 #include "SearchableComboBox.h"
 #include "prompts.h"
+#include "Networkmanipulator.h"
 const bool skipQuery = false;
 
 // This gets calculated later
@@ -96,9 +97,9 @@ void MainWindow::openDirectory()
 
                 // Create an instance of the Graphmaker class
                 Graphmaker graphOne;
-                std::cout << "Directory path is: "<< directoryPathStdString << std::endl;
-                std::cout << "Day is: "<< day << std::endl;
-                std::cout << "Limit is: "<< limit << std::endl;
+                std::cout << "Directory path is: " << directoryPathStdString << std::endl;
+                std::cout << "Day is: " << day << std::endl;
+                std::cout << "Limit is: " << limit << std::endl;
                 // Call processDataForDay with the directory path, day, and limit
                 graphOne.processDataForDay(directoryPathStdString, day, limit, SimulatorController::getGraphDataPointer());
                 // SimulatorController::addData(SimulatorController::getGraphDataPointer());
@@ -108,21 +109,21 @@ void MainWindow::openDirectory()
     }
 }
 
-
-
 void MainWindow::openImage()
 {
     if (ui->radioButton_5->property("imagePath").toString().isEmpty())
     {
         QString filepath = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("All Files (*.*)"));
         string filePath = filepath.toStdString();
-        if (!filePath.empty()){
+        if (!filePath.empty())
+        {
             imageSaver(filePath);
         }
     }
 }
 
-void MainWindow::imageSaver(string filePath){
+void MainWindow::imageSaver(string filePath)
+{
     QString qFilePath = QString::fromStdString(filePath);
     QPixmap image(qFilePath);
     ui->label->setPixmap(image);
@@ -135,51 +136,62 @@ void MainWindow::imageSaver(string filePath){
     // Check if no radio button is currently checked
     if (!ui->radioButton->isChecked() && !ui->radioButton_2->isChecked() &&
         !ui->radioButton_3->isChecked() && !ui->radioButton_4->isChecked() &&
-        !ui->radioButton_5->isChecked()){
+        !ui->radioButton_5->isChecked())
+    {
         nextRadioButton = ui->radioButton; // If no radio button is checked, start from radio button 1
     }
-    else{
+    else
+    {
         // Otherwise, find the next available radio button
         QList<QRadioButton *> radioButtons = {ui->radioButton_2, ui->radioButton_3,
                                               ui->radioButton_4, ui->radioButton_5};
-        for (QRadioButton *radioButton : radioButtons){
-            if (!radioButton->isChecked()){
+        for (QRadioButton *radioButton : radioButtons)
+        {
+            if (!radioButton->isChecked())
+            {
                 nextRadioButton = radioButton;
-                        break;
+                break;
             }
         }
     }
     // Store the file path and size as properties of the radio button
-    if (nextRadioButton != nullptr){
+    if (nextRadioButton != nullptr)
+    {
         QString currentImagePath = nextRadioButton->property("imagePath").toString();
-        if (currentImagePath.isEmpty()){
+        if (currentImagePath.isEmpty())
+        {
             // No image associated, this radio button is available
             nextRadioButton->setProperty("imagePath", qFilePath);
             nextRadioButton->setProperty("imageSize", imageSize);
             nextRadioButton->setEnabled(true); // Enable the radio button
             nextRadioButton->setChecked(true); // Automatically check the radio button
         }
-        else{
+        else
+        {
             // Radio button already has an image associated, try finding the next available one
             QRadioButton *availableRadioButton = nullptr;
-            for (int i = 2; i <= 5; ++i){ 
+            for (int i = 2; i <= 5; ++i)
+            {
                 // Start checking from radio button 2
                 QString radioButtonName = QString("radioButton_%1").arg(i);
                 availableRadioButton = findChild<QRadioButton *>(radioButtonName);
                 // If the radio button is available, break out of the loop
-                if (availableRadioButton && !availableRadioButton->isChecked() && availableRadioButton->property("imagePath").toString().isEmpty()){
+                if (availableRadioButton && !availableRadioButton->isChecked() && availableRadioButton->property("imagePath").toString().isEmpty())
+                {
                     break;
                 }
             }
             // Check if an available radio button was found
-            if (availableRadioButton){
+            if (availableRadioButton)
+            {
                 // Assign the image path and size to the available radio button
                 availableRadioButton->setProperty("imagePath", qFilePath);
                 availableRadioButton->setProperty("imageSize", imageSize);
                 availableRadioButton->setEnabled(true); // Enable the radio button
                 availableRadioButton->setChecked(true); // Automatically check the radio button
             }
-            else{
+            else
+            {
                 // No available radio button found, display a message or handle accordingly
                 qDebug() << "No available radio button found.";
             }
@@ -202,7 +214,6 @@ QRadioButton *MainWindow::findNextAvailableRadioButton(QRadioButton *startRadioB
     // No available radio button found
     return nullptr;
 }
-
 
 void MainWindow::radioButtonClicked(bool checked)
 {
@@ -245,7 +256,8 @@ void MainWindow::radioButtonClicked(bool checked)
 void MainWindow::simulateProcessingOne()
 {
     int currentValue = ui->progressBar_1->value();
-    if (currentValue < 100) {
+    if (currentValue < 100)
+    {
         ui->progressBar_1->setValue(currentValue + 20);
     }
 }
@@ -253,8 +265,9 @@ void MainWindow::simulateProcessingOne()
 void MainWindow::simulateProcessingTwo()
 {
     int currentValue = ui->progressBar_2->value();
-    if (currentValue < 100) {
-    ui->progressBar_2->setValue(currentValue + 20);
+    if (currentValue < 100)
+    {
+        ui->progressBar_2->setValue(currentValue + 20);
     }
 }
 
@@ -274,10 +287,10 @@ void MainWindow::generateGraph()
     if (ok && !filename.isEmpty())
     {
         // User entered something and pressed OK
-        Graphviz graphviz;
-        graphviz.GenerateDotandPNGFile((filename + ".dot").toStdString(), false, false);
-        
-
+        Graphviz::GenerateDotandPNGFile((filename + ".dot").toStdString(), false, false);
+        std::unordered_map<std::string, Linkutils> peakSet = Networkmanipulator::findPeaks(SimulatorController::getGraphDataPointer());
+        Networkmanipulator::populateWithPeakValues(&SimulatorController::getGraphDataPointer().Augmentedlinks, peakSet);
+        Graphviz::GenerateDotandPNGFile("NetworkDuringTheoreticPeak", true, true);
     }
 }
 
@@ -379,7 +392,9 @@ void MainWindow::runAlgorithmOne(Prompts &prompter)
     std::string sink = prompter.promptRouter(this, "Sink?");
     if (sink == "")
         return;
-    int result = SimulatorController::runDinics(source, sink, false, false, true);
+    int result = SimulatorController::runDinics(source, sink, false, false);
+    string filename = ("Flow_" + source + "---" + sink);
+    Graphviz::GenerateDotandPNGFile(filename, false, true);
     std::cout << "Result: " << result << std::endl;
     showResults("Dinic's MaxFlow no preload", "Result: " + std::to_string(result));
 }
@@ -397,7 +412,6 @@ void MainWindow::runAlgorithmTwo(Prompts &prompter)
         amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, maxPUVandPaths, 1, &amountOK);
         amountPaths = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of Paths's wanted"), 1, 1, maxPUVandPaths, 1, &PUVOK);
     }
-
     auto dinicsResults = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, false);
     std::string compiledOut = "";
     for (const auto &dinicsResult : dinicsResults)
@@ -438,6 +452,8 @@ void MainWindow::runAlgorithmFour(Prompts &prompter)
         sink = prompter.promptRouter(this, "Sink?");
     }
     std::cout << "Processing" << std::endl;
+    string filename = ("Flow_" + source + "---" + sink);
+    Graphviz::GenerateDotandPNGFile(filename, false, true);
     SimulatorController::minCut("R1", "R4", true);
 }
 
