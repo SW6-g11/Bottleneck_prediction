@@ -5,11 +5,9 @@
 #include <map>
 #include <regex>
 #include <vector>
-#include "path.h"
 #include "Networkmanipulator.h"
 #include "graphviz.h"
-
-
+#include "Path.h"
 
 graphDataStruct SimulatorController::graphData;
 DinicAlgorithm SimulatorController::dinicsInstance;

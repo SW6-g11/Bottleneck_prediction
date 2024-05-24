@@ -1,6 +1,6 @@
 #include "graphviz.h"
 #include "graphmaker.h"
-#include "link.h"
+#include "Link.h"
 #include "Linkutils.h"
 #include "Path.h"
 #include "Router.h"

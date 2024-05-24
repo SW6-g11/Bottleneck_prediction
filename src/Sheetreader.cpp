@@ -15,7 +15,7 @@ template <>
 void SheetReader::readType(istringstream &iss, Linkutils &linkUtilsItem)
 {
     // cout << "type linkutils" << endl;
-    string timestamp, linkStart, linkEnd;
+    string timestamp, linkStart, linkEnd, avgUtilizationString;
     double avgUtilization;
     if (getline(iss, timestamp, ',') &&
         getline(iss, linkStart, ',') &&
