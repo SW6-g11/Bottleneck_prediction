@@ -96,19 +96,18 @@ void SheetReader::readType<Paths>(istringstream &iss, Paths &pathsItem)
     string buffer;
     std::smatch matches;
 
-
     // std::cout << "BeforeLoop" << std::endl;
 
     // Loop over each token separated by the tab character ('\t') in the input string stream (iss)
     while (getline(iss, buffer, '\t'))
     {
-        std::cout << "New path: " << std::endl;
+        // std::cout << "New path: " << std::endl;
         regex_search(buffer, matches, matcher);
         // Extract and assign the timestamp, origin, and destination from the matched groups
         pathsItem.timestamp = matches[1];
         pathsItem.origin = matches[2];
         pathsItem.destination = matches[3];
-        std::cout << "0: " << matches[0] << " 1: " << matches[1] << " 2: " << matches[2] << " 3: " << matches[3] << " 4: " << matches[4] << std::endl;
+        // std::cout << "0: " << matches[0] << " 1: " << matches[1] << " 2: " << matches[2] << " 3: " << matches[3] << " 4: " << matches[4] << std::endl;
         if (matches[4] == "")
             continue;
         std::stringstream ss(matches[4]);
@@ -118,7 +117,7 @@ void SheetReader::readType<Paths>(istringstream &iss, Paths &pathsItem)
             pathsItem.path.push_back(move(pathBuffer));
         }
         pathsItem.applyChanges();
-        std::cout << pathsItem.to_string() << std::endl;
+        // std::cout << pathsItem.to_string() << std::endl;
     }
 }
 

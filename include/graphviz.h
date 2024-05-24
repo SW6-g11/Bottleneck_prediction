@@ -29,5 +29,6 @@ private:
     static void GenerateImageFromDotFile(string dotFilename);
     static std::string convertDotToPngFilename(const std::string &dotFilename);
     static void InvertDotFile(const std::string &dotFilename);
+    static std::string doubleToString(double db);
 };
 #endif // GRAPHVIZ_H

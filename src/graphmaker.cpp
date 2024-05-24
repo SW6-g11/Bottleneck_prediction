@@ -30,10 +30,10 @@ void Graphmaker::processDataForDay(string &directoryPath, int day, int Limit, gr
     mainWindow.simulateProcessingOne();
 
     string routersFileName = directoryPath + "/routers.csv";
-    Readmaster.readData(routersFileName, graphdata.MappedRouterVector, true);
+    Readmaster.readData(routersFileName, graphdata.MappedRouterVector, false);
     mainWindow.simulateProcessingOne();
 
     string linksFileName = directoryPath + "/links.csv";
-    Readmaster.readData(linksFileName, graphdata.Augmentedlinks, true);
+    Readmaster.readData(linksFileName, graphdata.Augmentedlinks, false);
     mainWindow.simulateProcessingOne();
 };

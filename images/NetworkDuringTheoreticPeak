@@ -1,7 +1,6 @@
 digraph G { 
 
 	graph [layout=neato];
-	[pos="0,0!"];
 	R1000[pos="-44.037,40.2877!"];
 	R1001[pos="-38.2448,40.6757!"];
 	R1002[pos="-39.9359,38.3254!"];
@@ -3388,7 +3387,6 @@ digraph G {
 	R4383[pos="-48.7271,37.9744!"];
 	R4384[pos="-36.7792,40.5595!"];
 	R4385[pos="-44.8133,39.502!"];
-	 ->  [label=0, color=brown];
 	R1176 -> R1993 [label=985824, color=brown];
 	R1321 -> R3244 [label=934733, color=brown];
 	R3244 -> R1321 [label=989927, color=brown];

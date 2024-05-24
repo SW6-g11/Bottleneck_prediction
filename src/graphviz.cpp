@@ -10,6 +10,7 @@
 #include <fstream>
 #include <mainwindow.h>
 #include "SimulatorController.h"
+#include <algorithm>
 #include <QProcess>
 #include <QMessageBox>
 #include <QString>
@@ -75,25 +76,45 @@ std:
 
 void Graphviz::writeTraffic(std::ofstream &dotFile, const std::vector<AugmentedLink> &linksData, bool usePreLoad, bool PeaksetOnly)
 {
-    for (const auto &AugmentedLink : linksData)
+    for (const auto &augmentedLink : linksData)
     {
         if (PeaksetOnly)
         {
-            dotFile << "\t" << AugmentedLink.linkStart << " -> " << AugmentedLink.linkEnd << " [label=" << AugmentedLink.getRemainingCapacity(AugmentedLink.start_, usePreLoad, false) << ", color=brown];\n";
+            dotFile << "\t" << augmentedLink.linkStart << " -> " << augmentedLink.linkEnd << " [label=" << augmentedLink.getRemainingCapacity(augmentedLink.start_, usePreLoad, false) << ", color=brown];\n";
         }
         else
         {
-            dotFile << "\t" << AugmentedLink.linkStart << " -> " << AugmentedLink.linkEnd << " [label=" << AugmentedLink.getRemainingCapacity(AugmentedLink.start_, usePreLoad, false) << ", color=darkblue];\n";
+            dotFile << "\t" << augmentedLink.linkStart << " -> " << augmentedLink.linkEnd << " [label=" << augmentedLink.getRemainingCapacity(augmentedLink.start_, usePreLoad, false) << ", color=darkblue];\n";
         }
     }
 }
 
 void Graphviz::writeLinks(std::ofstream &dotFile, const std::vector<AugmentedLink> &linksData)
 {
-    for (const auto &AugmentedLink : linksData)
+    for (const auto &augmentedLink : linksData)
     {
-        dotFile << "\t" << AugmentedLink.linkStart << " -> " << AugmentedLink.linkEnd << " [label=" << AugmentedLink.capacity << ", color=green];\n";
+        dotFile << "\t" << augmentedLink.linkStart << " -> " << augmentedLink.linkEnd << " [label=" << doubleToString(augmentedLink.capacity) << ", color=green];\n";
     }
+}
+
+std::string Graphviz::doubleToString(double db)
+{
+    std::string temp = std::to_string(db);
+    std::replace(temp.begin(), temp.end(), ',', '.');
+
+    // Remove trailing zeros
+    size_t dotPos = temp.find('.');
+    if (dotPos != std::string::npos)
+    {
+        // Remove trailing zeros
+        temp.erase(temp.find_last_not_of('0') + 1);
+        // Remove trailing dot if it's the last character
+        if (temp.back() == '.')
+        {
+            temp.pop_back();
+        }
+    }
+    return temp;
 }
 
 void Graphviz::GenerateImageFromDotFile(string dotFilename)
