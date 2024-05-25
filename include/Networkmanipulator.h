@@ -23,12 +23,13 @@ public:
         vector.erase(vector.begin() + Y, vector.end());
     }
     static std::string makeFingerPrint(Paths link);
+    static void populateWithPeakValues(vector<AugmentedLink> *links, std::unordered_map<std::string, Linkutils> peakset);
+    static std::unordered_map<std::string, Linkutils> findPeaks(graphDataStruct &graphData);
 
 private:
     // void reducePathvector(std::unordered_map<std::string, Paths> &vec, int Y);
     static bool alphanumericCompare(const std::string &a, const std::string &b);
     static bool alphanumericCompareDecorator(const Paths a, const Paths b);
-    static std::unordered_map<std::string, Linkutils> findPeaks(graphDataStruct &graphData);
 
     // vector<T &> replaceByFingerPrint(std::string (SimulatorController::makeFingerPrintFunction)(T), T linkObj, vector<T>arr);
     static std::string makeFingerPrint(Linkutils LinkUtils);
@@ -39,5 +40,4 @@ private:
     // void AugmentNetworkbyTimeStamp(string timestamp, vector<Linkutils> &Linkutildata, vector<Linkutils> &AugmentedLinks);
 
     static string PathCorrector(Paths chaoticpath);
-    static void populateWithPeakValues(vector<AugmentedLink> *links, std::unordered_map<std::string, Linkutils> peakset);
 };

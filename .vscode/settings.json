@@ -104,6 +104,7 @@
 		"regex": "cpp",
 		"ranges": "cpp",
 		"text_encoding": "cpp",
-		"qmessagebox": "cpp"
+		"qmessagebox": "cpp",
+		"*.ipp": "cpp"
 	}
 }

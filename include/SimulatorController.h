@@ -11,7 +11,7 @@ class SimulatorController
 public:
     SimulatorController() = delete;
 
-    static int runDinics(const std::string startLink, const std::string endLink, bool usePreLoad, bool isCalculatingMincut, bool useTraffic);
+    static int runDinics(const std::string startLink, const std::string endLink, bool usePreLoad, bool isCalculatingMincut);
 
     static graphDataStruct &getGraphDataPointer();
 

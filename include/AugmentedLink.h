@@ -41,18 +41,27 @@ public:
 
     int getRemainingCapacity(int from, bool usePreLoad, bool isCalculatingMincut) const
     { // Gets the capacity of the edge if the originating vertex is `from`
-        // std::cout << "preload? " << usePreLoad << " capacity; " << capacity << " preload value: " << preload << " return: " << (preload ? capacity - preload - flow : capacity - flow) << std::endl;
+        
+        std::cout << this->to_string() << "| preload? " << usePreLoad << " capacity; " << capacity << " preload value: " << preload  << " flow: " << flow;
         if (isCalculatingMincut)
         {
             return 1 - flow;
         }
-        if (from == start_)
-        {
-            // std::cout << "From " << from << "=" << start_ << " start" << std::endl;
-            return (preload ? capacity - preload - flow : capacity - flow);
+        
+        int returnValue = capacity;
+        if(from == start_) {
+            returnValue -= flow;
+        } else {
+            returnValue = flow;
         }
+        if(usePreLoad) {
+            returnValue -= preload;
+        }
+        std::cout << " Return: " << returnValue << std::endl;
+        return returnValue;
+            // std::cout << "From " << from << "=" << start_ << " start" << std::endl;
+
         // std::cout << "From " << from << "!=" << start_ << " start" << std::endl;
-        return (preload ? flow - preload : flow);
     }
 
 
