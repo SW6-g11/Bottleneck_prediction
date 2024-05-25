@@ -35,7 +35,7 @@
      <rect>
       <x>10</x>
       <y>130</y>
-      <width>191</width>
+      <width>520</width>
       <height>261</height>
      </rect>
     </property>
@@ -47,12 +47,12 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>121</width>
+       <width>500</width>
        <height>21</height>
       </rect>
      </property>
      <property name="text">
-      <string>Run algorithm 1</string>
+      <string>Compute maxflow from Source A to Sink B (prompts) | No traffic on network </string>
      </property>
     </widget>
     <widget class="QCheckBox" name="checkBox_2">
@@ -60,12 +60,12 @@
       <rect>
        <x>10</x>
        <y>40</y>
-       <width>131</width>
+       <width>500</width>
        <height>21</height>
       </rect>
      </property>
      <property name="text">
-      <string>Run algorithm 2</string>
+      <string>Compute maxflow on Y paths flowing over X bottleneck links (PUV's) | No traffic</string>      
      </property>
     </widget>
     <widget class="QCheckBox" name="checkBox_3">
@@ -73,12 +73,12 @@
       <rect>
        <x>10</x>
        <y>70</y>
-       <width>121</width>
+       <width>500</width>
        <height>21</height>
       </rect>
      </property>
      <property name="text">
-      <string>Run algorithm 3</string>
+      <string>Compute maxflow on Y paths flowing over X bottleneck links (PUV's) | Peak traffic</string>
      </property>
     </widget>
     <widget class="QCheckBox" name="checkBox_4">
@@ -86,12 +86,12 @@
       <rect>
        <x>10</x>
        <y>100</y>
-       <width>121</width>
+       <width>500</width>
        <height>21</height>
       </rect>
      </property>
      <property name="text">
-      <string>Run algorithm 4</string>
+      <string>Find Minimum cut from Source A to Sink B</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_4">
