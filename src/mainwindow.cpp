@@ -404,7 +404,7 @@ void MainWindow::runAlgorithmTwo(Prompts &prompter)
     bool amountOK = !skipQuery;
     int amountPUV = 5;
     bool PUVOK = !skipQuery;
-    int amountPaths = 5;
+    int amountPaths = 2;
     bool responseOK = !skipQuery;
     std::string response = "";
     if (!skipQuery)
@@ -418,6 +418,7 @@ void MainWindow::runAlgorithmTwo(Prompts &prompter)
     {
         compiledOut += dinicsResult.first + ": " + std::to_string(dinicsResult.second) + "\n";
     }
+
     showResults("Dinic's Auto Preload OFF", compiledOut);
 }
 
@@ -452,9 +453,9 @@ void MainWindow::runAlgorithmFour(Prompts &prompter)
         sink = prompter.promptRouter(this, "Sink?");
     }
     std::cout << "Processing" << std::endl;
-    string filename = ("Flow_" + source + "---" + sink);
+    string filename = ("Mincut_" + source + "---" + sink);
     Graphviz::GenerateDotandPNGFile(filename, false, true);
-    SimulatorController::minCut("R1", "R4", true);
+    SimulatorController::minCut(source, sink, true);
 }
 
 //
