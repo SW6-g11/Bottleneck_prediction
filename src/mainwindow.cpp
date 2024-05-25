@@ -287,10 +287,10 @@ void MainWindow::generateGraph()
     if (ok && !filename.isEmpty())
     {
         // User entered something and pressed OK
-        Graphviz::GenerateDotandPNGFile((filename + ".dot").toStdString(), false, false);
+        Graphviz::GenerateDotandPNGFile((filename + ".dot").toStdString(), false, false, false);
         std::unordered_map<std::string, Linkutils> peakSet = Networkmanipulator::findPeaks(SimulatorController::getGraphDataPointer());
         Networkmanipulator::populateWithPeakValues(&SimulatorController::getGraphDataPointer().Augmentedlinks, peakSet);
-        Graphviz::GenerateDotandPNGFile("NetworkDuringTheoreticPeak", true, true);
+        Graphviz::GenerateDotandPNGFile("NetworkDuringTheoreticPeak", true, true, false);
     }
 }
 
@@ -394,7 +394,7 @@ void MainWindow::runAlgorithmOne(Prompts &prompter)
         return;
     int result = SimulatorController::runDinics(source, sink, false, false);
     string filename = ("Flow_" + source + "---" + sink);
-    Graphviz::GenerateDotandPNGFile(filename, false, true);
+    Graphviz::GenerateDotandPNGFile(filename, false, true, false);
     std::cout << "Result: " << result << std::endl;
     showResults("Dinic's MaxFlow no preload", "Result: " + std::to_string(result));
 }
@@ -412,7 +412,7 @@ void MainWindow::runAlgorithmTwo(Prompts &prompter)
         amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, maxPUVandPaths, 1, &amountOK);
         amountPaths = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of Paths's wanted"), 1, 1, maxPUVandPaths, 1, &PUVOK);
     }
-    auto dinicsResults = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, false);
+    auto dinicsResults = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, false, false);
     std::string compiledOut = "";
     for (const auto &dinicsResult : dinicsResults)
     {
@@ -434,7 +434,7 @@ void MainWindow::runAlgorithmThree(Prompts &prompter)
         amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, maxPUVandPaths, 1, &PUVOK);
         amountPaths = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of Paths's wanted"), 1, 1, maxPUVandPaths, 1, &amountOK);
     }
-    auto dinicsResults = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, true);
+    auto dinicsResults = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, true, true);
     std::string compiledOut = "";
     for (const auto &dinicsResult : dinicsResults)
     {
@@ -453,8 +453,7 @@ void MainWindow::runAlgorithmFour(Prompts &prompter)
         sink = prompter.promptRouter(this, "Sink?");
     }
     std::cout << "Processing" << std::endl;
-    string filename = ("Mincut_" + source + "---" + sink);
-    Graphviz::GenerateDotandPNGFile(filename, false, true);
+
     SimulatorController::minCut(source, sink, true);
 }
 

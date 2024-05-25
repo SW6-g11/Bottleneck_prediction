@@ -18,7 +18,7 @@ using namespace std;
 class Graphviz
 {
 public:
-    static void GenerateDotandPNGFile(const string &filename, bool usePreLoad, bool useTraffic);
+    static void GenerateDotandPNGFile(const string &filename, bool usePreLoad, bool useTraffic, bool mincut, std::optional<std::string> result = nullopt);
 
 private:
     static void writeRouters(ofstream &dotFile, vector<MappedRouter> &routervector);
@@ -30,5 +30,6 @@ private:
     static std::string convertDotToPngFilename(const std::string &dotFilename);
     static void InvertDotFile(const std::string &dotFilename);
     static std::string doubleToString(double db);
+    static void writeMincut(std::ofstream &dotFile, const std::vector<AugmentedLink> &linksData);
 };
 #endif // GRAPHVIZ_H

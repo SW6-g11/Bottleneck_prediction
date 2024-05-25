@@ -15,39 +15,43 @@
 #include <QMessageBox>
 #include <QString>
 #include <QStringList>
+#include <optional>
 
 using namespace std;
 
-void Graphviz::GenerateDotandPNGFile(const string &filename, bool usePreLoad, bool useTraffic)
+void Graphviz::GenerateDotandPNGFile(const string &filename, bool usePreLoad, bool useTraffic, bool mincut, std::optional<std::pair<std::string, int>> result)
 {
-    graphDataStruct &graphdata = SimulatorController::getGraphDataPointer();
     MainWindow &mainWindow = MainWindow::getInstance();
-
     string filePath = "../images/" + filename;
     ofstream dotFile(filePath);
+
+    graphDataStruct &graphdata = SimulatorController::getGraphDataPointer();
 
     if (!dotFile.is_open())
     {
         cerr << "Error: Failed to open file " << filename << endl;
         return;
     }
-
-    dotFile << "digraph G { \n"
-            << endl;
+    dotFile << "digraph G { \n"<< endl;
     dotFile << "\t" << "graph [layout=neato];" << endl;
-
     writeRouters(dotFile, graphdata.MappedRouterVector);
-    bool peaksetgraph = (filename == "NetworkDuringTheoreticPeak");
+    bool peaksetgraph = (filename == "NetworkDuringTheoreticPeak"); /// bruges kun til color
 
     if (!useTraffic)
     {
+        std::cout<<"graph is not using traffic!"<< endl;
         writeLinks(dotFile, graphdata.Augmentedlinks);
+    }
+    else if (mincut)
+    {
+        std::cout<<"graph is mincut true"<< endl;
+        writeMincut(dotFile, graphdata.Augmentedlinks);
     }
     else
     {
+        std::cout<<"graph is default: traffic, preload: "<<usePreLoad<< endl;
         writeTraffic(dotFile, graphdata.Augmentedlinks, usePreLoad, peaksetgraph);
     }
-
     dotFile << "}\n"
             << endl;
     dotFile.close();
@@ -58,10 +62,7 @@ void Graphviz::GenerateDotandPNGFile(const string &filename, bool usePreLoad, bo
         cerr << "Error: Failed to write to file " << filename << endl;
         return;
     }
-
     Graphviz::GenerateImageFromDotFile(filePath);
-
-    // mainWindow.openGraphvizImage(filePath);
 }
 
 void Graphviz::writeRouters(ofstream &dotFile, vector<MappedRouter> &routervector)
@@ -94,6 +95,13 @@ void Graphviz::writeLinks(std::ofstream &dotFile, const std::vector<AugmentedLin
     for (const auto &augmentedLink : linksData)
     {
         dotFile << "\t" << augmentedLink.linkStart << " -> " << augmentedLink.linkEnd << " [label=" << doubleToString(augmentedLink.capacity) << ", color=green];\n";
+    }
+}
+void Graphviz::writeMincut(std::ofstream &dotFile, const std::vector<AugmentedLink> &linksData)
+{
+    for (const auto &augmentedLink : linksData)
+    {
+        dotFile << "\t" << augmentedLink.linkStart << " -> " << augmentedLink.linkEnd << " [label=" << doubleToString(augmentedLink.getRemainingCapacity(augmentedLink.start_, false, true)) << ", color=purple];\n";
     }
 }
 
