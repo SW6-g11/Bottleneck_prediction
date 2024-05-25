@@ -140,13 +140,13 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool useP
                 for (const AugmentedLink *arc : nodes_[current_node_i].getOutputs()) // TODO: getOutputs or getInAndOutputs?
                 {
                     // std::cout << "arc: " << arc->toString() << std::endl;
-                    // std::cout << "ComputeFLow2 is asking for Preload?: " << usePreLoad << std::endl;
+                    std::cout << "ComputeFLow2 is asking for Preload?: " << usePreLoad << std::endl;
 
                     if (arc->getRemainingCapacity(current_node_i, usePreLoad, isCalculatingMincut) <= 0)
                     {
-                        std::cout << "Node capacity: " << arc->getRemainingCapacity(current_node_i, usePreLoad, isCalculatingMincut) << std::endl;
                         continue;
                     }
+                    std::cout << "Node capacity: " << arc->getRemainingCapacity(current_node_i, usePreLoad, isCalculatingMincut) << std::endl;
                     // std::cout << "For1" << std::endl;
 
                     int next_i = arc->get_dest(current_node_i);

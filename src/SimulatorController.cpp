@@ -18,6 +18,7 @@ int SimulatorController::runDinics(const std::string source, const std::string s
 
     int result = dinicsInstance.compute_flow(source, sink, usePreLoad, isCalculatingMincut);
     std::cout << "Result 2: " << result << std::endl;
+
     return result;
 }
 

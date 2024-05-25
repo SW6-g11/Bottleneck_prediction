@@ -6,6 +6,6 @@ if [ ! -d "$DIRECTORY" ]; then
 fi
 rm $DIRECTORY/$FILENAME
 cd $DIRECTORY
-cmake ..
+cmake ../tests
 make
 ./testing
