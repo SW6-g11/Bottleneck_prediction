@@ -56,9 +56,11 @@ vector<std::pair<std::string, int>> SimulatorController::DinicsOnBottlenecksNoAu
         dinicsResults.push_back(result);
         if (SimulatorController::UIEnabled)
         {
+            std::cout << "UI ENABLED" << std::endl;
             string filename = ("empty_" + std::to_string(!usePreLoad) + "_Flow_Path_" + path.origin + "---" + path.destination);
             Graphviz::GenerateDotandPNGFile(filename, usePreLoad, ShowtrafficinGraph, false, result.first);
         }
+        std::cout << "Over" << std::endl;
     }
     for (const auto &dinicsResult : dinicsResults)
     {
@@ -69,7 +71,7 @@ vector<std::pair<std::string, int>> SimulatorController::DinicsOnBottlenecksNoAu
 
 vector<pair<string, string>> SimulatorController::minCut(std::string source, std::string sink, bool usePreload)
 {
-    // int maxFlow = runDinics(source, sink, usePreload, true);
+    int maxFlow = runDinics(source, sink, usePreload, true);
     vector<MappedRouter> nodes = dinicsInstance.getNodes();
     vector<int> level = vector<int>(nodes.size(), -1);
     vector<pair<string, string>> minCut;

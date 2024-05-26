@@ -60,7 +60,7 @@ TEST_CASE("Algorithm 1 result", "[Alg1test]") {
     REQUIRE(SimulatorController::runDinics("R1", "R4", false, false) == 30);
 
     //Test Algorithm 2
-    auto result = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(5, 1, false);
+    auto result = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(5, 1, false, false);
     std::stringstream ss;
     for (const auto &res : result) {
         ss << res.first << res.second;
@@ -70,7 +70,7 @@ TEST_CASE("Algorithm 1 result", "[Alg1test]") {
     REQUIRE(resultString == "R1,R2,R4,R3,R7,R6,R86");
 
     //Test Algorithm 3
-    auto result2 = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(5, 1, true);
+    auto result2 = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(5, 1, true, true);
     std::stringstream ss2;
     for (const auto &res : result2) {
         ss2 << res.first << res.second;
@@ -81,6 +81,7 @@ TEST_CASE("Algorithm 1 result", "[Alg1test]") {
 
     //Manual reset
     SimulatorController::resetDinics();
+
 
     
 
@@ -93,6 +94,6 @@ TEST_CASE("Algorithm 1 result", "[Alg1test]") {
     }
     std::string resultString3 = ss3.str();
     std::cout << "resultString3: " << resultString3 << std::endl;
-    //REQUIRE(resultString3 == "R1 - R2\nR1 - R4");
+    REQUIRE(resultString3 == "R1 - R2\nR1 - R4\n");
 }
 

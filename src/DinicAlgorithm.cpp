@@ -4,6 +4,7 @@
 #include "graphviz.h"
 #include <iostream>
 #include <string>
+#include "SimulatorController.h"
 using namespace std;
 
 // constant to represent infinity
@@ -259,7 +260,9 @@ void DinicAlgorithm::findMinCut(string source, vector<int> &level, vector<pair<s
     {
         minCutForGraph.push_back(cut.first + "," + cut.second);
     }
-    Graphviz::GenerateDotandPNGFile(filename, false, true, true, path, minCutForGraph);
+    if(SimulatorController::UIEnabled) {
+        Graphviz::GenerateDotandPNGFile(filename, false, true, true, path, minCutForGraph);
+    }
     cout << "end of MinCut" << endl;
 }
 /*
