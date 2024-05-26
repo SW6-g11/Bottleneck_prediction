@@ -50,8 +50,9 @@ vector<std::pair<std::string, int>> SimulatorController::DinicsOnBottlenecksNoAu
         dinicscounter++;
         std::pair<std::string, int> result = std::pair(Networkmanipulator::makeFingerPrint(path), runDinics(path.origin, path.destination, usePreLoad, false));
         dinicsResults.push_back(result);
-        if(SimulatorController::UIEnabled){
-            string filename = ("empty_"+std::to_string(!usePreLoad)+ "_Flow_Path_" + path.origin + "---" + path.destination);
+        if (SimulatorController::UIEnabled)
+        {
+            string filename = ("empty_" + std::to_string(!usePreLoad) + "_Flow_Path_" + path.origin + "---" + path.destination);
             Graphviz::GenerateDotandPNGFile(filename, usePreLoad, ShowtrafficinGraph, false, result.first);
         }
     }
@@ -68,7 +69,8 @@ vector<pair<string, string>> SimulatorController::minCut(std::string source, std
     vector<MappedRouter> nodes = dinicsInstance.getNodes();
     vector<int> level = vector<int>(nodes.size(), -1);
     vector<pair<string, string>> minCut;
-    dinicsInstance.findMinCut(source, level, minCut);
+    std::string path = source + "," + sink;
+    dinicsInstance.findMinCut(source, level, minCut, path);
     cout << "Min Cut: " << endl;
     for (const auto &cut : minCut)
     {
