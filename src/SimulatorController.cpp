@@ -65,7 +65,7 @@ vector<std::pair<std::string, int>> SimulatorController::DinicsOnBottlenecksNoAu
 
 vector<pair<string, string>> SimulatorController::minCut(std::string source, std::string sink, bool usePreload)
 {
-    int maxFlow = runDinics(source, sink, usePreload, true);
+    // int maxFlow = runDinics(source, sink, usePreload, true);
     vector<MappedRouter> nodes = dinicsInstance.getNodes();
     vector<int> level = vector<int>(nodes.size(), -1);
     vector<pair<string, string>> minCut;
