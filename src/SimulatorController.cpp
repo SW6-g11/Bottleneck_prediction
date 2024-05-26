@@ -22,6 +22,10 @@ int SimulatorController::runDinics(const std::string source, const std::string s
     return result;
 }
 
+void SimulatorController::resetDinics() {
+    dinicsInstance.populateDinics(graphData.Augmentedlinks, graphData.MappedRouterVector, true);
+}
+
 graphDataStruct &SimulatorController::getGraphDataPointer()
 {
     return graphData;

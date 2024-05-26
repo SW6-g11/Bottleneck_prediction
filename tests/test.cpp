@@ -14,12 +14,30 @@ TEST_CASE("Algorithm 1 result", "[Alg1test]") {
     int limit = 0;
     SheetReader Readmaster(limit);
     graphDataStruct &graphData = SimulatorController::getGraphDataPointer();
+
+    //Test empty graphData
+    REQUIRE(graphData.linkUtilsData.size() == 0);
+    REQUIRE(graphData.trafficData.size() == 0);
+    REQUIRE(graphData.pathsData.size() == 0);
+    REQUIRE(graphData.MappedRouterVector.size() == 0);
+    REQUIRE(graphData.Augmentedlinks.size() == 0);
+
     Readmaster.readData(path + "/link-util-day" + to_string(day) + ".csv", graphData.linkUtilsData, false);
     Readmaster.readData(path + "/flow-traffic-day" + to_string(day) + ".csv", graphData.trafficData, false);
     Readmaster.readData(path + "/flow-paths-day" + to_string(day) + ".csv", graphData.pathsData, false);
     Readmaster.readData(path + "/routers.csv", graphData.MappedRouterVector, true);
     Readmaster.readData(path + "/links.csv", graphData.Augmentedlinks, true);
-                
+
+    //Test readData size
+    REQUIRE(graphData.linkUtilsData.size() == 71);
+    REQUIRE(graphData.trafficData.size() == 26);
+    REQUIRE(graphData.pathsData.size() == 116);
+    REQUIRE(graphData.MappedRouterVector.size() == 9);
+    REQUIRE(graphData.Augmentedlinks.size() == 24);
+
+    //Test line 13 of linkUtilsData
+    //REQUIRE(graphData.linkUtilsData[13].link == "");
+
     //Test Algorithm 1
     REQUIRE(SimulatorController::runDinics("R1", "R4", false, false) == 30);
 
@@ -43,11 +61,17 @@ TEST_CASE("Algorithm 1 result", "[Alg1test]") {
     std::cout << "resultString2: " << resultString2 << std::endl;
     REQUIRE(resultString2 == "R1,R2,R4,R3,R7,R6,R85");
 
+    //Manual reset
+    SimulatorController::resetDinics();
+
+    
+
     //Test Algorithm 4
-    auto result3 = SimulatorController::minCut("R1", "R4", false);
+    auto result3 = SimulatorController::minCut("R1", "R4", true);
+    std::cout << "rsult3.size_ " << result3.size() << std::endl;  
     std::stringstream ss3;
     for (const auto &res : result3) {
-        ss3 << res.first << res.second;
+        ss3 << res.first << " - " << res.second << "\n";
     }
     std::string resultString3 = ss3.str();
     std::cout << "resultString3: " << resultString3 << std::endl;

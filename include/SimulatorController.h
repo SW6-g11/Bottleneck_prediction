@@ -36,6 +36,8 @@ public:
 
     static vector<pair<string, string>> minCut(std::string source, std::string sink, bool usePreload);
 
+    static void resetDinics();
+
 private:
     static graphDataStruct graphData;
     static DinicAlgorithm dinicsInstance;

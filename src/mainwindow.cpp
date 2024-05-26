@@ -455,7 +455,15 @@ void MainWindow::runAlgorithmFour(Prompts &prompter)
     std::cout << "Processing" << std::endl;
     string filename = ("Mincut_" + source + "---" + sink);
     Graphviz::GenerateDotandPNGFile(filename, false, true);
-    SimulatorController::minCut(source, sink, true);
+    auto minCutResult = SimulatorController::minCut(source, sink, true);
+    std::stringstream ss;
+    for (const auto &cut : minCutResult)
+    {
+        ss << cut.first << " - " << cut.second << "\n";
+    }
+    std::string CompiledOut = ss.str();
+    std::cout << "MinCut:\n" << CompiledOut << std::endl;
+    showResults("MinCut from " + source + " to " + sink, CompiledOut);
 }
 
 //
