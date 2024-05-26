@@ -8,6 +8,7 @@
 #include "Sheetreader.h"
 
 TEST_CASE("Algorithm 1 result", "[Alg1test]") {
+    SimulatorController::UIEnabled = false;
     Graphmaker graphOne;
     std::string path = "/home/anders/Bottleneck_prediction/data/sampleSet";
     int day = 1;

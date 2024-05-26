@@ -211,7 +211,7 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool useP
     return -1;
 };
 
-void DinicAlgorithm::findMinCut(string source, vector<int> &level, vector<pair<string, string>> &minCut)
+void DinicAlgorithm::findMinCut(string source, vector<int> &level, vector<pair<string, string>> &minCut, std::optional<std::string> path)
 {
     cout << "Start of MinCut" << endl;
     int source_i;
@@ -253,6 +253,13 @@ void DinicAlgorithm::findMinCut(string source, vector<int> &level, vector<pair<s
             }
         }
     }
+    string filename = ("Mincut_from_" + source + "---");
+    vector<std::string> minCutForGraph;
+    for (const auto &cut : minCut)
+    {
+        minCutForGraph.push_back(cut.first + "," + cut.second);
+    }
+    Graphviz::GenerateDotandPNGFile(filename, false, true, true, path, minCutForGraph);
     cout << "end of MinCut" << endl;
 }
 /*

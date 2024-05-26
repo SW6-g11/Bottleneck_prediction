@@ -9,6 +9,8 @@
 class SimulatorController
 {
 public:
+    static bool UIEnabled;
+
     SimulatorController() = delete;
 
     static int runDinics(const std::string startLink, const std::string endLink, bool usePreLoad, bool isCalculatingMincut);
@@ -32,7 +34,7 @@ public:
         return result;
     }
 
-    static vector<std::pair<std::string, int>> DinicsOnBottlenecksNoAugmentedNetork(int amountPUV, int amountPaths, bool usePreLoad);
+    static vector<std::pair<std::string, int>> DinicsOnBottlenecksNoAugmentedNetork(int amountPUV, int amountPaths, bool usePreLoad, bool ShowtrafficinGraph);
 
     static vector<pair<string, string>> minCut(std::string source, std::string sink, bool usePreload);
 

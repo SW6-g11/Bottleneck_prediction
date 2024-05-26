@@ -28,8 +28,14 @@ void MappedRouter::populateMappedRouters(vector<AugmentedLink> &links, vector<Ma
 {
     std::sort(routers.begin(), routers.end(), compareRouters);
     std::cout << "Link Size: " << links.size() << std::endl;
+    for (auto &router : routers)
+    {
+        router.outputs.clear();
+        router.inputs.clear();
+    }
     for (auto &link : links)
     {
+
         /*const auto placeStart = std::lower_bound(routers.begin(), routers.end(), link.start, [](const AugmentedLink &a, const std::string &b)
                                                  { return a.start < b; });
         const auto placeEnd = std::lower_bound(routers.begin(), routers.end(), link.start,
