@@ -412,7 +412,7 @@ void MainWindow::runAlgorithmTwo(Prompts &prompter)
         amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, maxPUVandPaths, 1, &amountOK);
         amountPaths = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of Paths's wanted"), 1, 1, maxPUVandPaths, 1, &PUVOK);
     }
-    auto dinicsResults = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, false, false);
+    auto dinicsResults = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, false, true);
     std::string compiledOut = "";
     for (const auto &dinicsResult : dinicsResults)
     {
