@@ -418,7 +418,6 @@ void MainWindow::runAlgorithmTwo(Prompts &prompter)
     {
         compiledOut += dinicsResult.first + ": " + std::to_string(dinicsResult.second) + "\n";
     }
-
     showResults("Dinic's Auto Preload OFF", compiledOut);
 }
 
