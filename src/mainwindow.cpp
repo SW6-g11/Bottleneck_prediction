@@ -323,92 +323,92 @@ void showResults(std::string title, std::string message)
 
 void MainWindow::runAlgorithmOne(Prompts &prompter)
 {
-    simulateProcessingTwo(0);
+    simulateProcessingThree(0);
     std::cout << "ProcessingOne" << std::endl;
     // TODO: add preload prompt?
     std::cout << "ProcessingOne1" << std::endl;
     std::string source = prompter.promptRouter(this, "Source?");
     if (source == "")
         return;
-    simulateProcessingTwo(40);
+    simulateProcessingThree(40);
     std::string sink = prompter.promptRouter(this, "Sink?");
     if (sink == "")
         return;
     int result = SimulatorController::runDinics(source, sink, false, false);
     string filename = ("Flow_" + source + "---" + sink);
     Graphviz::GenerateDotandPNGFile(filename, false, true, false);
-    simulateProcessingTwo(40);
+    simulateProcessingThree(40);
     std::cout << "Result: " << result << std::endl;
     showResults("Dinic's MaxFlow no preload", "Result: " + std::to_string(result));
-    simulateProcessingTwo(20);
+    simulateProcessingThree(20);
 }
 
 void MainWindow::runAlgorithmTwo(Prompts &prompter)
 {
-    simulateProcessingTwo(0);
+    simulateProcessingThree(0);
     bool amountOK = !skipQuery;
     int amountPUV = 5;
     bool PUVOK = !skipQuery;
     int amountPaths = 2;
     bool responseOK = !skipQuery;
     std::string response = "";
-    simulateProcessingTwo(20);
+    simulateProcessingThree(20);
     if (!skipQuery)
     {
         amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, maxPUVandPaths, 1, &amountOK);
         amountPaths = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of Paths's wanted"), 1, 1, maxPUVandPaths, 1, &PUVOK);
     }
-    simulateProcessingTwo(40);
+    simulateProcessingThree(40);
     auto dinicsResults = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, false, true);
     std::string compiledOut = "";
     for (const auto &dinicsResult : dinicsResults)
     {
         compiledOut += dinicsResult.first + ": " + std::to_string(dinicsResult.second) + "\n";
     }
-    simulateProcessingTwo(40);
+    simulateProcessingThree(40);
     showResults("Dinic's Auto Preload OFF", compiledOut);
 }
 
 void MainWindow::runAlgorithmThree(Prompts &prompter)
 {
-    simulateProcessingTwo(0);
+    simulateProcessingThree(0);
     std::cout << "ProcessingThree" << std::endl;
     bool amountOK = !skipQuery;
     bool PUVOK = !skipQuery;
     int amountPUV = 5;
     int amountPaths = 5;
-    simulateProcessingTwo(10);
+    simulateProcessingThree(10);
     if (!skipQuery)
     {
         amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, maxPUVandPaths, 1, &PUVOK);
         amountPaths = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of Paths's wanted"), 1, 1, maxPUVandPaths, 1, &amountOK);
     }
     auto dinicsResults = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, true, true);
-    simulateProcessingTwo(50);
+    simulateProcessingThree(50);
     std::string compiledOut = "";
     for (const auto &dinicsResult : dinicsResults)
     {
         compiledOut += dinicsResult.first + ": " + std::to_string(dinicsResult.second) + "\n";
     }
-    simulateProcessingTwo(40);
+    simulateProcessingThree(40);
     showResults("Dinic's Auto Preload ON", compiledOut);
 }
 
 void MainWindow::runAlgorithmFour(Prompts &prompter)
 {
-    simulateProcessingTwo(0);
+    simulateProcessingThree(0);
     std::string source = "R1";
     std::string sink = "R4";
-    simulateProcessingTwo(30);
+    simulateProcessingThree(30);
     if (!skipQuery)
     {
         source = prompter.promptRouter(this, "Source?");
         sink = prompter.promptRouter(this, "Sink?");
     }
     std::cout << "Processing" << std::endl;
-    simulateProcessingTwo(30);
+    simulateProcessingThree(30);
     SimulatorController::minCut(source, sink, true);
-    simulateProcessingTwo(40);
+    simulateProcessingThree(40);
 }
 
 //
