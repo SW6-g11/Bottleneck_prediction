@@ -45,7 +45,6 @@ private slots:
     void openDirectory();
     void generateGraph();
     void openImage();
-    void runAlgorithms();
 
     void radioButtonClicked(bool checked);
 
