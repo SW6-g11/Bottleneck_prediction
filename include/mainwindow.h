@@ -11,6 +11,7 @@
 #include <QRadioButton>
 #include <QMessageBox>
 #include <QInputDialog>
+#include <QTextEdit>
 #include "graphDataStruct.h"
 #include "prompts.h"
 
@@ -28,6 +29,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    void addToTerminal(std::string input);
+    void clearTerminal();
 
     void imageSaver(string filePath);
     void simulateProcessingOne();
@@ -53,6 +56,7 @@ private:
     Ui::MainWindow *ui;
     QLabel *imageLabel;
     QProgressBar *progressBar;
+    QTextEdit *terminal;
 
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();

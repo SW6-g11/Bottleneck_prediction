@@ -23,7 +23,8 @@ int SimulatorController::runDinics(const std::string source, const std::string s
     return result;
 }
 
-void SimulatorController::resetDinics() {
+void SimulatorController::resetDinics()
+{
     dinicsInstance.populateDinics(graphData.Augmentedlinks, graphData.MappedRouterVector, true);
 }
 
@@ -45,6 +46,13 @@ vector<std::pair<std::string, int>> SimulatorController::DinicsOnBottlenecksNoAu
     Networkmanipulator::reduceVector(problempaths, amountPaths);
     std::cout << "ProblemPaths length: " << problempaths.size() << std::endl;
     int dinicscounter = 0;
+    /*
+    std::string problempathsString = "";
+    for (const auto &problemPath : problempaths)
+    {
+        problempathsString += problemPath.fingerprint + "\n";
+    }
+    */
 
     vector<std::pair<std::string, int>> dinicsResults;
     dinicsResults.reserve(problempaths.size());

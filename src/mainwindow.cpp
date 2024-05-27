@@ -45,6 +45,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->radioButton_4, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
     connect(ui->radioButton_5, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
 
+    terminal = ui->terminal;
+
+    addToTerminal("Ready to load data");
+
     // Initialize the QLabel with width and height set to 0
     ui->label->setFixedSize(0, 0);
     ui->progressBar_1->setValue(0);
@@ -67,6 +71,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::openDirectory()
 {
+    clearTerminal();
+    addToTerminal("Loading data...\nThe window will stop responding, be patient");
     // Open a directory dialog to select a directory
     std::string initialDir = "../data/sampleSet";
     if (!std::filesystem::exists(initialDir))
@@ -107,6 +113,8 @@ void MainWindow::openDirectory()
             }
         }
     }
+    clearTerminal();
+    addToTerminal("Done loading data");
 }
 
 void MainWindow::openImage()
@@ -296,6 +304,7 @@ void MainWindow::generateGraph()
 
 void MainWindow::runAlgorithms()
 {
+    clearTerminal();
     maxPUVandPaths = SimulatorController::getGraphDataPointer().MappedRouterVector.size();
 
     Prompts prompter = Prompts();
@@ -396,6 +405,7 @@ void MainWindow::runAlgorithmOne(Prompts &prompter)
     string filename = ("Flow_" + source + "---" + sink);
     Graphviz::GenerateDotandPNGFile(filename, false, true, false);
     std::cout << "Result: " << result << std::endl;
+    addToTerminal("Dinic's MaxFlow no preload - Result:\n" + std::to_string(result));
     showResults("Dinic's MaxFlow no preload", "Result: " + std::to_string(result));
 }
 
@@ -418,7 +428,7 @@ void MainWindow::runAlgorithmTwo(Prompts &prompter)
     {
         compiledOut += dinicsResult.first + ": " + std::to_string(dinicsResult.second) + "\n";
     }
-
+    addToTerminal("Dinic's Auto Preload OFF:\n" + compiledOut);
     showResults("Dinic's Auto Preload OFF", compiledOut);
 }
 
@@ -440,6 +450,7 @@ void MainWindow::runAlgorithmThree(Prompts &prompter)
     {
         compiledOut += dinicsResult.first + ": " + std::to_string(dinicsResult.second) + "\n";
     }
+    addToTerminal("Dinic's Auto Preload ON:\n" + compiledOut);
     showResults("Dinic's Auto Preload ON", compiledOut);
 }
 
@@ -454,11 +465,12 @@ void MainWindow::runAlgorithmFour(Prompts &prompter)
     }
     std::cout << "Processing" << std::endl;
     string filename = ("Mincut_" + source + "---" + sink);
+    addToTerminal("Processing MinCut");
     auto minCutResult = SimulatorController::minCut(source, sink, true);
     std::stringstream ss;
     vector<string> graphMinCut;
     for (const auto &cut : minCutResult)
-    {  
+    {
         graphMinCut.push_back(cut.first + "," + cut.second);
         ss << cut.first << " - " << cut.second << "\n";
     }
@@ -466,8 +478,23 @@ void MainWindow::runAlgorithmFour(Prompts &prompter)
     std::string CompiledOut = ss.str();
     std::cout << "MinCut:\n"
               << CompiledOut << std::endl;
+    addToTerminal("MinCut from " + source + " to " + sink + ":\n" + CompiledOut);
     showResults("MinCut from " + source + " to " + sink, CompiledOut);
 }
+
+void MainWindow::addToTerminal(std::string input)
+{
+    QString newText = QString::fromStdString(input);
+    if (!terminal->toPlainText().isEmpty())
+    {
+        newText.prepend("\n");
+    }
+    terminal->setPlainText(terminal->toPlainText() + newText);
+}
+void MainWindow::clearTerminal()
+{
+    terminal->setPlainText("");
+};
 
 //
 
