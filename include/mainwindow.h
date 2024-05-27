@@ -34,10 +34,10 @@ public:
     void simulateProcessingTwo();
     void simulateProcessingThree(int barValue);
     void runAlgorithmNoAugmentedNetwork();
-    void runAlgorithmOne(Prompts &prompter);
-    void runAlgorithmTwo(Prompts &prompter);
-    void runAlgorithmThree(Prompts &prompter);
-    void runAlgorithmFour(Prompts &prompter);
+    void runAlgorithmOne();
+    //void runAlgorithmTwo();
+    void runAlgorithmThree();
+    void runAlgorithmFour();
     std::string promptRouter();
     static MainWindow &getInstance();
 

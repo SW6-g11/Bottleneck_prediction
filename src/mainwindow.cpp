@@ -38,7 +38,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_3, &QPushButton::clicked, this, &MainWindow::openImage);
     connect(ui->pushButton_4, &QPushButton::clicked, this, &MainWindow::runAlgorithmFour);
     connect(ui->pushButton_5, &QPushButton::clicked, this, &MainWindow::runAlgorithmThree);
-    connect(ui->pushButton_6, &QPushButton::clicked, this, &MainWindow::runAlgorithmTwo);
     connect(ui->pushButton_7, &QPushButton::clicked, this, &MainWindow::runAlgorithmOne);
 
     // Connect checkbox state changed signal to the slot
@@ -144,11 +143,11 @@ void MainWindow::imageSaver(string filePath)
     // Check if no radio button is currently checked
     if (!ui->radioButton->isChecked() && !ui->radioButton_2->isChecked() &&
         !ui->radioButton_3->isChecked() && !ui->radioButton_4->isChecked() &&
-        !ui->radioButton_5->isChecked()&&
-        !ui->radioButton_6->isChecked()&&
-        !ui->radioButton_7->isChecked()&&
-        !ui->radioButton_8->isChecked()&&
-        !ui->radioButton_9->isChecked()&&
+        !ui->radioButton_5->isChecked() &&
+        !ui->radioButton_6->isChecked() &&
+        !ui->radioButton_7->isChecked() &&
+        !ui->radioButton_8->isChecked() &&
+        !ui->radioButton_9->isChecked() &&
         !ui->radioButton_10->isChecked())
     {
         nextRadioButton = ui->radioButton; // If no radio button is checked, start from radio button 1
@@ -321,8 +320,9 @@ void showResults(std::string title, std::string message)
     msgBox.exec();
 }
 
-void MainWindow::runAlgorithmOne(Prompts &prompter)
+void MainWindow::runAlgorithmOne()
 {
+    Prompts prompter = Prompts();
     simulateProcessingThree(0);
     std::cout << "ProcessingOne" << std::endl;
     // TODO: add preload prompt?
@@ -343,8 +343,9 @@ void MainWindow::runAlgorithmOne(Prompts &prompter)
     simulateProcessingThree(20);
 }
 
-void MainWindow::runAlgorithmTwo(Prompts &prompter)
+/*void MainWindow::runAlgorithmTwo()
 {
+    Prompts prompter = Prompts();
     simulateProcessingThree(0);
     bool amountOK = !skipQuery;
     int amountPUV = 5;
@@ -368,9 +369,10 @@ void MainWindow::runAlgorithmTwo(Prompts &prompter)
     simulateProcessingThree(40);
     showResults("Dinic's Auto Preload OFF", compiledOut);
 }
-
-void MainWindow::runAlgorithmThree(Prompts &prompter)
+*/
+void MainWindow::runAlgorithmThree()
 {
+    Prompts prompter = Prompts();
     simulateProcessingThree(0);
     std::cout << "ProcessingThree" << std::endl;
     bool amountOK = !skipQuery;
@@ -394,8 +396,9 @@ void MainWindow::runAlgorithmThree(Prompts &prompter)
     showResults("Dinic's Auto Preload ON", compiledOut);
 }
 
-void MainWindow::runAlgorithmFour(Prompts &prompter)
+void MainWindow::runAlgorithmFour()
 {
+    Prompts prompter = Prompts();
     simulateProcessingThree(0);
     std::string source = "R1";
     std::string sink = "R4";

@@ -36,7 +36,7 @@
       <x>10</x>
       <y>130</y>
       <width>191</width>
-      <height>381</height>
+      <height>271</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -46,7 +46,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>340</y>
+       <y>230</y>
        <width>118</width>
        <height>23</height>
       </rect>
@@ -62,7 +62,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>270</y>
+       <y>170</y>
        <width>151</width>
        <height>51</height>
       </rect>
@@ -79,7 +79,7 @@ from Source A to Sink B</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>190</y>
+       <y>90</y>
        <width>151</width>
        <height>71</height>
       </rect>
@@ -92,25 +92,6 @@ from Source A to Sink B</string>
 Y paths flowing over X 
 bottleneck links 
 (PUV's) | Peak traffic</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_6">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>90</y>
-       <width>151</width>
-       <height>91</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color:rgb(0, 165, 224)</string>
-     </property>
-     <property name="text">
-      <string>Compute maxflow 
-on Y paths flowing over X 
-bottleneck links 
-(PUV's) | No traffic</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_7">
@@ -166,7 +147,7 @@ to Sink B (prompts)
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>540</y>
+      <y>430</y>
       <width>121</width>
       <height>51</height>
      </rect>
@@ -182,7 +163,7 @@ to Sink B (prompts)
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>600</y>
+      <y>490</y>
       <width>118</width>
       <height>23</height>
      </rect>
@@ -198,7 +179,7 @@ to Sink B (prompts)
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>650</y>
+      <y>540</y>
       <width>191</width>
       <height>381</height>
      </rect>
