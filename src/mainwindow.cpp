@@ -52,7 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->radioButton_9, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
     connect(ui->radioButton_10, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
 
-    terminal = ui->terminal;
+    // terminal = ui->terminal;
 
     addToTerminal("Ready to load data");
 
@@ -294,7 +294,8 @@ void MainWindow::simulateProcessingTwo()
 void MainWindow::simulateProcessingThree(int barValue)
 {
     int currentValue = ui->progressBar_3->value();
-    if (currentValue == 100){
+    if (currentValue == 100)
+    {
         ui->progressBar_3->setValue(0);
     }
     ui->progressBar_3->setValue(currentValue + barValue);

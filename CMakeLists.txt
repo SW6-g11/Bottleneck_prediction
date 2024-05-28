@@ -65,7 +65,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(catch2)
 
-# Test sources (tests)
+#Test sources (tests)
 file(GLOB_RECURSE TEST_SOURCES
     "${CMAKE_SOURCE_DIR}/tests/*.cpp"
 )

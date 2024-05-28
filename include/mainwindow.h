@@ -31,7 +31,7 @@ class MainWindow : public QMainWindow
 public:
     void addToTerminal(std::string input);
     void clearTerminal();
-    
+
     void imageSaver(string filePath);
     void simulateProcessingOne();
     void simulateProcessingTwo();

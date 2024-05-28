@@ -352,19 +352,6 @@ to Sink B (prompts)
    </property>
   </action>
  </widget>
- <widget class="QTextEdit" name="terminal">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>800</y>
-      <width>300</width>
-      <height>100</height>
-     </rect>
-    </property>
-    <property name="readOnly">
-      <bool>true</bool>
-    </property>
-  </widget>
  <resources/>
  <connections/>
 </ui>
