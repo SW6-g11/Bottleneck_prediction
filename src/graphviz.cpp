@@ -36,6 +36,7 @@ void Graphviz::GenerateDotandPNGFile(const string &filename, bool usePreLoad, bo
         cout << "no result passed" << endl;
     }
     MainWindow &mainWindow = MainWindow::getInstance();
+    mainWindow.simulateProcessingTwo();
     string filePath = folder + filename;
     ofstream dotFile(filePath);
 
@@ -51,7 +52,7 @@ void Graphviz::GenerateDotandPNGFile(const string &filename, bool usePreLoad, bo
     dotFile << "\t" << "graph [layout=neato];" << endl;
     writeRouters(dotFile, graphdata.MappedRouterVector, result);
     bool peaksetgraph = (filename == "NetworkDuringTheoreticPeak"); /// bruges kun til color
-
+    mainWindow.simulateProcessingTwo();
     if (!useTraffic)
     {
         std::cout << "graph is not using traffic!" << endl;
@@ -78,6 +79,7 @@ void Graphviz::GenerateDotandPNGFile(const string &filename, bool usePreLoad, bo
         return;
     }
     Graphviz::GenerateImageFromDotFile(filePath);
+    mainWindow.simulateProcessingTwo();
 }
 
 void Graphviz::writeRouters(ofstream &dotFile, vector<MappedRouter> &routervector, std::optional<string> minCutTarget)
