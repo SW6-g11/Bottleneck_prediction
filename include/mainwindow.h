@@ -28,14 +28,13 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-
     void imageSaver(string filePath);
     void simulateProcessingOne();
     void simulateProcessingTwo();
     void simulateProcessingThree(int barValue);
     void runAlgorithmNoAugmentedNetwork();
     void runAlgorithmOne();
-    //void runAlgorithmTwo();
+    // void runAlgorithmTwo();
     void runAlgorithmThree();
     void runAlgorithmFour();
     std::string promptRouter();
@@ -63,5 +62,6 @@ private:
     graphDataStruct graphdata;
 
     static MainWindow *instance;
+    Prompts prompter = Prompts();
 };
 #endif // MAINWINDOW_H
