@@ -36,7 +36,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::openDirectory);
     connect(ui->pushButton_2, &QPushButton::clicked, this, &MainWindow::generateGraph);
     connect(ui->pushButton_3, &QPushButton::clicked, this, &MainWindow::openImage);
-    connect(ui->pushButton_4, &QPushButton::clicked, this, &MainWindow::runAlgorithms);
+    connect(ui->pushButton_4, &QPushButton::clicked, this, &MainWindow::runAlgorithmFour);
+    connect(ui->pushButton_5, &QPushButton::clicked, this, &MainWindow::runAlgorithmThree);
+    connect(ui->pushButton_7, &QPushButton::clicked, this, &MainWindow::runAlgorithmOne);
 
     // Connect checkbox state changed signal to the slot
     connect(ui->radioButton, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
@@ -44,6 +46,11 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->radioButton_3, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
     connect(ui->radioButton_4, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
     connect(ui->radioButton_5, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
+    connect(ui->radioButton_6, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
+    connect(ui->radioButton_7, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
+    connect(ui->radioButton_8, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
+    connect(ui->radioButton_9, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
+    connect(ui->radioButton_10, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
 
     terminal = ui->terminal;
 
@@ -119,7 +126,7 @@ void MainWindow::openDirectory()
 
 void MainWindow::openImage()
 {
-    if (ui->radioButton_5->property("imagePath").toString().isEmpty())
+    if (ui->radioButton_10->property("imagePath").toString().isEmpty())
     {
         QString filepath = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("All Files (*.*)"));
         string filePath = filepath.toStdString();
@@ -144,7 +151,12 @@ void MainWindow::imageSaver(string filePath)
     // Check if no radio button is currently checked
     if (!ui->radioButton->isChecked() && !ui->radioButton_2->isChecked() &&
         !ui->radioButton_3->isChecked() && !ui->radioButton_4->isChecked() &&
-        !ui->radioButton_5->isChecked())
+        !ui->radioButton_5->isChecked() &&
+        !ui->radioButton_6->isChecked() &&
+        !ui->radioButton_7->isChecked() &&
+        !ui->radioButton_8->isChecked() &&
+        !ui->radioButton_9->isChecked() &&
+        !ui->radioButton_10->isChecked())
     {
         nextRadioButton = ui->radioButton; // If no radio button is checked, start from radio button 1
     }
@@ -152,7 +164,7 @@ void MainWindow::imageSaver(string filePath)
     {
         // Otherwise, find the next available radio button
         QList<QRadioButton *> radioButtons = {ui->radioButton_2, ui->radioButton_3,
-                                              ui->radioButton_4, ui->radioButton_5};
+                                              ui->radioButton_4, ui->radioButton_5, ui->radioButton_6, ui->radioButton_7, ui->radioButton_8, ui->radioButton_9, ui->radioButton_10};
         for (QRadioButton *radioButton : radioButtons)
         {
             if (!radioButton->isChecked())
@@ -178,7 +190,7 @@ void MainWindow::imageSaver(string filePath)
         {
             // Radio button already has an image associated, try finding the next available one
             QRadioButton *availableRadioButton = nullptr;
-            for (int i = 2; i <= 5; ++i)
+            for (int i = 2; i <= 10; ++i)
             {
                 // Start checking from radio button 2
                 QString radioButtonName = QString("radioButton_%1").arg(i);
@@ -210,7 +222,7 @@ void MainWindow::imageSaver(string filePath)
 QRadioButton *MainWindow::findNextAvailableRadioButton(QRadioButton *startRadioButton)
 {
     // Iterate over the radio buttons starting from the given one
-    QList<QRadioButton *> radioButtons = {ui->radioButton_2, ui->radioButton_3, ui->radioButton_4, ui->radioButton_5};
+    QList<QRadioButton *> radioButtons = {ui->radioButton_2, ui->radioButton_3, ui->radioButton_4, ui->radioButton_5, ui->radioButton_6, ui->radioButton_7, ui->radioButton_8, ui->radioButton_9, ui->radioButton_10};
     for (QRadioButton *radioButton : radioButtons)
     {
         // If the radio button is not checked, it's available for loading an image
@@ -282,10 +294,10 @@ void MainWindow::simulateProcessingTwo()
 void MainWindow::simulateProcessingThree(int barValue)
 {
     int currentValue = ui->progressBar_3->value();
-    if (currentValue < 100)
-    {
-        ui->progressBar_3->setValue(currentValue + barValue);
+    if (currentValue == 100){
+        ui->progressBar_3->setValue(0);
     }
+    ui->progressBar_3->setValue(currentValue + barValue);
 }
 
 void MainWindow::generateGraph()
@@ -302,82 +314,6 @@ void MainWindow::generateGraph()
     }
 }
 
-void MainWindow::runAlgorithms()
-{
-    clearTerminal();
-    maxPUVandPaths = SimulatorController::getGraphDataPointer().MappedRouterVector.size();
-
-    Prompts prompter = Prompts();
-    ui->progressBar_3->setValue(0);
-    ui->pushButton_4->setEnabled(false);
-    QList<QCheckBox *> checkboxes = findChildren<QCheckBox *>();
-    for (QCheckBox *checkbox : checkboxes)
-    {
-        checkbox->setEnabled(false);
-    }
-
-    int checkedCount_ = 0;
-    int barValue = 100;
-    for (QCheckBox *checkbox : checkboxes)
-    {
-        if (checkbox->isChecked())
-        {
-            checkedCount_++;
-        }
-    }
-    checkedCount = checkedCount_;
-    if (checkedCount == 0)
-    {
-        ui->pushButton_4->setEnabled(true);
-        for (QCheckBox *checkbox : checkboxes)
-        {
-            checkbox->setEnabled(true);
-        }
-        return;
-    }
-    if (checkedCount != 0)
-    {
-        barValue = 100 / checkedCount;
-    }
-
-    if (ui->checkBox->isChecked())
-    {
-        // TODO: should prompt for router inputs! function only used to run dinics on specific routers
-        //   to find maxflow between these routers, when no toher traffic is on the network.
-        runAlgorithmOne(prompter);
-        // simulateProcessingTwo(barValue);
-    }
-
-    if (ui->checkBox_2->isChecked())
-    {
-        runAlgorithmTwo(prompter);
-        // simulateProcessingTwo(barValue);
-    }
-
-    if (ui->checkBox_3->isChecked())
-    {
-        runAlgorithmThree(prompter);
-        // simulateProcessingTwo(barValue);
-    }
-
-    if (ui->checkBox_4->isChecked())
-    {
-        runAlgorithmFour(prompter);
-        // simulateProcessingTwo(barValue);
-    }
-
-    if (ui->progressBar_3->value() != 100)
-    {
-        ui->progressBar_3->setValue(100);
-    }
-
-    ui->pushButton_4->setEnabled(true);
-    for (QCheckBox *checkbox : checkboxes)
-    {
-        checkbox->setEnabled(true);
-    }
-}
-
 void showResults(std::string title, std::string message)
 {
     QMessageBox msgBox;
@@ -390,38 +326,46 @@ void showResults(std::string title, std::string message)
     msgBox.exec();
 }
 
-void MainWindow::runAlgorithmOne(Prompts &prompter)
+void MainWindow::runAlgorithmOne()
 {
+    simulateProcessingThree(0);
     std::cout << "ProcessingOne" << std::endl;
     // TODO: add preload prompt?
     std::cout << "ProcessingOne1" << std::endl;
     std::string source = prompter.promptRouter(this, "Source?");
     if (source == "")
         return;
+    simulateProcessingThree(40);
     std::string sink = prompter.promptRouter(this, "Sink?");
     if (sink == "")
         return;
     int result = SimulatorController::runDinics(source, sink, false, false);
     string filename = ("Flow_" + source + "---" + sink);
     Graphviz::GenerateDotandPNGFile(filename, false, true, false);
+    simulateProcessingThree(40);
     std::cout << "Result: " << result << std::endl;
     addToTerminal("Dinic's MaxFlow no preload - Result:\n" + std::to_string(result));
     showResults("Dinic's MaxFlow no preload", "Result: " + std::to_string(result));
+    simulateProcessingThree(20);
 }
 
-void MainWindow::runAlgorithmTwo(Prompts &prompter)
+/*void MainWindow::runAlgorithmTwo()
 {
+    Prompts prompter = Prompts();
+    simulateProcessingThree(0);
     bool amountOK = !skipQuery;
     int amountPUV = 5;
     bool PUVOK = !skipQuery;
     int amountPaths = 2;
     bool responseOK = !skipQuery;
     std::string response = "";
+    simulateProcessingThree(20);
     if (!skipQuery)
     {
         amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, maxPUVandPaths, 1, &amountOK);
         amountPaths = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of Paths's wanted"), 1, 1, maxPUVandPaths, 1, &PUVOK);
     }
+    simulateProcessingThree(40);
     auto dinicsResults = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, false, true);
     std::string compiledOut = "";
     for (const auto &dinicsResult : dinicsResults)
@@ -429,41 +373,52 @@ void MainWindow::runAlgorithmTwo(Prompts &prompter)
         compiledOut += dinicsResult.first + ": " + std::to_string(dinicsResult.second) + "\n";
     }
     addToTerminal("Dinic's Auto Preload OFF:\n" + compiledOut);
+    simulateProcessingThree(40);
+
     showResults("Dinic's Auto Preload OFF", compiledOut);
 }
-
-void MainWindow::runAlgorithmThree(Prompts &prompter)
+*/
+void MainWindow::runAlgorithmThree()
 {
+    Prompts prompter = Prompts();
+    simulateProcessingThree(0);
     std::cout << "ProcessingThree" << std::endl;
     bool amountOK = !skipQuery;
     bool PUVOK = !skipQuery;
     int amountPUV = 5;
     int amountPaths = 5;
+    simulateProcessingThree(10);
     if (!skipQuery)
     {
         amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, maxPUVandPaths, 1, &PUVOK);
         amountPaths = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of Paths's wanted"), 1, 1, maxPUVandPaths, 1, &amountOK);
     }
     auto dinicsResults = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, true, true);
+    simulateProcessingThree(50);
     std::string compiledOut = "";
     for (const auto &dinicsResult : dinicsResults)
     {
         compiledOut += dinicsResult.first + ": " + std::to_string(dinicsResult.second) + "\n";
     }
     addToTerminal("Dinic's Auto Preload ON:\n" + compiledOut);
+    simulateProcessingThree(40);
+
     showResults("Dinic's Auto Preload ON", compiledOut);
 }
 
-void MainWindow::runAlgorithmFour(Prompts &prompter)
+void MainWindow::runAlgorithmFour()
 {
+    simulateProcessingThree(0);
     std::string source = "R1";
     std::string sink = "R4";
+    simulateProcessingThree(30);
     if (!skipQuery)
     {
         source = prompter.promptRouter(this, "Source?");
         sink = prompter.promptRouter(this, "Sink?");
     }
     std::cout << "Processing" << std::endl;
+
     string filename = ("Mincut_" + source + "---" + sink);
     addToTerminal("Processing MinCut");
     auto minCutResult = SimulatorController::minCut(source, sink, true);
@@ -491,6 +446,7 @@ void MainWindow::addToTerminal(std::string input)
     }
     terminal->setPlainText(terminal->toPlainText() + newText);
 }
+
 void MainWindow::clearTerminal()
 {
     terminal->setPlainText("");

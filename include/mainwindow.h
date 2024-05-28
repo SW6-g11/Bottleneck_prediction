@@ -31,16 +31,16 @@ class MainWindow : public QMainWindow
 public:
     void addToTerminal(std::string input);
     void clearTerminal();
-
+    
     void imageSaver(string filePath);
     void simulateProcessingOne();
     void simulateProcessingTwo();
     void simulateProcessingThree(int barValue);
     void runAlgorithmNoAugmentedNetwork();
-    void runAlgorithmOne(Prompts &prompter);
-    void runAlgorithmTwo(Prompts &prompter);
-    void runAlgorithmThree(Prompts &prompter);
-    void runAlgorithmFour(Prompts &prompter);
+    void runAlgorithmOne();
+    // void runAlgorithmTwo();
+    void runAlgorithmThree();
+    void runAlgorithmFour();
     std::string promptRouter();
     static MainWindow &getInstance();
 
@@ -48,7 +48,6 @@ private slots:
     void openDirectory();
     void generateGraph();
     void openImage();
-    void runAlgorithms();
 
     void radioButtonClicked(bool checked);
 
@@ -68,5 +67,6 @@ private:
     graphDataStruct graphdata;
 
     static MainWindow *instance;
+    Prompts prompter = Prompts();
 };
 #endif // MAINWINDOW_H

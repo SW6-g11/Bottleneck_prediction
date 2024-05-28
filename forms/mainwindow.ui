@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1200</width>
-    <height>800</height>
+    <height>1080</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,86 +35,18 @@
      <rect>
       <x>10</x>
       <y>130</y>
-      <width>520</width>
-      <height>261</height>
+      <width>191</width>
+      <height>271</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color:rgb(50, 203, 255)</string>
     </property>
-    <widget class="QCheckBox" name="checkBox">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>500</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Compute maxflow from Source A to Sink B (prompts) | No traffic on network </string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="checkBox_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>40</y>
-       <width>500</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Compute maxflow on Y paths flowing over X bottleneck links (PUV's) | No traffic</string>      
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="checkBox_3">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>70</y>
-       <width>500</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Compute maxflow on Y paths flowing over X bottleneck links (PUV's) | Peak traffic</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="checkBox_4">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>100</y>
-       <width>500</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Find Minimum cut from Source A to Sink B</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_4">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>130</y>
-       <width>121</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color:rgb(0, 165, 224)</string>
-     </property>
-     <property name="text">
-      <string>Run</string>
-     </property>
-    </widget>
     <widget class="QProgressBar" name="progressBar_3">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>190</y>
+       <y>230</y>
        <width>118</width>
        <height>23</height>
       </rect>
@@ -124,6 +56,61 @@
      </property>
      <property name="value">
       <number>0</number>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>170</y>
+       <width>151</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgb(0, 165, 224)</string>
+     </property>
+     <property name="text">
+      <string>Find Minimum cut 
+from Source A to Sink B</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_5">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>151</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgb(0, 165, 224)</string>
+     </property>
+     <property name="text">
+      <string>Compute maxflow on 
+Y paths flowing over X 
+bottleneck links 
+(PUV's) | Peak traffic</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_7">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>151</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgb(0, 165, 224)</string>
+     </property>
+     <property name="text">
+      <string>Compute maxflow
+from Source A
+to Sink B (prompts) 
+|No traffic on network </string>
      </property>
     </widget>
    </widget>
@@ -160,7 +147,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>420</y>
+      <y>430</y>
       <width>121</width>
       <height>51</height>
      </rect>
@@ -176,7 +163,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>480</y>
+      <y>490</y>
       <width>118</width>
       <height>23</height>
      </rect>
@@ -192,9 +179,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>530</y>
+      <y>540</y>
       <width>191</width>
-      <height>241</height>
+      <height>381</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -269,7 +256,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>170</y>
+       <y>320</y>
        <width>121</width>
        <height>51</height>
       </rect>
@@ -281,6 +268,71 @@
       <string>Load Image</string>
      </property>
     </widget>
+    <widget class="QRadioButton" name="radioButton_6">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>160</y>
+       <width>89</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Image 6</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_7">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>190</y>
+       <width>89</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Image 7</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_8">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>220</y>
+       <width>89</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Image 8</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_9">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>250</y>
+       <width>89</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Image 9</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_10">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>280</y>
+       <width>89</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Image 10</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -288,8 +340,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>2570</width>
-     <height>17</height>
+     <width>1200</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>
@@ -300,6 +352,19 @@
    </property>
   </action>
  </widget>
+ <widget class="QTextEdit" name="terminal">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>800</y>
+      <width>300</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+      <bool>true</bool>
+    </property>
+  </widget>
  <resources/>
  <connections/>
 </ui>
