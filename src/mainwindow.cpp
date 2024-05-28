@@ -51,8 +51,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->radioButton_8, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
     connect(ui->radioButton_9, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
     connect(ui->radioButton_10, &QRadioButton::clicked, this, &MainWindow::radioButtonClicked);
-
-    // terminal = ui->terminal;
+    terminal = ui->terminal;
 
     addToTerminal("Ready to load data");
 
