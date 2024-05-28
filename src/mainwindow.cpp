@@ -38,7 +38,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_3, &QPushButton::clicked, this, &MainWindow::openImage);
     connect(ui->pushButton_4, &QPushButton::clicked, this, &MainWindow::runAlgorithmFour);
     connect(ui->pushButton_5, &QPushButton::clicked, this, &MainWindow::runAlgorithmThree);
-    connect(ui->pushButton_6, &QPushButton::clicked, this, &MainWindow::runAlgorithmTwo);
     connect(ui->pushButton_7, &QPushButton::clicked, this, &MainWindow::runAlgorithmOne);
 
     // Connect checkbox state changed signal to the slot
@@ -144,11 +143,11 @@ void MainWindow::imageSaver(string filePath)
     // Check if no radio button is currently checked
     if (!ui->radioButton->isChecked() && !ui->radioButton_2->isChecked() &&
         !ui->radioButton_3->isChecked() && !ui->radioButton_4->isChecked() &&
-        !ui->radioButton_5->isChecked()&&
-        !ui->radioButton_6->isChecked()&&
-        !ui->radioButton_7->isChecked()&&
-        !ui->radioButton_8->isChecked()&&
-        !ui->radioButton_9->isChecked()&&
+        !ui->radioButton_5->isChecked() &&
+        !ui->radioButton_6->isChecked() &&
+        !ui->radioButton_7->isChecked() &&
+        !ui->radioButton_8->isChecked() &&
+        !ui->radioButton_9->isChecked() &&
         !ui->radioButton_10->isChecked())
     {
         nextRadioButton = ui->radioButton; // If no radio button is checked, start from radio button 1
@@ -300,10 +299,10 @@ void MainWindow::generateGraph()
     if (ok && !filename.isEmpty())
     {
         // User entered something and pressed OK
-        Graphviz::GenerateDotandPNGFile((filename + ".dot").toStdString(), false, false);
+        Graphviz::GenerateDotandPNGFile((filename + ".dot").toStdString(), false, false, false);
         std::unordered_map<std::string, Linkutils> peakSet = Networkmanipulator::findPeaks(SimulatorController::getGraphDataPointer());
         Networkmanipulator::populateWithPeakValues(&SimulatorController::getGraphDataPointer().Augmentedlinks, peakSet);
-        Graphviz::GenerateDotandPNGFile("NetworkDuringTheoreticPeak", true, true);
+        Graphviz::GenerateDotandPNGFile("NetworkDuringTheoreticPeak", true, true, false);
     }
 }
 
@@ -321,7 +320,7 @@ void showResults(std::string title, std::string message)
     msgBox.exec();
 }
 
-void MainWindow::runAlgorithmOne(Prompts &prompter)
+void MainWindow::runAlgorithmOne()
 {
     simulateProcessingThree(0);
     std::cout << "ProcessingOne" << std::endl;
@@ -336,15 +335,16 @@ void MainWindow::runAlgorithmOne(Prompts &prompter)
         return;
     int result = SimulatorController::runDinics(source, sink, false, false);
     string filename = ("Flow_" + source + "---" + sink);
-    Graphviz::GenerateDotandPNGFile(filename, false, true);
+    Graphviz::GenerateDotandPNGFile(filename, false, true, false);
     simulateProcessingThree(40);
     std::cout << "Result: " << result << std::endl;
     showResults("Dinic's MaxFlow no preload", "Result: " + std::to_string(result));
     simulateProcessingThree(20);
 }
 
-void MainWindow::runAlgorithmTwo(Prompts &prompter)
+/*void MainWindow::runAlgorithmTwo()
 {
+    Prompts prompter = Prompts();
     simulateProcessingThree(0);
     bool amountOK = !skipQuery;
     int amountPUV = 5;
@@ -359,7 +359,7 @@ void MainWindow::runAlgorithmTwo(Prompts &prompter)
         amountPaths = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of Paths's wanted"), 1, 1, maxPUVandPaths, 1, &PUVOK);
     }
     simulateProcessingThree(40);
-    auto dinicsResults = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, false);
+    auto dinicsResults = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, false, true);
     std::string compiledOut = "";
     for (const auto &dinicsResult : dinicsResults)
     {
@@ -368,9 +368,10 @@ void MainWindow::runAlgorithmTwo(Prompts &prompter)
     simulateProcessingThree(40);
     showResults("Dinic's Auto Preload OFF", compiledOut);
 }
-
-void MainWindow::runAlgorithmThree(Prompts &prompter)
+*/
+void MainWindow::runAlgorithmThree()
 {
+    Prompts prompter = Prompts();
     simulateProcessingThree(0);
     std::cout << "ProcessingThree" << std::endl;
     bool amountOK = !skipQuery;
@@ -383,7 +384,7 @@ void MainWindow::runAlgorithmThree(Prompts &prompter)
         amountPUV = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of PUV's wanted"), 1, 1, maxPUVandPaths, 1, &PUVOK);
         amountPaths = QInputDialog::getInt(this, tr("Input Number"), tr("Please enter an amount of Paths's wanted"), 1, 1, maxPUVandPaths, 1, &amountOK);
     }
-    auto dinicsResults = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, true);
+    auto dinicsResults = SimulatorController::DinicsOnBottlenecksNoAugmentedNetork(amountPUV, amountPaths, true, true);
     simulateProcessingThree(50);
     std::string compiledOut = "";
     for (const auto &dinicsResult : dinicsResults)
@@ -394,7 +395,7 @@ void MainWindow::runAlgorithmThree(Prompts &prompter)
     showResults("Dinic's Auto Preload ON", compiledOut);
 }
 
-void MainWindow::runAlgorithmFour(Prompts &prompter)
+void MainWindow::runAlgorithmFour()
 {
     simulateProcessingThree(0);
     std::string source = "R1";
@@ -406,9 +407,7 @@ void MainWindow::runAlgorithmFour(Prompts &prompter)
         sink = prompter.promptRouter(this, "Sink?");
     }
     std::cout << "Processing" << std::endl;
-    string filename = ("Mincut_" + source + "---" + sink);
     simulateProcessingThree(30);
-    Graphviz::GenerateDotandPNGFile(filename, false, true);
     SimulatorController::minCut(source, sink, true);
     simulateProcessingThree(40);
 }

@@ -253,6 +253,8 @@ void DinicAlgorithm::findMinCut(string source, vector<int> &level, vector<pair<s
             }
         }
     }
+    string filename = ("Mincut_from_" + source + "---");
+    Graphviz::GenerateDotandPNGFile(filename, false, true, true);
     cout << "end of MinCut" << endl;
 }
 /*
