@@ -33,6 +33,12 @@ std::string Prompts::promptRouter(QWidget *parent, std::string title)
         return selectedText.toStdString();
     }
 }
+
+void Prompts::RefreshData()
+{
+    dialog.addItems(SimulatorController::getGraphDataPointer().MappedRouterVector);
+    routers = SimulatorController::getGraphDataPointer().MappedRouterVector;
+}
 Prompts::Prompts()
 {
     // dialog = SearchableComboBoxDialog(parent);

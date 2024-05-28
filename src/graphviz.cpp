@@ -16,11 +16,17 @@
 #include <QString>
 #include <QStringList>
 #include <optional>
+#include <filesystem>
 
 using namespace std;
 
 void Graphviz::GenerateDotandPNGFile(const string &filename, bool usePreLoad, bool useTraffic, bool mincut, std::optional<std::string> result, std::optional<vector<std::string>> mincutResult)
 {
+    const std::string folder = "../images/";
+    if (!std::filesystem::exists(folder))
+    {
+        std::filesystem::create_directory(folder);
+    }
     if (result.has_value())
     {
         cout << result.value() << endl;
@@ -30,7 +36,7 @@ void Graphviz::GenerateDotandPNGFile(const string &filename, bool usePreLoad, bo
         cout << "no result passed" << endl;
     }
     MainWindow &mainWindow = MainWindow::getInstance();
-    string filePath = "../images/" + filename;
+    string filePath = folder + filename;
     ofstream dotFile(filePath);
 
     graphDataStruct &graphdata = SimulatorController::getGraphDataPointer();

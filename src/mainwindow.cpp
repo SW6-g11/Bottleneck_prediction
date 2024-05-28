@@ -12,7 +12,7 @@
 const bool skipQuery = false;
 
 // This gets calculated later
-int maxPUVandPaths = 0;
+int maxPUVandPaths = 1000;
 int checkedCount = 0;
 
 MainWindow *MainWindow::instance = nullptr;
@@ -78,7 +78,6 @@ MainWindow::~MainWindow()
 void MainWindow::openDirectory()
 {
     clearTerminal();
-    addToTerminal("Loading data...\nThe window will stop responding, be patient");
     // Open a directory dialog to select a directory
     std::string initialDir = "../data/sampleSet";
     if (!std::filesystem::exists(initialDir))
@@ -109,6 +108,7 @@ void MainWindow::openDirectory()
 
                 // Create an instance of the Graphmaker class
                 Graphmaker graphOne;
+                addToTerminal("Loading data...\nThe window will stop responding, be patient");
                 std::cout << "Directory path is: " << directoryPathStdString << std::endl;
                 std::cout << "Day is: " << day << std::endl;
                 std::cout << "Limit is: " << limit << std::endl;
@@ -119,6 +119,7 @@ void MainWindow::openDirectory()
             }
         }
     }
+    prompter.RefreshData();
     clearTerminal();
     addToTerminal("Done loading data");
 }

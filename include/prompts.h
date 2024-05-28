@@ -13,6 +13,7 @@ public:
     ~Prompts();
 
     // std::string promptRouter(QWidget *parent);
+    void RefreshData();
     std::string promptRouter(QWidget *parent, std::string title = "Routers");
 };
 #endif
