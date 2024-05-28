@@ -1,14 +1,26 @@
 # Bottleneck_prediction
 
-install the following in WSL:
-Graphviz:
-Installation Command (Ubuntu/Debian): sudo apt-get install graphviz
-Doxygen:
-Installation Command (Ubuntu/Debian): sudo apt-get install doxygen
-libxslt:
-Installation Command (Ubuntu/Debian): sudo apt-get install libxslt1-dev
-Wayland:
-Clone Repository: git clone https://gitlab.freedesktop.org/wayland/wayland.git
-After cloning the repository, navigate into the cloned directory and follow the build instructions provided in the README or other documentation files. Typically, this involves running commands like meson build to configure the build.
-QT:
-sudo apt-get install qt6-default
+## Windows
+Running the program in Windows as opposed to [Linux and WSL](https://github.com/SW6-g11/Bottleneck_prediction/edit/main/README.md#linux-and-wsl) works with no defienciencies, but is more tedious to run:
+ 
+
+## Linux and WSL
+Linux is the recommended way to run the program
+### Requirements
+Update repositories (Ubuntu/Debian): apt-get update
+Update repositories (arch/yay): yay -Sy
+
+Install the following in WSL or Linux:
+- Graphviz:
+  - Installation Command (Ubuntu/Debian): ```apt-get install graphviz```
+  - Installation Command (arch/yay): ```yay -S graphwiz``` 
+- libxslt:
+  - Installation Command (Ubuntu/Debian): ```apt-get install libxslt1-dev```
+  - Installation Command (arch/yay): ```yay -S libxslt1```
+- QT:
+  - Installation Command (Ubuntu/Debian): ```apt-get install qt6-default```
+  - Installation Command (arch/yay): ```yay -S qt6-base```
+### Running the program
+- Clone this repo
+- ```cd``` into the repo
+- run ```./buildAndRun.sh```
