@@ -289,7 +289,7 @@ void MainWindow::simulateProcessingThree(int barValue)
     if (currentValue == 100){
         ui->progressBar_3->setValue(0);
     }
-        ui->progressBar_3->setValue(currentValue + barValue);
+    ui->progressBar_3->setValue(currentValue + barValue);
 }
 
 void MainWindow::generateGraph()
@@ -322,7 +322,6 @@ void showResults(std::string title, std::string message)
 
 void MainWindow::runAlgorithmOne()
 {
-    Prompts prompter = Prompts();
     simulateProcessingThree(0);
     std::cout << "ProcessingOne" << std::endl;
     // TODO: add preload prompt?
@@ -398,7 +397,6 @@ void MainWindow::runAlgorithmThree()
 
 void MainWindow::runAlgorithmFour()
 {
-    Prompts prompter = Prompts();
     simulateProcessingThree(0);
     std::string source = "R1";
     std::string sink = "R4";
