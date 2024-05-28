@@ -32,6 +32,6 @@ private:
     static void InvertDotFile(const std::string &dotFilename);
     static std::string doubleToString(double db);
     static void writeMincut(std::ofstream &dotFile, const std::vector<AugmentedLink> &linksData, std::optional<std::string> result = nullopt, std::optional<vector<std::string>> mincutResult = nullopt);
-    static std::string getRightColor(const AugmentedLink &link, std::optional<std::string> result = nullopt, unordered_map<std::string, std::string>, std::optional<vector<string>> minCut = nullopt);
+    static std::string getRightColor(const AugmentedLink &link, unordered_map<std::string, std::string>, std::optional<std::string> result = nullopt, std::optional<vector<string>> minCut = nullopt);
 };
 #endif // GRAPHVIZ_H

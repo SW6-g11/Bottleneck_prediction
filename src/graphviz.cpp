@@ -82,8 +82,6 @@ void Graphviz::GenerateDotandPNGFile(const string &filename, bool usePreLoad, bo
 
 void Graphviz::writeRouters(ofstream &dotFile, vector<MappedRouter> &routervector, std::optional<string> minCutTarget)
 {
-    std::cout << "Stop " << minCutTarget.value() << endl;
-
     std::unordered_map<string, string> colors = {
         {"normalColor", "black"},
         {"specialColor", "Red"}};
@@ -118,12 +116,13 @@ void Graphviz::writeTraffic(std::ofstream &dotFile, const std::vector<AugmentedL
         }
         else
         {
-            dotFile << "\t" << augmentedLink.linkStart << " -> " << augmentedLink.linkEnd << " [label=" << augmentedLink.flow << ", color=" << getRightColor(augmentedLink, result, colors) << "];\n";
+            dotFile << "\t" << augmentedLink.linkStart << " -> " << augmentedLink.linkEnd << " [label="
+                    << augmentedLink.flow << ", color=" << getRightColor(augmentedLink, colors, result) << "];\n";
         }
     }
 }
 
-std::string Graphviz::getRightColor(const AugmentedLink &link, std::optional<std::string> result, unordered_map<std::string, std::string> colors, std::optional<vector<string>> minCut)
+std::string Graphviz::getRightColor(const AugmentedLink &link, unordered_map<std::string, std::string> colors, std::optional<std::string> result, std::optional<vector<string>> minCut)
 {
     bool resultFound = false;
     bool minCutFound = false;
@@ -162,7 +161,9 @@ void Graphviz::writeLinks(std::ofstream &dotFile, const std::vector<AugmentedLin
         {"pathColor", "Red"}};
     for (const auto &augmentedLink : linksData)
     {
-        dotFile << "\t" << augmentedLink.linkStart << " -> " << augmentedLink.linkEnd << " [label=" << doubleToString(augmentedLink.capacity) << ", color=" << getRightColor(augmentedLink, result, colors) << "];\n";
+        dotFile << "\t" << augmentedLink.linkStart << " -> " << augmentedLink.linkEnd
+                << " [label=" << doubleToString(augmentedLink.capacity) << ", color="
+                << getRightColor(augmentedLink, colors, result) << "];\n";
     }
 }
 void Graphviz::writeMincut(std::ofstream &dotFile, const std::vector<AugmentedLink> &linksData, std::optional<std::string> result, std::optional<vector<std::string>> mincutResult)
@@ -176,7 +177,9 @@ void Graphviz::writeMincut(std::ofstream &dotFile, const std::vector<AugmentedLi
 
     for (const auto &augmentedLink : linksData)
     {
-        dotFile << "\t" << augmentedLink.linkStart << " -> " << augmentedLink.linkEnd << " [label=" << doubleToString(augmentedLink.getRemainingCapacity(augmentedLink.start_, false, true)) << ", color=" << getRightColor(augmentedLink, result, colors, mincutResult) << "];\n";
+        dotFile << "\t" << augmentedLink.linkStart << " -> " << augmentedLink.linkEnd
+                << " [label=" << doubleToString(augmentedLink.getRemainingCapacity(augmentedLink.start_, false, true))
+                << ", color=" << getRightColor(augmentedLink, colors, result, mincutResult) << "];\n";
     }
     dotFile << "\tnode [shape=plaintext];\n"
             << "\tColorIndicator [label=\"Color for the minCut: " << colors["minCutColor"] << "\", pos=\"0,0.2!\"];\n"
