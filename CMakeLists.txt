@@ -55,3 +55,35 @@ target_include_directories(Network_Simulator PRIVATE ${SOURCE_DIR})
 
 #===================== LINKING LIBRARIES =======================#
 target_link_libraries(Network_Simulator Qt6::Widgets)
+
+#====================TESTING========================#
+include(FetchContent)
+FetchContent_Declare(
+  catch2
+  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+  GIT_TAG v3.0.1  # You can specify the version you need
+)
+FetchContent_MakeAvailable(catch2)
+
+# Test sources (tests)
+file(GLOB_RECURSE TEST_SOURCES
+    "${CMAKE_SOURCE_DIR}/tests/*.cpp"
+)
+
+# Combine project sources and test sources
+set(FILE_TO_REMOVE "${CMAKE_SOURCE_DIR}/src/main.cpp")
+list(REMOVE_ITEM PROJECT_SOURCES "${FILE_TO_REMOVE}")
+list(APPEND ALL_TEST_SOURCES ${PROJECT_SOURCES} ${TEST_SOURCES})
+
+# Add the test executable
+add_executable(testing ${ALL_TEST_SOURCES})
+
+# Add the target includes for the test executable
+
+target_include_directories(testing PRIVATE ${FORMS_DIR})
+target_include_directories(testing PRIVATE ${INCLUDE_DIR})
+target_include_directories(testing PRIVATE ${SOURCE_DIR})
+target_include_directories(testing PRIVATE ${CMAKE_SOURCE_DIR}/tests)
+
+# Link Catch2 to the test executable
+target_link_libraries(testing PRIVATE Catch2::Catch2WithMain Qt6::Widgets)

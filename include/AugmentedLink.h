@@ -45,6 +45,7 @@ public:
         std::cout << this->to_string() << "| preload? " << usePreLoad << " capacity; " << capacity << " preload value: " << preload  << " flow: " << flow;
         if (isCalculatingMincut)
         {
+            std::cout << " Return: " << 1 - flow << std::endl;
             return 1 - flow;
         }
         

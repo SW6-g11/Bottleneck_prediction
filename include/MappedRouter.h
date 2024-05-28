@@ -14,6 +14,7 @@ private:
     std::vector<AugmentedLink *> outputs;
     static bool isRouterIdGreaterThanTarget(MappedRouter &a, std::string target);
     static bool isRouterIdSameAsTarget(MappedRouter &a, std::string target);
+    static bool alphaNumbericCompare(const string &a, const std::string &b);
 
 public:
     MappedRouter();

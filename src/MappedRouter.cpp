@@ -28,30 +28,22 @@ void MappedRouter::populateMappedRouters(vector<AugmentedLink> &links, vector<Ma
 {
     std::sort(routers.begin(), routers.end(), compareRouters);
     std::cout << "Link Size: " << links.size() << std::endl;
+    for (auto &router : routers)
+    {
+        router.outputs.clear();
+        router.inputs.clear();
+    }
     for (auto &link : links)
     {
-        /*const auto placeStart = std::lower_bound(routers.begin(), routers.end(), link.start, [](const AugmentedLink &a, const std::string &b)
-                                                 { return a.start < b; });
-        const auto placeEnd = std::lower_bound(routers.begin(), routers.end(), link.start,
-                                               [](AugmentedLink &a, const std::string &b)
-                                               {
-                                                   return a.start < b;
-                                               });
-        const auto placeStart = placeEnd;
-        if (placeStart == routers.end() || placeEnd == routers.end())
-        {
-            std::cerr << "Invalid link found, router not found" << link.start << link.end << std::endl;
-            continue;
+        for(auto &router : routers) {
+            std::cout << "Router: " << router.id << std::endl;
         }
-        const int indexStart = routers.begin() - placeStart;
-        const int indexEnd = routers.begin() - placeEnd;
-        std::cout << "index is: " << indexStart << " " << indexEnd << std::endl;*/
         int indexStart = binarySearch(routers, 0, routers.size() - 1, link.linkStart, &isRouterIdSameAsTarget, isRouterIdGreaterThanTarget);
         int indexEnd = binarySearch(routers, 0, routers.size() - 1, link.linkEnd, &isRouterIdSameAsTarget, isRouterIdGreaterThanTarget);
 
         if (routers[indexStart].id != link.linkStart || routers[indexEnd].id != link.linkEnd)
         {
-            std::cerr << "Invalid link found, router not found: " << link.linkStart << link.linkEnd << std::endl;
+            std::cerr << "Invalid link found, router not found: " << link.linkStart << " " << link.linkEnd << " indexStart: " << indexStart << " indexEnd: " << indexEnd << std::endl;
             // std::cout << "Invalid link found, router not found: " << link.linkStart << link.linkEnd << std::endl;
             continue;
         }
@@ -70,6 +62,7 @@ void MappedRouter::populateMappedRouters(vector<AugmentedLink> &links, vector<Ma
         // std::cout << "Populated Mappedrouter " << routers[indexStart].id << " and " << routers[indexEnd].id << std::endl;
         routers[indexStart].outputs.push_back(&link);
         routers[indexEnd].inputs.push_back(&link);
+        std::cout << "Added links to router's input and output" << std::endl;
     }
 }
 
@@ -80,14 +73,7 @@ bool MappedRouter::compareRouterToString(const MappedRouter &router, string &b)
 
 bool MappedRouter::compareRouters(const MappedRouter &a, const MappedRouter &b)
 {
-    for (int i = 0; i < a.id.length() && i < b.id.length(); i++)
-    {
-        if (a.id[i] != b.id[i])
-        {
-            return a.id[i] > b.id[i];
-        }
-    }
-    return a.id.length() - b.id.length();
+    return alphaNumbericCompare(a.id, b.id);
 }
 
 template <typename ARR, typename TARGET>
@@ -131,10 +117,44 @@ bool MappedRouter::isRouterIdSameAsTarget(MappedRouter &a, std::string target)
     return a.id == target;
 }
 
-bool MappedRouter::isRouterIdGreaterThanTarget(MappedRouter &a, std::string target)
-{
-    // std::cout << "asd: " << (a.id > target) << std::endl;
-    return a.id > target;
+bool MappedRouter::isRouterIdGreaterThanTarget(MappedRouter &a, std::string target) {
+    std::cout << "COMPARE Router:" << a.id << std::endl; 
+    return alphaNumbericCompare(a.id, target);
+}
+
+bool MappedRouter::alphaNumbericCompare(const string &a, const std::string &b) {
+    std::cout << "COMPARE A:" << a << std::endl; 
+    std::cout << "COMPARE B:" << a << std::endl; 
+    auto it1 = a.begin();
+    auto it2 = b.begin();
+
+    while (it1 != a.end() && it2 != b.end()) {
+        if (std::isdigit(*it1) && std::isdigit(*it2)) {
+            // If both characters are digits, compare them as numbers
+            int num1 = 0, num2 = 0;
+            while (it1 != a.end() && std::isdigit(*it1)) {
+                num1 = num1 * 10 + (*it1 - '0');
+                ++it1;
+            }
+            while (it2 != b.end() && std::isdigit(*it2)) {
+                num2 = num2 * 10 + (*it2 - '0');
+                ++it2;
+            }
+            if (num1 != num2) {
+                return num1 < num2;
+            }
+        } else {
+            // If one or both characters are non-digits, compare them as characters
+            if (*it1 != *it2) {
+                return *it1 < *it2;
+            }
+            ++it1;
+            ++it2;
+        }
+    }
+
+    // If one string is a prefix of the other, the shorter string comes first
+    return it1 == a.end() && it2 != b.end();
 }
 
 std::string MappedRouter::to_string() const

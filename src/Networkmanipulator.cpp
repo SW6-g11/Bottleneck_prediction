@@ -9,6 +9,7 @@
 #include <iomanip>
 #include <regex>
 #include <unordered_map>
+#include <mainwindow.h>
 
 const bool sortDescending = true;
 // void Networkmanipulator::AugmentNetworkbyTimeStamp(string timestamp, vector<Linkutils> &Linkutildata, vector<Linkutils> &AugmentedLinks)
@@ -285,13 +286,19 @@ void Networkmanipulator::findPeakUtilValues(int amountofBottleneckLinks, vector<
     temp += "]";
     std::cout << temp << std::endl;
 
+    std::string sortedBottleLinksString = "***Sorted BottleLinks:****\n";
     // Output sorted results
     std::cout << "***Sorted BottleLinks:****" << std::endl;
-    for (int i = 0; /*i < amountofBottleneckLinks && */ i < BottleLinks.size(); ++i)
+    for (int i = 0; i < amountofBottleneckLinks && i < BottleLinks.size(); ++i)
     {
         const auto &pair = BottleLinks[i];
-        std::cout << pair.first << " - PeakUtilValue: " << pair.second.PeakUtilValue << std::endl;
+        sortedBottleLinksString += pair.first + " - PeakUtilValue: " + std::to_string(pair.second.PeakUtilValue) + "\n";
         // DinicAlgorithm::DinicAlgorithm(())
+    }
+    sortedBottleLinksString.pop_back();
+    if (SimulatorController::UIEnabled)
+    {
+        MainWindow::getInstance().addToTerminal(sortedBottleLinksString);
     }
     // Output the rest of the results to the console
     std::cout << "***Left over BottleLinks:****" << std::endl;

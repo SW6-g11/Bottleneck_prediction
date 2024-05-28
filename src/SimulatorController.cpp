@@ -23,6 +23,11 @@ int SimulatorController::runDinics(const std::string source, const std::string s
     return result;
 }
 
+void SimulatorController::resetDinics()
+{
+    dinicsInstance.populateDinics(graphData.Augmentedlinks, graphData.MappedRouterVector, true);
+}
+
 graphDataStruct &SimulatorController::getGraphDataPointer()
 {
     return graphData;
@@ -41,6 +46,13 @@ vector<std::pair<std::string, int>> SimulatorController::DinicsOnBottlenecksNoAu
     Networkmanipulator::reduceVector(problempaths, amountPaths);
     std::cout << "ProblemPaths length: " << problempaths.size() << std::endl;
     int dinicscounter = 0;
+    /*
+    std::string problempathsString = "";
+    for (const auto &problemPath : problempaths)
+    {
+        problempathsString += problemPath.fingerprint + "\n";
+    }
+    */
 
     vector<std::pair<std::string, int>> dinicsResults;
     dinicsResults.reserve(problempaths.size());
@@ -50,10 +62,13 @@ vector<std::pair<std::string, int>> SimulatorController::DinicsOnBottlenecksNoAu
         dinicscounter++;
         std::pair<std::string, int> result = std::pair(Networkmanipulator::makeFingerPrint(path), runDinics(path.origin, path.destination, usePreLoad, false));
         dinicsResults.push_back(result);
-        if(SimulatorController::UIEnabled){
-            string filename = ("empty_"+std::to_string(!usePreLoad)+ "_Flow_Path_" + path.origin + "---" + path.destination);
+        if (SimulatorController::UIEnabled)
+        {
+            std::cout << "UI ENABLED" << std::endl;
+            string filename = ("empty_" + std::to_string(!usePreLoad) + "_Flow_Path_" + path.origin + "---" + path.destination);
             Graphviz::GenerateDotandPNGFile(filename, usePreLoad, ShowtrafficinGraph, false, result.first);
         }
+        std::cout << "Over" << std::endl;
     }
     for (const auto &dinicsResult : dinicsResults)
     {
@@ -68,7 +83,8 @@ vector<pair<string, string>> SimulatorController::minCut(std::string source, std
     vector<MappedRouter> nodes = dinicsInstance.getNodes();
     vector<int> level = vector<int>(nodes.size(), -1);
     vector<pair<string, string>> minCut;
-    dinicsInstance.findMinCut(source, level, minCut);
+    std::string path = source + "," + sink;
+    dinicsInstance.findMinCut(source, level, minCut, path);
     cout << "Min Cut: " << endl;
     for (const auto &cut : minCut)
     {
