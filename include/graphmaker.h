@@ -7,9 +7,9 @@
 #include <vector>
 #include <string>
 #include <filesystem>
+#include <future>
 
 #include <graphDataStruct.h>
-
 
 using namespace std;
 
@@ -28,14 +28,13 @@ public:
     // const vector<Router>& getRoutersData() const {return ma;}
     // const vector<Link>& getLinksData() const {return linksData;}
 
-// private:
-//     vector<Linkutils> linkUtilsData;
-//     vector<Traffic> trafficData;
-//     vector<Paths> pathsData;
-//     vector<Router> routersData;
-//     vector<Link> linksData;
-
+    // private:
+    //     vector<Linkutils> linkUtilsData;
+    //     vector<Traffic> trafficData;
+    //     vector<Paths> pathsData;
+    //     vector<Router> routersData;
+    //     vector<Link> linksData;
+    bool isdone(std::future<void> a, std::future<void> b, std::future<void> c, std::future<void> d, std::future<void> e);
 };
-
 
 #endif // GRAPHMAKER_H

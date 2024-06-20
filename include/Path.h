@@ -9,11 +9,11 @@ class Paths
 {
 public:
     string timestamp;
-    string origin;
-    string destination;
-    vector<string> path; // Changed to a pointer
+    int origin;
+    int destination;
+    vector<int> path; // Changed to a pointer
     int pathLength;
-    string fingerprint;
+    // string fingerprint;
 
     // Default constructor
     Paths() : timestamp(""), origin(""), destination(""), path() {}
@@ -45,6 +45,7 @@ public:
         }
         return result + destination;
     }
+    /*
     bool operator==(const Paths &other) const
     {
         return this->fingerprint == other.fingerprint;

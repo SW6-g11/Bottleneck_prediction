@@ -9,7 +9,7 @@ using namespace std;
 class AugmentedLink : public Link
 {
 public:
-    AugmentedLink(string &linkStart, string &linkEnd, double capacity) : Link(linkStart, linkEnd, capacity){};
+    AugmentedLink(int linkStart, int linkEnd, double capacity) : Link(linkStart, linkEnd, capacity){};
     AugmentedLink() : Link(){};
     int start_;
     int end_;
@@ -41,34 +41,37 @@ public:
 
     int getRemainingCapacity(int from, bool usePreLoad, bool isCalculatingMincut) const
     { // Gets the capacity of the edge if the originating vertex is `from`
-        
-        std::cout << this->to_string() << "| preload? " << usePreLoad << " capacity; " << capacity << " preload value: " << preload  << " flow: " << flow;
+
+        std::cout << this->to_string() << "| preload? " << usePreLoad << " capacity; " << capacity << " preload value: " << preload << " flow: " << flow;
         if (isCalculatingMincut)
         {
             std::cout << " Return: " << 1 - flow << std::endl;
             return 1 - flow;
         }
-        
+
         int returnValue = capacity;
-        if(from == start_) {
+        if (from == start_)
+        {
             returnValue -= flow;
-        } else {
+        }
+        else
+        {
             returnValue = flow;
         }
-        if(usePreLoad) {
+        if (usePreLoad)
+        {
             returnValue -= preload;
         }
         std::cout << " Return: " << returnValue << std::endl;
         return returnValue;
-            // std::cout << "From " << from << "=" << start_ << " start" << std::endl;
+        // std::cout << "From " << from << "=" << start_ << " start" << std::endl;
 
         // std::cout << "From " << from << "!=" << start_ << " start" << std::endl;
     }
 
-
     std::string toString() const
     {
-        return linkStart + "" + linkEnd + " indexes: " + std::to_string(start_) + "," + std::to_string(end_) + ", capacity: " + std::to_string(capacity) + ", flow: " + std::to_string(flow);
+        return to_string(linkStart) + "" + to_string(linkEnd) + " indexes: " + std::to_string(start_) + "," + std::to_string(end_) + ", capacity: " + std::to_string(capacity) + ", flow: " + std::to_string(flow);
     }
     std::string to_string() const
     {

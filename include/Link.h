@@ -11,10 +11,10 @@ public:
     double capacity;
 
     // Default constructor
-    Link() : linkStart(""), linkEnd(""), capacity(0.0) {}
+    Link() : linkStart(-1), linkEnd(-1), capacity(0.0) {}
 
     // Constructor with parameters
-    Link(string &linkStart, string &linkEnd, double capacity)
+    Link(int linkStart, int linkEnd, double capacity)
         : linkStart(linkStart), linkEnd(linkEnd), capacity(capacity) {}
 };
 #endif // LINK_H

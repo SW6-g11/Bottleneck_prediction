@@ -41,7 +41,7 @@ public:
         return concatenatedResult;
     }
 
-    std::string toString() const { return id; };
+    std::string toString() const { return std::to_string(id); };
 };
 
 #endif

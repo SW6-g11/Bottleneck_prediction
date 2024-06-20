@@ -22,6 +22,11 @@ void SheetReader::readType(istringstream &iss, Linkutils &linkUtilsItem)
         getline(iss, linkEnd, ',') &&
         iss >> avgUtilization)
     {
+        if (iss.fail() || !iss.eof())
+        {
+            cerr << "Warning: Skipping line with insufficient data: " << iss.str() << endl;
+            return;
+        }
         linkUtilsItem = Linkutils(timestamp, linkStart, linkEnd, avgUtilization);
     }
     else
@@ -41,6 +46,11 @@ void SheetReader::readType<Traffic>(istringstream &iss, Traffic &trafficItem)
         getline(iss, destination, ',') &&
         iss >> avgTraffic)
     {
+        if (iss.fail() || !iss.eof())
+        {
+            cerr << "Warning: Skipping line with insufficient data: " << iss.str() << endl;
+            return;
+        }
         trafficItem = Traffic(timestamp, origin, destination, avgTraffic);
     }
     else
@@ -133,6 +143,11 @@ void SheetReader::readType<MappedRouter>(istringstream &iss, MappedRouter &route
         iss.ignore() && // Skip the comma
         getline(iss, type))
     {
+        if (iss.fail() || !iss.eof())
+        {
+            cerr << "Warning: Skipping line with insufficient data: " << iss.str() << endl;
+            return;
+        }
         routerItem = MappedRouter(id, latitude, longitude, type);
     }
     else
@@ -150,6 +165,11 @@ void SheetReader::readType<AugmentedLink>(istringstream &iss, AugmentedLink &lin
         getline(iss, linkEnd, ',') &&
         iss >> capacity)
     {
+        if (iss.fail() || !iss.eof())
+        {
+            cerr << "Warning: Skipping line with insufficient data: " << iss.str() << endl;
+            return;
+        }
         linkItem = AugmentedLink(linkStart, linkEnd, capacity);
     }
     else
