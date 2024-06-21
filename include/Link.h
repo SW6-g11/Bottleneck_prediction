@@ -6,8 +6,8 @@ using namespace std;
 class Link
 {
 public:
-    string linkStart;
-    string linkEnd;
+    int linkStart;
+    int linkEnd;
     double capacity;
 
     // Default constructor

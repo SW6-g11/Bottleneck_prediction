@@ -16,7 +16,7 @@ public:
     // string fingerprint;
 
     // Default constructor
-    Paths() : timestamp(""), origin(""), destination(""), path() {}
+    Paths() : timestamp(-1), origin(-1), destination(-1), path() {}
 
     // Constructor with parameters
     Paths(const string &timestamp, const string &origin, const string &destination, vector<string> path)
@@ -50,5 +50,6 @@ public:
     {
         return this->fingerprint == other.fingerprint;
     }
+    */
 };
 #endif // PATH_H

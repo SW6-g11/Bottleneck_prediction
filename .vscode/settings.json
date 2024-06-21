@@ -105,6 +105,10 @@
 		"ranges": "cpp",
 		"text_encoding": "cpp",
 		"qmessagebox": "cpp",
-		"*.ipp": "cpp"
+		"*.ipp": "cpp",
+		"__bit_reference": "cpp",
+		"__config": "cpp",
+		"__split_buffer": "cpp",
+		"__verbose_abort": "cpp"
 	}
 }

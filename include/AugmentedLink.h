@@ -71,11 +71,11 @@ public:
 
     std::string toString() const
     {
-        return to_string(linkStart) + "" + to_string(linkEnd) + " indexes: " + std::to_string(start_) + "," + std::to_string(end_) + ", capacity: " + std::to_string(capacity) + ", flow: " + std::to_string(flow);
+        return std::to_string(linkStart) + "" + std::to_string(linkEnd) + " indexes: " + std::to_string(start_) + "," + std::to_string(end_) + ", capacity: " + std::to_string(capacity) + ", flow: " + std::to_string(flow);
     }
     std::string to_string() const
     {
-        return "(" + linkStart + "," + linkEnd + "),i:(" + std::to_string(start_) + "," + std::to_string(end_) + "))";
+        return "(" + std::to_string(linkStart) + "," + std::to_string(linkEnd) + "),i:(" + std::to_string(start_) + "," + std::to_string(end_) + "))";
     }
 };
 #endif
