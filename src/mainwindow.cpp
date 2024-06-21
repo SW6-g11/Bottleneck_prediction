@@ -290,7 +290,6 @@ void MainWindow::simulateProcessingTwo()
         ui->progressBar_2->setValue(0);
     }
     ui->progressBar_2->setValue(currentValue + 25);
-
 }
 
 void MainWindow::simulateProcessingThree(int barValue)
