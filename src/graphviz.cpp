@@ -38,6 +38,7 @@ void Graphviz::GenerateDotandPNGFile(const string &filename, bool usePreLoad, bo
         cout << "no result passed" << endl;
     }
     MainWindow &mainWindow = MainWindow::getInstance();
+    mainWindow.simulateProcessingTwo();
     string filePath = folder + filename;
     ofstream dotFile(filePath);
 
@@ -53,7 +54,7 @@ void Graphviz::GenerateDotandPNGFile(const string &filename, bool usePreLoad, bo
     dotFile << "\t" << "graph [layout=neato];" << endl;
     writeRouters(dotFile, graphdata.MappedRouterVector, result);
     bool peaksetgraph = (filename == "NetworkDuringTheoreticPeak"); /// bruges kun til color
-
+    mainWindow.simulateProcessingTwo();
     if (!useTraffic)
     {
         std::cout << "graph is not using traffic!" << endl;
@@ -72,18 +73,18 @@ void Graphviz::GenerateDotandPNGFile(const string &filename, bool usePreLoad, bo
     dotFile << "}\n"
             << endl;
     dotFile.close();
-    mainWindow.simulateProcessingTwo();
-
     if (dotFile.fail())
     {
         cerr << "Error: Failed to write to file " << filename << endl;
         return;
     }
+    mainWindow.simulateProcessingTwo();
     Graphviz::GenerateImageFromDotFile(filePath);
 }
 
 void Graphviz::writeRouters(ofstream &dotFile, vector<MappedRouter> &routervector, std::optional<string> minCutTarget)
 {
+    MainWindow &mainWindow = MainWindow::getInstance();
     std::unordered_map<string, string> colors = {
         {"normalColor", "black"},
         {"specialColor", "Red"}};
@@ -92,6 +93,7 @@ void Graphviz::writeRouters(ofstream &dotFile, vector<MappedRouter> &routervecto
     {
         dotFile << "\t" << router.id << "[color=\"" << getRouterColor(router, colors, minCutTarget) << "\",pos=\"" << router.longitude << "," << router.latitude << "!\"];\n";
     }
+    mainWindow.simulateProcessingTwo();
 }
 std::string Graphviz::getRouterColor(const MappedRouter &router, std::unordered_map<string, string> colors, std::optional<string> minCutTarget)
 {
@@ -230,6 +232,7 @@ std:
     {
         QMessageBox::warning(nullptr, "Error", "Failed to generate PNG from DOT file.");
     }
+    mainWindow.simulateProcessingTwo();
     mainWindow.imageSaver(pngFilename);
 }
 
