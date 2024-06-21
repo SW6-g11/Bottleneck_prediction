@@ -13,6 +13,7 @@
 #include "Path.h"
 #include "Router.h"
 #include "Traffic.h"
+#include "graphDataStruct.h"
 // class Linkutils;
 // class Traffic;
 // class Paths;
@@ -88,6 +89,7 @@ private:
   // void readLinks(istringstream &iss, Link &linkItem);
   template <typename T>
   void readType(istringstream &iss, T &typeItem);
+  int getIndex(graphDataStruct &graphdata)
 };
 
 #endif // SHEEHTREADER_

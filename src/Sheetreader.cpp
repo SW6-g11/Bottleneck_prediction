@@ -99,6 +99,14 @@ void SheetReader::readType<Traffic>(istringstream &iss, Traffic &trafficItem)
 //         cerr << "Warning: Skipping line with insufficient data: " << iss.str() << endl;
 //     }
 // }
+
+int SheetReader::getIndex(graphDataStruct &graphdata, std::string target)
+{
+    for (int i = 0; i < graphdata.MappedRouterVector.)
+    {
+    }
+}
+
 template <>
 void SheetReader::readType<Paths>(istringstream &iss, Paths &pathsItem)
 {

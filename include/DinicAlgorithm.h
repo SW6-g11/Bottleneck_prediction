@@ -26,7 +26,7 @@ private:
     deque<AugmentedLink> arcs_;
 
     void applyindices(vector<AugmentedLink> &links);
-    bool getIndexOfSourceAndSink(int &indexSource, int &indexSink, std::string source, std::string sink);
+    bool getIndexOfSourceAndSink(int &indexSource, int &indexSink, int source, int sink);
     template <typename T>
     static void printArr(const std::vector<T> &arr, const std::string name);
     // Specialization for when T is int
@@ -37,9 +37,9 @@ public:
     DinicAlgorithm();
     void PopulateAdjecencymap(vector<AugmentedLink> &links, vector<MappedRouter> &routers, bool overwrite);
     void populateDinics(vector<AugmentedLink> &links, vector<MappedRouter> &routers, bool overwrite);
-    void findMinCut(string source_i, vector<int> &level, vector<pair<string, string>> &minCut, std::optional<std::string> path = nullptr);
+    void findMinCut(int source, vector<int> &level, vector<pair<string, string>> &minCut, std::optional<std::string> path = nullptr);
     // int findMinCut2(string source, string &sink, vector<pair<string, string>> &minCut);
-    int compute_flow(std::string source, std::string sink, bool usePreLoad, bool isCalculatingMincut);
+    int compute_flow(int source, int sink, bool usePreLoad, bool isCalculatingMincut);
     // double findMaxFlow(const std::string &source, const std::string &sink);
     // int compute_flow(int source_i, int sink_i);
     vector<MappedRouter> getNodes();

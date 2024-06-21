@@ -13,23 +13,22 @@ public:
     int destination;
     vector<int> path; // Changed to a pointer
     int pathLength;
-    // string fingerprint;
 
     // Default constructor
-    Paths() : timestamp(-1), origin(-1), destination(-1), path() {}
+    // Paths() : timestamp(-1), origin(-1), destination(-1), path([]) {}
 
     // Constructor with parameters
-    Paths(const string &timestamp, const string &origin, const string &destination, vector<string> path)
+    Paths(const string &timestamp, const int &origin, const int &destination, vector<int> path)
         : timestamp(timestamp), origin(origin), destination(destination), path(path)
     {
 
         pathLength = path.size() + 2;
-        fingerprint = this->to_string();
+        // fingerprint = this->to_string();
     }
     void applyChanges()
     {
         pathLength = path.size() + 2;
-        fingerprint = this->to_string();
+        // fingerprint = this->to_string();
     }
     // Destructor
     ~Paths()
@@ -38,12 +37,12 @@ public:
     }
     string to_string() const
     {
-        std::string result = origin + ",";
+        std::string result = std::to_string(origin) + ",";
         for (int i = 0; i < path.size(); i++)
         {
             result += path[i] + ",";
         }
-        return result + destination;
+        return result + std::to_string(destination);
     }
     /*
     bool operator==(const Paths &other) const

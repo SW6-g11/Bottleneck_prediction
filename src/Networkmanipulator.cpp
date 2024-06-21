@@ -66,18 +66,18 @@ std::string Networkmanipulator::makeFingerPrint(AugmentedLink link)
 }
 std::string Networkmanipulator::makeFingerPrint(Paths link)
 {
-    std::string temp = link.origin + ",";
+    std::string temp = std::to_string(link.origin) + ",";
     for (int i = 0; i < link.path.size(); i++)
     {
         temp += link.path[i] + ",";
     }
-    return temp + link.destination;
+    return temp + std::to_string(link.destination);
 }
 
 vector<Paths> Networkmanipulator::findLinksInPaths(std::vector<std::pair<std::string, Linkutils>> peakset, int amountofBottleneckLinks, graphDataStruct &graphData)
 {
 
-    std::unordered_map<std::string, Paths> ProblematicPathMap;
+    std::unordered_map<Paths *, Paths> ProblematicPathMap;
     // Populate ProblematicPathVector so we can remove dublicates.
     // for (int j = 0; j < graphData.pathsData.size(); j++)
     // {
@@ -92,12 +92,13 @@ vector<Paths> Networkmanipulator::findLinksInPaths(std::vector<std::pair<std::st
         std::regex test = std::regex(".*" + peakset[i].first + ".*"); // peakset[i].first = the link fingerprint
         for (int j = 0; j < graphData.pathsData.size(); j++)
         {
-            if (ProblematicPathMap.find(graphData.pathsData[j].fingerprint) != ProblematicPathMap.end())
+            // Find fingerprint replaced by pointer
+            if (&graphData.pathsData[j] != std::prev(ProblematicPathMap.end())->first)
                 continue;
             // std::cout << "Searching in: \"" + PathCorrector(graphData.pathsData[j]) + "\" searching for: \"" + peakset[i].first + "\"" << endl;
             //  if we find the bottlenecklink (from peakset) in the path, add that path to the problematicpath vector
             if (std::regex_search(PathCorrector(graphData.pathsData[j]), test))
-                ProblematicPathMap.insert({graphData.pathsData[j].fingerprint, graphData.pathsData[j]});
+                ProblematicPathMap.insert({&graphData.pathsData[j], graphData.pathsData[j]});
         }
     }
 
@@ -161,6 +162,8 @@ bool Networkmanipulator::comparePathFingerprint(const Paths &a, const Paths &b)
 
 bool Networkmanipulator::alphanumericCompareDecorator(const Paths a, const Paths b)
 {
+    // TODO Figure out a diff solution
+    /*
     for (int i = 0; i < a.fingerprint.size(); i++)
     {
         if (a.fingerprint[i] != b.fingerprint[i])
@@ -168,7 +171,9 @@ bool Networkmanipulator::alphanumericCompareDecorator(const Paths a, const Paths
             return a.fingerprint[i] > b.fingerprint[i];
         }
     }
+    */
     return false;
+
     // return alphanumericCompare(a.fingerprint, b.fingerprint);
 }
 

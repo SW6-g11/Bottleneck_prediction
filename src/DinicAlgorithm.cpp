@@ -43,12 +43,12 @@ void DinicAlgorithm::populateDinics(vector<AugmentedLink> &links, vector<MappedR
 }
 bool DinicAlgorithm::isEmpty(const Router &router)
 {
-    return router.id == "";
+    return router.id == -1;
 }
 
 void DinicAlgorithm::applyindices(vector<AugmentedLink> &links)
 {
-    std::unordered_map<std::string, int> positions;
+    std::unordered_map<int, int> positions;
     for (int i = 0; i < nodes_.size(); i++)
     {
         positions.insert(std::pair(nodes_[i].id, i));
@@ -63,7 +63,7 @@ void DinicAlgorithm::applyindices(vector<AugmentedLink> &links)
 }
 
 // returns false if both are found ok
-bool DinicAlgorithm::getIndexOfSourceAndSink(int &indexSource, int &indexSink, std::string source, std::string sink)
+bool DinicAlgorithm::getIndexOfSourceAndSink(int &indexSource, int &indexSink, int source, int sink)
 {
 
     bool foundSource = false;
@@ -90,7 +90,7 @@ bool DinicAlgorithm::getIndexOfSourceAndSink(int &indexSource, int &indexSink, s
     return true;
 }
 
-int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool usePreLoad, bool isCalculatingMincut)
+int DinicAlgorithm::compute_flow(int source, int sink, bool usePreLoad, bool isCalculatingMincut)
 { // Compute the maximum flow with the Dinic's algorithm
     std::cout << "ComputeFLow is asking for Preload?: " << usePreLoad << std::endl;
     int source_i;
@@ -212,7 +212,7 @@ int DinicAlgorithm::compute_flow(std::string source, std::string sink, bool useP
     return -1;
 };
 
-void DinicAlgorithm::findMinCut(string source, vector<int> &level, vector<pair<string, string>> &minCut, std::optional<std::string> path)
+void DinicAlgorithm::findMinCut(int source, vector<int> &level, vector<pair<string, string>> &minCut, std::optional<std::string> path)
 {
     cout << "Start of MinCut" << endl;
     int source_i;
@@ -249,18 +249,20 @@ void DinicAlgorithm::findMinCut(string source, vector<int> &level, vector<pair<s
                 int next_i = arc->get_dest(i);
                 if (!visited[next_i])
                 {
-                    minCut.push_back({nodes_[i].id, nodes_[next_i].id});
+                    // Todo get actual name not int
+                    minCut.push_back({std::to_string(nodes_[i].id), std::to_string(nodes_[next_i].id)});
                 }
             }
         }
     }
-    string filename = ("Mincut_from_" + source + "---");
+    string filename = ("Mincut_from_" + std::to_string(source) + "---");
     vector<std::string> minCutForGraph;
     for (const auto &cut : minCut)
     {
         minCutForGraph.push_back(cut.first + "," + cut.second);
     }
-    if(SimulatorController::UIEnabled) {
+    if (SimulatorController::UIEnabled)
+    {
         Graphviz::GenerateDotandPNGFile(filename, false, true, true, path, minCutForGraph);
     }
     cout << "end of MinCut" << endl;

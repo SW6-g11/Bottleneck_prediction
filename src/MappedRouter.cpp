@@ -4,7 +4,7 @@
 
 MappedRouter::MappedRouter() {}
 
-MappedRouter::MappedRouter(const string &id, double latitude, double longitude, const string &type) : Router(id, latitude, longitude, type)
+MappedRouter::MappedRouter(const int &id, double latitude, double longitude, const string &type) : Router(id, latitude, longitude, type)
 {
 }
 
@@ -35,7 +35,8 @@ void MappedRouter::populateMappedRouters(vector<AugmentedLink> &links, vector<Ma
     }
     for (auto &link : links)
     {
-        for(auto &router : routers) {
+        for (auto &router : routers)
+        {
             std::cout << "Router: " << router.id << std::endl;
         }
         int indexStart = binarySearch(routers, 0, routers.size() - 1, link.linkStart, &isRouterIdSameAsTarget, isRouterIdGreaterThanTarget);
@@ -66,14 +67,15 @@ void MappedRouter::populateMappedRouters(vector<AugmentedLink> &links, vector<Ma
     }
 }
 
-bool MappedRouter::compareRouterToString(const MappedRouter &router, string &b)
+bool MappedRouter::compareRouterToString(const MappedRouter &router, int b)
 {
     return router.id == b;
 }
 
 bool MappedRouter::compareRouters(const MappedRouter &a, const MappedRouter &b)
 {
-    return alphaNumbericCompare(a.id, b.id);
+    return a.id > b.id;
+    // alphaNumbericCompare(a.id, b.id);
 }
 
 template <typename ARR, typename TARGET>
@@ -112,40 +114,50 @@ int MappedRouter::binarySearch(vector<ARR> arr, int low, unsigned long high, TAR
     return -1;
 }
 
-bool MappedRouter::isRouterIdSameAsTarget(MappedRouter &a, std::string target)
+bool MappedRouter::isRouterIdSameAsTarget(MappedRouter &a, int target)
 {
     return a.id == target;
 }
 
-bool MappedRouter::isRouterIdGreaterThanTarget(MappedRouter &a, std::string target) {
-    std::cout << "COMPARE Router:" << a.id << std::endl; 
-    return alphaNumbericCompare(a.id, target);
+bool MappedRouter::isRouterIdGreaterThanTarget(MappedRouter &a, int target)
+{
+    std::cout << "COMPARE Router:" << a.id << std::endl;
+    return a.id > target; // alphaNumbericCompare(a.id, target);
 }
 
-bool MappedRouter::alphaNumbericCompare(const string &a, const std::string &b) {
-    std::cout << "COMPARE A:" << a << std::endl; 
-    std::cout << "COMPARE B:" << a << std::endl; 
+bool MappedRouter::alphaNumbericCompare(const string &a, const std::string &b)
+{
+    std::cout << "COMPARE A:" << a << std::endl;
+    std::cout << "COMPARE B:" << a << std::endl;
     auto it1 = a.begin();
     auto it2 = b.begin();
 
-    while (it1 != a.end() && it2 != b.end()) {
-        if (std::isdigit(*it1) && std::isdigit(*it2)) {
+    while (it1 != a.end() && it2 != b.end())
+    {
+        if (std::isdigit(*it1) && std::isdigit(*it2))
+        {
             // If both characters are digits, compare them as numbers
             int num1 = 0, num2 = 0;
-            while (it1 != a.end() && std::isdigit(*it1)) {
+            while (it1 != a.end() && std::isdigit(*it1))
+            {
                 num1 = num1 * 10 + (*it1 - '0');
                 ++it1;
             }
-            while (it2 != b.end() && std::isdigit(*it2)) {
+            while (it2 != b.end() && std::isdigit(*it2))
+            {
                 num2 = num2 * 10 + (*it2 - '0');
                 ++it2;
             }
-            if (num1 != num2) {
+            if (num1 != num2)
+            {
                 return num1 < num2;
             }
-        } else {
+        }
+        else
+        {
             // If one or both characters are non-digits, compare them as characters
-            if (*it1 != *it2) {
+            if (*it1 != *it2)
+            {
                 return *it1 < *it2;
             }
             ++it1;
@@ -159,7 +171,7 @@ bool MappedRouter::alphaNumbericCompare(const string &a, const std::string &b) {
 
 std::string MappedRouter::to_string() const
 {
-    std::string result = "Router: " + id + " inputs=[";
+    std::string result = "Router: " + std::to_string(id) + " inputs=[";
     for (int i = 0; i < inputs.size(); i++)
     {
         result += inputs[i]->to_string();

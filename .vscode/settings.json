@@ -109,6 +109,7 @@
 		"__bit_reference": "cpp",
 		"__config": "cpp",
 		"__split_buffer": "cpp",
-		"__verbose_abort": "cpp"
+		"__verbose_abort": "cpp",
+		"__locale": "cpp"
 	}
 }
